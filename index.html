@@ -209,6 +209,30 @@ details.teacher summary { cursor: pointer; color: var(--teal-d); font-weight: 60
 .flash { animation: flash 1.6s ease; }
 @keyframes flash { 0%,30% { box-shadow: 0 0 0 3px var(--gold); } 100% { box-shadow: none; } }
 .empty { color: var(--muted); text-align: center; padding: 20px; }
+/* home */
+#home { max-width: 1200px; margin: 0 auto; padding: 28px 18px 10px; }
+#home .intro { text-align: center; margin-bottom: 24px; }
+#home .intro .ar { font-size: 44px; color: var(--teal-d); line-height: 1.5; display: block; }
+#home .intro p { color: var(--muted); margin: 4px 0 0; }
+.unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+.unit-card { position: relative; text-align: start; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); padding: 0; overflow: hidden; display: flex; flex-direction: column; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.unit-card:hover, .unit-card:focus-visible { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.12); border-color: var(--teal); outline: none; }
+.unit-card .band { background: var(--teal-d); color: #fff; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+:root[data-theme="dark"] .unit-card .band { background: #0f2422; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .unit-card .band { background: #0f2422; } }
+.unit-card .band .num { font-size: 22px; font-weight: 750; }
+.unit-card .band .ur { font-size: 20px; line-height: 1.6; }
+.unit-card .content { padding: 14px 18px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.unit-card .t-ur { font-family: var(--ur); direction: rtl; text-align: right; color: var(--red); font-size: 20px; line-height: 2; }
+.unit-card .t-en { font-weight: 650; color: var(--teal-d); font-size: 16px; }
+.unit-card .meta { font-size: 13px; color: var(--muted); }
+.unit-card .bar { height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; margin-top: auto; }
+.unit-card .bar span { display: block; height: 100%; background: var(--ok); border-radius: 999px; }
+.unit-card .go { font-size: 13px; font-weight: 650; color: var(--teal-d); }
+body.view-home .layout, body.view-home .unit-tabs { display: none; }
+body.view-unit #home { display: none; }
+.homebtn { font-weight: 650; }
+
 footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px 16px 30px; }
 
 @media (max-width: 860px) {
@@ -236,6 +260,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px
     <h1>Muallim-ul-Quran · Units 1–6</h1>
     <span class="spacer"></span>
     <div class="tools">
+      <button class="iconbtn homebtn" id="homeBtn" title="Back to all units">⌂ Home</button>
       <div class="search-box">
         <input id="search" type="search" placeholder="Search Arabic, Urdu or English…" autocomplete="off" aria-label="Search all units">
         <div id="results" class="results" role="listbox"></div>
@@ -249,6 +274,11 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px
   </div>
   <nav class="unit-tabs" role="tablist" id="unitTabs" aria-label="Units"></nav>
 </header>
+
+<section id="home" aria-label="Choose a unit">
+  <div class="intro"><span class="ar">مُعَلِّمُ الْقُرْآنِ</span><p>Choose a unit to start · یونٹ منتخب کیجیے</p></div>
+  <div class="unit-grid" id="unitGrid"></div>
+</section>
 
 <div class="layout">
   <aside class="lessons" id="lessonList" aria-label="Lessons"></aside>
@@ -52448,6 +52478,15 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px
     selftest: store.get('selftest', false), size: store.get('size', 1),
     theme: store.get('theme', null)
   };
+  state.view = 'home';
+  const UNIT_INFO = {
+    1: { ur: 'قرآن کریم کے آسان الفاظ', en: 'Easy words of the Holy Quran' },
+    2: { ur: 'قرآنی الفاظ کے شروع میں آنے والے حروف', en: 'Particles that come before Quranic words' },
+    3: { ur: 'قرآنی الفاظ اپنی خاصیت اور نسبت کے ساتھ', en: 'Words with their attributes and relations' },
+    4: { ur: 'ضمیریں', en: 'Pronouns, separate and attached' },
+    5: { ur: 'جمع اور جمع کی ضمیریں', en: 'Plurals and plural pronouns' },
+    6: { ur: 'قرآنی افعال', en: 'Quranic verbs' }
+  };
   const unitOf = n => DATA.units.find(u => u.n === n) || DATA.units[0];
   const lessonsOf = u => u.lessons;
   const curUnit = () => unitOf(state.unit);
@@ -52492,7 +52531,29 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px
     const i = DATA.units.findIndex(u => u.n === state.unit); const j = (i + (e.key === 'ArrowRight' ? 1 : -1) + DATA.units.length) % DATA.units.length;
     selectUnit(DATA.units[j].n); $(`.unit-tab[data-unit="${DATA.units[j].n}"]`).focus();
   });
-  const selectUnit = n => { state.unit = n; store.set('unit', n); renderAll(); window.scrollTo({ top: 0 }); };
+  const selectUnit = n => { state.unit = n; store.set('unit', n); state.view = 'unit'; renderAll(); window.scrollTo({ top: 0 }); };
+  const goHome = () => { state.view = 'home'; renderAll(); window.scrollTo({ top: 0 }); };
+
+  // ---------- home: one box per unit ----------
+  const renderHome = () => {
+    $('#unitGrid').innerHTML = DATA.units.map(u => {
+      const info = UNIT_INFO[u.n] || { ur: '', en: '' };
+      const done = u.lessons.filter(l => isDone(u.n, l.lesson)).length;
+      const words = u.lessons.reduce((a, l) => a + allItems(l).length, 0);
+      const pct = Math.round(100 * done / u.lessons.length);
+      return `<button class="unit-card" data-unit="${u.n}" aria-label="Open Unit ${u.n}">
+        <div class="band"><span class="num">Unit ${u.n}</span><span class="ur">یونٹ ${urNum(u.n)}</span></div>
+        <div class="content">
+          <div class="t-ur">${esc(info.ur)}</div>
+          <div class="t-en">${esc(info.en)}</div>
+          <div class="meta">${u.lessons.length} lessons · ${words.toLocaleString()} words &amp; phrases · ${done} done</div>
+          <div class="bar" title="${pct}% done"><span style="width:${pct}%"></span></div>
+          <div class="go">${done ? 'Continue' : 'Start'} →</div>
+        </div></button>`;
+    }).join('');
+  };
+  $('#unitGrid').addEventListener('click', e => { const c = e.target.closest('.unit-card'); if (c) selectUnit(+c.dataset.unit); });
+  $('#homeBtn').onclick = goHome;
 
   // ---------- lesson list ----------
   let lessonFilter = '';
@@ -52665,7 +52726,12 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px
       <div id="body"></div>`;
     renderBody();
   };
-  const renderAll = () => { renderUnitTabs(); renderLessonList(); renderLesson(); };
+  const renderAll = () => {
+    document.body.classList.toggle('view-home', state.view === 'home');
+    document.body.classList.toggle('view-unit', state.view !== 'home');
+    if (state.view === 'home') { renderHome(); return; }
+    renderUnitTabs(); renderLessonList(); renderLesson();
+  };
 
   // ---------- interactions in the view ----------
   $('#view').addEventListener('click', e => {
@@ -52726,7 +52792,7 @@ footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px
     const r = e.target.closest('.res'); if (!r) return;
     const h = INDEX[+r.dataset.i];
     $('#results').classList.remove('open');
-    state.unit = h.u; store.set('unit', h.u);
+    state.unit = h.u; store.set('unit', h.u); state.view = 'unit';
     state.tab = h.tab; store.set('tab', h.tab);
     state.lesson[h.u] = h.l; store.set('lesson', state.lesson);
     renderAll();
