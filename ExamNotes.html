@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muallim-ul-Quran Exam Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ec; --surface: #fffdf8; --surface-2: #f0ebe0; --ink: #1f2a2a; --muted: #5d6b6b; --line: #ddd5c4;
+  --teal: #2f7f78; --teal-d: #1f5c57; --red: #b3261e; --gold: #a8741a; --ok: #2e7d32; --head: #1f5c57;
+  --ar: "Scheherazade New", "Traditional Arabic", serif;
+  --ur: "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #141a1a; --surface: #1c2424; --surface-2: #243030; --ink: #e8eeee; --muted: #9fb0b0; --line: #334242; --teal: #5fb8ae; --teal-d: #8fd3ca; --red: #f08a80; --gold: #e0b45c; --ok: #7bc47f; --head: #0f2422; }
+}
+:root[data-theme="dark"] { --bg: #141a1a; --surface: #1c2424; --surface-2: #243030; --ink: #e8eeee; --muted: #9fb0b0; --line: #334242; --teal: #5fb8ae; --teal-d: #8fd3ca; --red: #f08a80; --gold: #e0b45c; --ok: #7bc47f; --head: #0f2422; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, "Segoe UI", sans-serif; }
+.ar { font-family: var(--ar); font-size: 1.32em; line-height: 1.7; direction: rtl; unicode-bidi: isolate; }
+.ur { font-family: var(--ur); line-height: 2; direction: rtl; unicode-bidi: isolate; }
+/* bilingual blocks: L-en = English text, L-ur = its Urdu version */
+.L-ur { font-family: var(--ur); direction: rtl; text-align: right; line-height: 2.15; }
+p.L-ur, li .L-ur, .L-ur.blk { display: block; }
+li > .L-en, li > .L-ur { display: block; margin: 0; }
+li > .L-ur { color: color-mix(in srgb, var(--ink) 85%, var(--teal)); }
+body.lang-en .L-ur, body.lang-ur .L-en { display: none !important; }
+body.lang-ur li { list-style: none; }
+body.lang-ur ul { padding-right: 4px; }
+body.lang-ur table, body.lang-ur ul, body.lang-ur .rule, body.lang-ur .uhead { direction: rtl; }
+body.lang-ur th, body.lang-ur td { text-align: right; }
+body.lang-ur h3 { flex-direction: row; }
+body.lang-ur details.q summary { direction: rtl; }
+
+header.top { position: sticky; top: 0; z-index: 20; background: var(--head); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.bar { max-width: 1150px; margin: 0 auto; padding: 8px 16px 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.brand { font-weight: 700; margin-right: auto; white-space: nowrap; }
+.brand .ar { font-size: 22px; margin-left: 6px; }
+.seg { display: inline-flex; background: rgba(255,255,255,.14); border-radius: 999px; padding: 2px; }
+.seg button { border: 0; background: transparent; color: #fff; font: inherit; font-size: 13px; padding: 4px 11px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: #fff; color: #1f5c57; font-weight: 700; }
+.seg .u { font-family: var(--ur); font-size: 14px; line-height: 1.4; }
+.tbtn { border: 0; background: rgba(255,255,255,.15); color: #fff; border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+nav.tabs { max-width: 1150px; margin: 0 auto; display: flex; gap: 4px; padding: 8px 16px 0; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { flex: none; border: 0; background: rgba(255,255,255,.1); color: #fff; font: inherit; font-size: 14px; padding: 7px 14px 8px; border-radius: 12px 12px 0 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
+nav.tabs button .tu { font-family: var(--ur); font-size: 12px; opacity: .85; line-height: 1.6; }
+nav.tabs button .tick { font-size: 11px; color: #a5e3a8; }
+nav.tabs button[aria-selected="true"] { background: var(--bg); color: var(--teal-d); font-weight: 700; }
+main { max-width: 1150px; margin: 0 auto; padding: 18px 16px 60px; }
+section.tab { display: none; animation: fade .2s ease; }
+section.tab.on { display: block; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; margin: 14px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.uhead { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; }
+.uhead .num { background: var(--teal-d); color: #fff; border-radius: 14px; padding: 8px 14px; text-align: center; font-weight: 800; font-size: 20px; line-height: 1.2; }
+:root[data-theme="dark"] .uhead .num { color: #10201f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .uhead .num { color: #10201f; } }
+.uhead .num small { display: block; font-family: var(--ur); font-weight: 400; font-size: 13px; line-height: 1.6; }
+.uhead .ttl { flex: 1; min-width: 220px; }
+.uhead h2 { margin: 0; color: var(--teal-d); font-size: 22px; }
+.uhead h2.L-ur { font-size: 24px; color: var(--red); font-weight: 400; }
+.uhead .meta { color: var(--muted); font-size: 13px; }
+.donebtn { border: 2px solid var(--ok); background: transparent; color: var(--ok); border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; }
+.donebtn[aria-pressed="true"] { background: var(--ok); color: #fff; }
+h3 { color: var(--red); margin: 0 0 8px; font-size: 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+h3 .L-ur { font-weight: 400; font-size: 20px; }
+body.lang-ur h3 { flex-direction: row-reverse; }
+.lead { font-size: 16.5px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 15px; }
+th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: middle; }
+th { background: var(--surface-2); color: var(--teal-d); font-size: 13px; letter-spacing: .2px; }
+th .L-ur, td.L-ur, th.L-ur { font-family: var(--ur); text-align: right; }
+td.L-ur { direction: rtl; }
+tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
+.tw { overflow-x: auto; }
+ul { padding-left: 22px; margin: 6px 0; } li { margin: 6px 0; }
+.rule { background: color-mix(in srgb, var(--teal) 10%, var(--surface)); border-left: 4px solid var(--teal); padding: 10px 14px; border-radius: 8px; margin: 10px 0; }
+.traps { background: color-mix(in srgb, var(--red) 8%, var(--surface)); border-color: color-mix(in srgb, var(--red) 35%, var(--line)); }
+.plan td:last-child { text-align: center; width: 64px; }
+.plan input, .got input { width: 20px; height: 20px; accent-color: var(--ok); cursor: pointer; }
+.plan tr.done td { color: var(--muted); }
+.progress { height: 10px; background: var(--surface-2); border-radius: 999px; overflow: hidden; margin: 6px 0 2px; }
+.progress span { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s; }
+.qbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.score { font-size: 14px; color: var(--muted); }
+.score b { color: var(--ok); }
+details.q { border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin: 8px 0; background: var(--surface); }
+details.q summary { cursor: pointer; font-weight: 600; }
+details.q summary::marker { color: var(--teal); }
+details.q summary .L-ur { font-weight: 400; }
+details.q .ans { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line); color: var(--ok); }
+.got { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 14px; color: var(--muted); cursor: pointer; }
+.sbtn { border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); border-radius: 999px; padding: 5px 14px; font: inherit; font-size: 14px; cursor: pointer; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.ucard { text-align: start; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 12px 14px; cursor: pointer; font: inherit; color: inherit; transition: transform .12s, box-shadow .12s; }
+.ucard:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.1); }
+.ucard b { color: var(--teal-d); display: block; }
+.ucard .ur { color: var(--red); display: block; }
+.ucard .st { font-size: 13px; color: var(--muted); }
+footer { text-align: center; color: var(--muted); font-size: 13px; padding: 20px; }
+@media (max-width: 760px) {
+  .grid2 { grid-template-columns: 1fr; }
+  .card { padding: 12px 14px; }
+  .brand { font-size: 15px; }
+  .uhead h2 { font-size: 19px; }
+  th, td { padding: 5px 6px; font-size: 14px; }
+}
+@media print {
+  header.top, .noprint, .donebtn, .got { display: none !important; }
+  section.tab { display: block !important; break-before: page; }
+  body { background: #fff; color: #000; font-size: 11.5pt; }
+  .card { box-shadow: none; break-inside: avoid; }
+  details.q > * { display: block; }
+}
+</style>
+</head>
+<body class="lang-both">
+<header class="top">
+  <div class="bar">
+    <span class="brand">Exam Notes <span class="ar">مُعَلِّمُ الْقُرْآنِ</span></span>
+    <div class="seg" role="group" aria-label="Language">
+      <button data-lang="en">English</button><button data-lang="both">Both</button><button data-lang="ur" class="u">اردو</button>
+    </div>
+    <button class="tbtn" id="theme" title="Dark / light">◐</button>
+    <button class="tbtn" onclick="print()" title="Print all tabs or save as PDF">Print</button>
+  </div>
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-tab="plan">Plan<span class="tu">منصوبہ</span></button>
+    <button role="tab" data-tab="u1">Unit 1<span class="tu">یونٹ ۱</span></button>
+    <button role="tab" data-tab="u2">Unit 2<span class="tu">یونٹ ۲</span></button>
+    <button role="tab" data-tab="u3">Unit 3<span class="tu">یونٹ ۳</span></button>
+    <button role="tab" data-tab="u4">Unit 4<span class="tu">یونٹ ۴</span></button>
+    <button role="tab" data-tab="u5">Unit 5<span class="tu">یونٹ ۵</span></button>
+    <button role="tab" data-tab="rev">Revision<span class="tu">دہرائی</span></button>
+  </nav>
+</header>
+
+<main>
+<!-- ================= PLAN ================= -->
+<section class="tab" id="plan" role="tabpanel">
+  <div class="card">
+    <h3><span class="L-en">10-day study plan</span><span class="L-ur">دس دن کا مطالعاتی منصوبہ</span></h3>
+    <p class="L-en lead">82 lessons in 10 days: about 9 lessons a day, vocabulary first, Day 10 for full revision. Tick each day when done; ticks are saved in this browser.</p>
+    <p class="L-ur lead">دس دن میں 82 اسباق: روزانہ تقریباً 9 اسباق، پہلے ذخیرۂ الفاظ، اور دسواں دن مکمل دہرائی کے لیے۔ ہر دن مکمل ہونے پر نشان لگائیں؛ نشان اسی براؤزر میں محفوظ رہیں گے۔</p>
+    <div class="progress"><span id="pbar"></span></div>
+    <p class="score" id="ptext"></p>
+    <div class="tw"><table class="plan">
+      <tr><th>Day · دن</th><th>Lessons · اسباق</th><th class="L-en">Focus</th><th class="L-ur">موضوع</th><th>✓</th></tr>
+      <tr><td>1</td><td>U1 · L1–9</td><td class="L-en">Core Quranic vocabulary, Allah's attributes</td><td class="L-ur">بنیادی قرآنی الفاظ، اللہ کی صفات</td><td><input type="checkbox" data-day="1"></td></tr>
+      <tr><td>2</td><td>U1 · L10–19</td><td class="L-en">Plurals, الـ vs tanween, pointing words, لَـ, أَفْعَلُ</td><td class="L-ur">جمع، الـ اور تنوین، اسمائے اشارہ، لامِ تاکید، أَفْعَلُ</td><td><input type="checkbox" data-day="2"></td></tr>
+      <tr><td>3</td><td>U2 · L1–7</td><td class="L-en">إِنَّ and the prepositions</td><td class="L-ur">إِنَّ اور حروفِ جار</td><td><input type="checkbox" data-day="3"></td></tr>
+      <tr><td>4</td><td>U2 · L8–13</td><td class="L-en">لَا, إِلَّا, oath وَ, أَنَّ, كَانَ, يَا</td><td class="L-ur">لَا، إِلَّا، واوِ قسم، أَنَّ، كَانَ، يَا</td><td><input type="checkbox" data-day="4"></td></tr>
+      <tr><td>5</td><td>U3 · L1–10</td><td class="L-en">Attribute vs idafah, كُلٌّ, word patterns, the dual</td><td class="L-ur">صفت اور اضافت، كُلٌّ، اوزان، تثنیہ</td><td><input type="checkbox" data-day="5"></td></tr>
+      <tr><td>6</td><td>U4 · L1–8</td><td class="L-en">هُوَ / ـهُ and أَنْتَ / ـكَ</td><td class="L-ur">هُوَ / ـهُ اور أَنْتَ / ـكَ</td><td><input type="checkbox" data-day="6"></td></tr>
+      <tr><td>7</td><td>U4 · L9–17</td><td class="L-en">هِيَ / ـهَا, أَنَا / ـي, tanween fath style</td><td class="L-ur">هِيَ / ـهَا، أَنَا / ـي، تنوینِ نصب کا اسلوب</td><td><input type="checkbox" data-day="7"></td></tr>
+      <tr><td>8</td><td>U5 · L1–12</td><td class="L-en">ـُونَ / ـِينَ, broken plurals, هُمْ, أَنْتُمْ</td><td class="L-ur">ـُونَ / ـِينَ، جمعِ مکسر، هُمْ، أَنْتُمْ</td><td><input type="checkbox" data-day="8"></td></tr>
+      <tr><td>9</td><td>U5 · L13–23</td><td class="L-en">نَحْنُ, أُولٰئِكَ, هٰؤُلَاءِ, styles and idioms</td><td class="L-ur">نَحْنُ، أُولٰئِكَ، هٰؤُلَاءِ، اسالیب اور محاورے</td><td><input type="checkbox" data-day="9"></td></tr>
+      <tr><td>10</td><td class="L-en">All units</td><td class="L-ur">تمام یونٹ</td><td class="L-en">Revision tab, practice questions, weak areas</td><td class="L-ur">دہرائی، مشقی سوالات، کمزور حصے</td><td><input type="checkbox" data-day="10"></td></tr>
+    </table></div>
+    <div class="rule"><p class="L-en">Each day: read that unit's notes (30–40 min), drill the words in the units app (20 min), then answer that unit's practice questions and tick the ones you got right. Most marks come from translating short phrases, changing a word's form, and explaining why an ending changed.</p>
+    <p class="L-ur">روزانہ: متعلقہ یونٹ کے نوٹس پڑھیں (30–40 منٹ)، یونٹس ایپ میں الفاظ کی مشق کریں (20 منٹ)، پھر اس یونٹ کے مشقی سوالات حل کریں اور درست جوابات پر نشان لگائیں۔ زیادہ نمبر مختصر قرآنی ٹکڑوں کے ترجمے، لفظ کی شکل بدلنے، اور آخری حرکت بدلنے کی وجہ بتانے پر ملتے ہیں۔</p></div>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">Your units</span><span class="L-ur">آپ کے یونٹ</span></h3>
+    <div class="home-grid" id="ucards"></div>
+  </div>
+</section>
+
+<!-- ================= UNIT 1 ================= -->
+<section class="tab" id="u1" role="tabpanel" data-title-en="Quranic words and first sentences" data-title-ur="قرآنی الفاظ اور ابتدائی جملے" data-lessons="19">
+  <div class="card">
+    <p class="L-en lead">About 400 Quranic words you already half-know from Urdu (L1–11), then the first sentence patterns: الـ vs tanween, pointing words, لَـ of emphasis and the أَفْعَلُ pattern (L12–19).</p>
+    <p class="L-ur lead">تقریباً 400 قرآنی الفاظ جو اردو میں پہلے سے موجود ہیں (سبق 1–11)، پھر پہلے جملوں کے قاعدے: الـ اور تنوین، اسمائے اشارہ، لامِ تاکید لَـ اور أَفْعَلُ کا وزن (سبق 12–19)۔</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">L1–9 Vocabulary</span><span class="L-ur">سبق 1–9: ذخیرۂ الفاظ</span></h3>
+    <ul>
+      <li><span class="L-en">Remove الـ and most words are Urdu: الْمُؤْمِن → مومن، الْعَدْل → عدل، الْقَلَم → قلم.</span><span class="L-ur">الـ ہٹا دیں تو اکثر الفاظ اردو بن جاتے ہیں: الْمُؤْمِن ← مومن، الْعَدْل ← عدل، الْقَلَم ← قلم۔</span></li>
+      <li><span class="L-en">الـ is usually not used with personal names (مُحَمَّد، مُوسَى، عِيسَى).</span><span class="L-ur">انسانی ناموں کے ساتھ عموماً الـ نہیں آتا (مُحَمَّد، مُوسَى، عِيسَى)۔</span></li>
+      <li><span class="L-en">Round ta (ة) = feminine: مَغْفِرَة، مُؤْمِنَة. In Urdu it becomes ت (مغفرت) or ہ (مومنہ); same meaning.</span><span class="L-ur">گول تاء (ة) والے الفاظ مؤنث ہیں: مَغْفِرَة، مُؤْمِنَة۔ اردو میں یہ ت (مغفرت) یا ہ (مومنہ) بن جاتی ہے؛ معنی وہی رہتا ہے۔</span></li>
+      <li><span class="L-en">Feminine without ة: جَهَنَّم، أَرْض، سَمَاء، نَار، شَمْس، نَفْس، عَيْن.</span><span class="L-ur">ة کے بغیر مؤنث: جَهَنَّم، أَرْض، سَمَاء، نَار، شَمْس، نَفْس، عَيْن۔</span></li>
+      <li><span class="L-en">A word with الـ basically ends in one damma (الْكِتَابُ); in a sentence it may become الْكِتَابَ / الْكِتَابِ without changing the meaning.</span><span class="L-ur">الـ والا لفظ اصل میں ایک پیش پر ختم ہوتا ہے (الْكِتَابُ)؛ جملے میں الْكِتَابَ / الْكِتَابِ بھی ہو سکتا ہے، معنی نہیں بدلتا۔</span></li>
+      <li><span class="L-en">L9 Allah's attributes, with or without الـ: خَالِق Creator · مَالِك Owner · قَادِر All-Powerful · هَادِي Guide · غَافِر Forgiver · شَاكِر Appreciative · حَفِيظ Guardian · سَمِيع All-Hearing · عَلِيم All-Knowing · خَبِير All-Aware.</span><span class="L-ur">سبق 9 اللہ کی صفات (الـ کے ساتھ یا بغیر، معنی ایک): خَالِق پیدا کرنے والا · مَالِك مالک · قَادِر قدرت والا · هَادِي ہدایت دینے والا · غَافِر بخشنے والا · شَاكِر قدردان · حَفِيظ حفاظت کرنے والا · سَمِيع سننے والا · عَلِيم خوب جاننے والا · خَبِير باخبر۔</span></li>
+    </ul>
+    <div class="rule"><p class="L-en">Words that look like Urdu but mean something else:</p><p class="L-ur">وہ الفاظ جو اردو جیسے ہیں مگر معنی مختلف ہے:</p>
+      الْبَيْت = گھر · الْأَرْض = زمین · النَّاس = لوگ · الصِّدْق = سچائی · الْغُرُور = دھوکہ · الظَّن = گمان · الْمَكَان = جگہ · الْوَلِيّ = دوست، سرپرست</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">L10–11 Plurals</span><span class="L-ur">سبق 10–11: جمع</span></h3>
+    <div class="tw"><table>
+      <tr><th>Singular · واحد</th><th>Plural · جمع</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <tr><td>قَلَم</td><td>أَقْلَام</td><td class="L-en">pen</td><td class="L-ur">قلم</td></tr>
+      <tr><td>كِتَاب</td><td>كُتُب</td><td class="L-en">book</td><td class="L-ur">کتاب</td></tr>
+      <tr><td>عَمَل</td><td>أَعْمَال</td><td class="L-en">deed</td><td class="L-ur">عمل</td></tr>
+      <tr><td>يَوْم</td><td>أَيَّام</td><td class="L-en">day</td><td class="L-ur">دن</td></tr>
+      <tr><td>شَيْء</td><td>أَشْيَاء</td><td class="L-en">thing</td><td class="L-ur">چیز</td></tr>
+      <tr><td>مَسْجِد</td><td>مَسَاجِد</td><td class="L-en">mosque</td><td class="L-ur">مسجد</td></tr>
+      <tr><td>اِسْم</td><td>أَسْمَاء</td><td class="L-en">name</td><td class="L-ur">نام</td></tr>
+      <tr><td>نَفْس</td><td>نُفُوس</td><td class="L-en">soul</td><td class="L-ur">جان</td></tr>
+      <tr><td>قَبْر / قَلْب</td><td>قُبُور / قُلُوب</td><td class="L-en">grave / heart</td><td class="L-ur">قبر / دل</td></tr>
+      <tr><td>آيَة</td><td>آيَات</td><td class="L-en">verse, sign</td><td class="L-ur">آیت، نشانی</td></tr>
+      <tr><td>صَلَاة</td><td>صَلَوَات</td><td class="L-en">prayer</td><td class="L-ur">نماز</td></tr>
+      <tr><td>سَمَاء</td><td>سَمٰوَات</td><td class="L-en">sky, heaven</td><td class="L-ur">آسمان</td></tr>
+      <tr><td>حَسَنَة / سَيِّئَة</td><td>حَسَنَات / سَيِّئَات</td><td class="L-en">good / evil deed</td><td class="L-ur">نیکی / برائی</td></tr>
+      <tr><td>ظُلْمَة</td><td>ظُلُمَات</td><td class="L-en">darkness</td><td class="L-ur">اندھیرا</td></tr>
+    </table></div>
+    <ul>
+      <li><span class="L-en">Plurals of things are treated as feminine.</span><span class="L-ur">چیزوں کی جمع مؤنث شمار ہوتی ہے۔</span></li>
+      <li><span class="L-en">ـَات plurals are for things and women; without الـ they take double damma: الْآيَاتُ → آيَاتٌ.</span><span class="L-ur">ـَات والی جمع چیزوں اور عورتوں کے لیے ہے؛ الـ کے بغیر دو پیش آتے ہیں: الْآيَاتُ ← آيَاتٌ۔</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">L12 وَ = and</span><span class="L-ur">سبق 12: وَ = اور</span></h3>
+    <p class="L-en">وَ joins two or more words, all with the same ending: الشَّمْسُ وَالْقَمَرُ (the sun and the moon) · اللَّيْلُ وَالنَّهَارُ (night and day) · الْحَقُّ وَالْبَاطِلُ (truth and falsehood).</p>
+    <p class="L-ur">وَ دو یا زیادہ الفاظ کو جوڑتا ہے اور سب کی آخری حرکت ایک جیسی ہوتی ہے: الشَّمْسُ وَالْقَمَرُ (سورج اور چاند) · اللَّيْلُ وَالنَّهَارُ (رات اور دن) · الْحَقُّ وَالْبَاطِلُ (حق اور باطل)۔</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">L13–14 Definite (الـ) vs indefinite (tanween)</span><span class="L-ur">سبق 13–14: معرفہ (الـ) اور نکرہ (تنوین)</span></h3>
+    <div class="tw"><table>
+      <tr><th class="L-en">Form</th><th class="L-ur">شکل</th><th>Example · مثال</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <tr><td class="L-en">الـ + one vowel</td><td class="L-ur">الـ + ایک حرکت</td><td>الْكِتَابُ</td><td class="L-en">the book</td><td class="L-ur">کتاب (خاص)</td></tr>
+      <tr><td class="L-en">tanween, no الـ</td><td class="L-ur">تنوین، الـ نہیں</td><td>كِتَابٌ / كِتَابًا / كِتَابٍ</td><td class="L-en">a book, any book</td><td class="L-ur">کوئی کتاب / ایک کتاب</td></tr>
+      <tr><td class="L-en">tanween at sentence end</td><td class="L-ur">جملے کے آخر میں تنوین</td><td>ظَالِمٌ، قَرِيبٌ</td><td class="L-en">is a wrongdoer, is near</td><td class="L-ur">ظالم ہے، قریب ہے</td></tr>
+    </table></div>
+    <ul>
+      <li><span class="L-en">All three tanweens (ٌ ً ٍ) mean the same; focus on meaning, not the ending.</span><span class="L-ur">تینوں تنوینوں (ٌ ً ٍ) کا معنی ایک ہے؛ آخری حرکت کے بجائے معنی پر توجہ دیں۔</span></li>
+      <li><span class="L-en">وَاللّٰهُ غَفُورٌ = And Allah is Most Forgiving. Two attributes without وَ go together: وَاللّٰهُ سَمِيعٌ عَلِيمٌ = And Allah is All-Hearing, All-Knowing.</span><span class="L-ur">وَاللّٰهُ غَفُورٌ = اور اللہ بخشنے والا ہے۔ وَ کے بغیر دو صفات کا ترجمہ ساتھ ہوگا: وَاللّٰهُ سَمِيعٌ عَلِيمٌ = اور اللہ سننے والا، جاننے والا ہے۔</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">L15–17 Pointing words</span><span class="L-ur">سبق 15–17: اسمائے اشارہ</span></h3>
+    <div class="tw"><table>
+      <tr><th></th><th>Near · قریب</th><th>Far · دور</th></tr>
+      <tr><td><span class="L-en">Masculine</span><span class="L-ur">مذکر</span></td><td>هٰذَا</td><td>ذٰلِكَ</td></tr>
+      <tr><td><span class="L-en">Feminine</span><span class="L-ur">مؤنث</span></td><td>هٰذِهِ</td><td>تِلْكَ</td></tr>
+    </table></div>
+    <div class="rule">
+      <p class="L-en"><b>The deciding rule:</b> pointing word + tanween word = sentence with "is": هٰذَا كِتَابٌ = This is a book. Pointing word + الـ word = phrase, no "is": هٰذَا الْقُرْآنُ = this Qur'an. With emphasis it can still be a sentence: ذٰلِكَ الْفَوْزُ = That is the success.</p>
+      <p class="L-ur"><b>فیصلہ کن قاعدہ:</b> اسمِ اشارہ + تنوین والا لفظ = مکمل جملہ ("ہے" کے ساتھ): هٰذَا كِتَابٌ = یہ کتاب ہے۔ اسمِ اشارہ + الـ والا لفظ = ٹکڑا، "ہے" نہیں: هٰذَا الْقُرْآنُ = یہ قرآن۔ تاکید ہو تو جملہ بھی بنتا ہے: ذٰلِكَ الْفَوْزُ = یہی کامیابی ہے۔</p>
+    </div>
+    <ul>
+      <li><span class="L-en">In the Qur'an ذٰلِكَ and تِلْكَ mostly mean "this": ذٰلِكَ الْكِتَابُ = this Book. Context decides.</span><span class="L-ur">قرآن میں ذٰلِكَ اور تِلْكَ اکثر "یہ" (قریب) کے معنی میں ہیں: ذٰلِكَ الْكِتَابُ = یہ کتاب۔ سیاق فیصلہ کرتا ہے۔</span></li>
+      <li><span class="L-en">مَتَى = when: مَتَى هٰذَا الْوَعْدُ = When is this promise?</span><span class="L-ur">مَتَى = کب: مَتَى هٰذَا الْوَعْدُ = یہ وعدہ کب ہے؟</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">L18 لَـ of emphasis · L19 أَفْعَلُ pattern</span><span class="L-ur">سبق 18 لامِ تاکید · سبق 19 أَفْعَلُ</span></h3>
+    <ul>
+      <li><span class="L-en">لَـ + tanween word = "surely … is": لَحَقٌّ = surely it is the truth · لَشَدِيدٌ = surely it is severe. Before الـ the alif drops: لَلْآخِرَةُ = surely the Hereafter.</span><span class="L-ur">لَـ + تنوین والا لفظ = "یقیناً … ہے": لَحَقٌّ = یقیناً حق ہے · لَشَدِيدٌ = یقیناً سخت ہے۔ الـ سے پہلے الف گر جاتا ہے: لَلْآخِرَةُ = یقیناً آخرت۔</span></li>
+      <li><span class="L-en">أَفْعَلُ (four letters, starts with أَ) = most / -est: أَكْبَرُ greatest · أَعْلَمُ most knowing · أَرْحَمُ most merciful · أَحْسَنُ best · أَقْرَبُ nearest · أَبْقَى most lasting. خَيْرٌ / شَرٌّ were أَخْيَرُ / أَشَرُّ, so they also mean better / worse.</span><span class="L-ur">أَفْعَلُ (چار حروف، شروع میں أَ) = سب سے زیادہ: أَكْبَرُ سب سے بڑا · أَعْلَمُ سب سے زیادہ جاننے والا · أَرْحَمُ سب سے زیادہ رحم کرنے والا · أَحْسَنُ سب سے اچھا · أَقْرَبُ سب سے قریب · أَبْقَى سب سے زیادہ باقی رہنے والا۔ خَيْرٌ / شَرٌّ اصل میں أَخْيَرُ / أَشَرُّ ہیں، اس لیے بہتر / بدتر کے معنی بھی دیتے ہیں۔</span></li>
+    </ul>
+  </div>
+
+  <div class="card traps">
+    <h3><span class="L-en">Exam traps</span><span class="L-ur">امتحانی غلطیاں</span></h3>
+    <ul>
+      <li><span class="L-en">Adding "is" to هٰذَا + الـ word: هٰذَا الْكِتَابُ is "this book", not "this is the book".</span><span class="L-ur">هٰذَا + الـ والے لفظ میں "ہے" لگانا: هٰذَا الْكِتَابُ کا مطلب "یہ کتاب" ہے، "یہ کتاب ہے" نہیں۔</span></li>
+      <li><span class="L-en">Using هٰذَا with a feminine word: آيَة، جَنَّة، نَار، أَرْض take هٰذِهِ / تِلْكَ.</span><span class="L-ur">مؤنث لفظ کے ساتھ هٰذَا لگانا: آيَة، جَنَّة، نَار، أَرْض کے ساتھ هٰذِهِ / تِلْكَ آئے گا۔</span></li>
+      <li><span class="L-en">Confusing لَـ (surely, fatha) with لِـ (for, kasra).</span><span class="L-ur">لَـ (یقیناً، زبر) اور لِـ (کے لیے، زیر) میں فرق نہ کرنا۔</span></li>
+      <li><span class="L-en">Writing plurals with Urdu endings. Learn broken plurals as pairs.</span><span class="L-ur">جمع کو اردو طریقے سے بنانا۔ جمعِ مکسر کو جوڑوں کی صورت میں یاد کریں۔</span></li>
+    </ul>
+  </div>
+
+  <div class="card practice">
+    <div class="qbar"><h3><span class="L-en">Practice questions</span><span class="L-ur">مشقی سوالات</span></h3><span class="score"></span><button class="sbtn noprint showall">Show all answers · سب جوابات</button></div>
+    <details class="q"><summary><span class="L-en">Give the plural:</span><span class="L-ur">جمع بتائیں:</span> قَلَم، كِتَاب، يَوْم، آيَة، نَفْس</summary><div class="ans">أَقْلَام · كُتُب · أَيَّام · آيَات · نُفُوس</div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> هٰذَا كِتَابٌ — هٰذَا الْكِتَابُ</summary><div class="ans"><span class="L-en">This is a book. — this book (a phrase, because the second word has الـ).</span><span class="L-ur blk">یہ کتاب ہے۔ — یہ کتاب (ٹکڑا، کیونکہ دوسرے لفظ پر الـ ہے)۔</span></div></details>
+    <details class="q"><summary><span class="L-en">Which pointing word?</span><span class="L-ur">کون سا اسمِ اشارہ؟</span> آيَةٌ، رَسُولٌ، جَهَنَّمُ، نَارٌ</summary><div class="ans">هٰذِهِ آيَةٌ · هٰذَا رَسُولٌ · هٰذِهِ جَهَنَّمُ · هٰذِهِ نَارٌ</div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> وَاللّٰهُ غَفُورٌ رَحِيمٌ</summary><div class="ans"><span class="L-en">And Allah is Most Forgiving, Most Merciful.</span><span class="L-ur blk">اور اللہ بخشنے والا، رحم کرنے والا ہے۔</span></div></details>
+    <details class="q"><summary><span class="L-en">Meaning of:</span><span class="L-ur">معنی بتائیں:</span> لَحَقٌّ، لَشَدِيدٌ، لَلْآخِرَةُ</summary><div class="ans"><span class="L-en">surely it is the truth · surely it is severe · surely the Hereafter</span><span class="L-ur blk">یقیناً حق ہے · یقیناً سخت ہے · یقیناً آخرت</span></div></details>
+    <details class="q"><summary><span class="L-en">Meaning of:</span><span class="L-ur">معنی بتائیں:</span> أَكْبَرُ، أَعْلَمُ، أَحْسَنُ، أَقْرَبُ</summary><div class="ans"><span class="L-en">greatest · most knowing · best · nearest</span><span class="L-ur blk">سب سے بڑا · سب سے زیادہ جاننے والا · سب سے اچھا · سب سے قریب</span></div></details>
+  </div>
+</section>
+
+<!-- ================= UNIT 2 ================= -->
+<section class="tab" id="u2" role="tabpanel" data-title-en="Particles before a noun" data-title-ur="اسم سے پہلے آنے والے حروف" data-lessons="13">
+  <div class="card">
+    <p class="L-en lead">Each lesson is one small word placed before a noun. Learn two things for each: its meaning, and what it does to the noun's last vowel.</p>
+    <p class="L-ur lead">ہر سبق میں ایک چھوٹا لفظ اسم سے پہلے آتا ہے۔ ہر ایک کی دو باتیں یاد کریں: اس کا معنی، اور یہ کہ وہ اسم کی آخری حرکت پر کیا اثر ڈالتا ہے۔</p>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">The master table</span><span class="L-ur">بنیادی جدول</span></h3>
+    <div class="tw"><table>
+      <tr><th>L</th><th>Particle · حرف</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th class="L-en">Next noun ends in</th><th class="L-ur">اگلے اسم کی حرکت</th><th>Example · مثال</th></tr>
+      <tr><td>1</td><td>إِنَّ</td><td class="L-en">surely, indeed</td><td class="L-ur">بے شک</td><td class="L-en">fatha</td><td class="L-ur">زبر</td><td>إِنَّ اللّٰهَ</td></tr>
+      <tr><td>2</td><td>لِـ</td><td class="L-en">for, belongs to</td><td class="L-ur">کے لیے</td><td class="L-en">kasra</td><td class="L-ur">زیر</td><td>لِلْكِتَابِ</td></tr>
+      <tr><td>3</td><td>فِي</td><td class="L-en">in</td><td class="L-ur">میں</td><td class="L-en">kasra</td><td class="L-ur">زیر</td><td>فِي الْأَرْضِ</td></tr>
+      <tr><td>4</td><td>عَلَى</td><td class="L-en">on</td><td class="L-ur">پر</td><td class="L-en">kasra</td><td class="L-ur">زیر</td><td>عَلَى اللّٰهِ</td></tr>
+      <tr><td>5</td><td>مِنْ</td><td class="L-en">from; than</td><td class="L-ur">سے</td><td class="L-en">kasra</td><td class="L-ur">زیر</td><td>مِنَ النَّارِ</td></tr>
+      <tr><td>6</td><td>إِلَى</td><td class="L-en">towards; until</td><td class="L-ur">کی طرف؛ تک</td><td class="L-en">kasra</td><td class="L-ur">زیر</td><td>إِلَى النُّورِ</td></tr>
+      <tr><td>7</td><td>بِـ</td><td class="L-en">in / with / to; in exchange for</td><td class="L-ur">پر، سے، کو؛ کے بدلے</td><td class="L-en">kasra</td><td class="L-ur">زیر</td><td>بِاللّٰهِ</td></tr>
+      <tr><td>8</td><td>لَا</td><td class="L-en">no … at all</td><td class="L-ur">قطعاً کوئی … نہیں</td><td class="L-en">one fatha, no tanween</td><td class="L-ur">ایک زبر، تنوین نہیں</td><td>لَا رَيْبَ</td></tr>
+      <tr><td>9</td><td>إِلَّا</td><td class="L-en">except, but</td><td class="L-ur">مگر، سوائے</td><td class="L-en">any (no effect)</td><td class="L-ur">کوئی بھی (اثر نہیں)</td><td>إِلَّا اللّٰهُ</td></tr>
+      <tr><td>10</td><td>وَ</td><td class="L-en">by … (oath)</td><td class="L-ur">قسم ہے … کی</td><td class="L-en">kasra</td><td class="L-ur">زیر</td><td>وَالْعَصْرِ</td></tr>
+      <tr><td>11</td><td>أَنَّ</td><td class="L-en">that</td><td class="L-ur">کہ</td><td class="L-en">fatha</td><td class="L-ur">زبر</td><td>أَنَّ اللّٰهَ</td></tr>
+      <tr><td>12</td><td>كَانَ</td><td class="L-en">was</td><td class="L-ur">تھا</td><td class="L-en">double fatha ـًا</td><td class="L-ur">دو زبر ـًا</td><td>كَانَ رَسُولًا</td></tr>
+      <tr><td>13</td><td>يَا</td><td class="L-en">O</td><td class="L-ur">اے</td><td class="L-en">one damma</td><td class="L-ur">ایک پیش</td><td>يَا آدَمُ</td></tr>
+    </table></div>
+    <div class="rule"><p class="L-en">Memory trick: إِنَّ · أَنَّ · كَانَ give <b>fatha</b>; the prepositions لِ · فِي · عَلَى · مِنْ · إِلَى · بِ and the oath وَ give <b>kasra</b>.</p><p class="L-ur">یاد رکھنے کا طریقہ: إِنَّ · أَنَّ · كَانَ کے بعد <b>زبر</b>؛ حروفِ جار لِ · فِي · عَلَى · مِنْ · إِلَى · بِ اور واوِ قسم کے بعد <b>زیر</b>۔</p></div>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">Rules for every particle</span><span class="L-ur">ہر حرف کے عمومی قواعد</span></h3>
+    <ul>
+      <li><span class="L-en">Particle + noun is one phrase, translated together.</span><span class="L-ur">حرف اور اسم مل کر ایک ٹکڑا بنتے ہیں اور ترجمہ اکٹھا ہوتا ہے۔</span></li>
+      <li><span class="L-en">Noun without الـ adds "a / some": فِي شَكٍّ = in a doubt · مِنْ مَاءٍ = from some water.</span><span class="L-ur">الـ کے بغیر اسم میں "کوئی / ایک" کا معنی آتا ہے: فِي شَكٍّ = کسی شک میں · مِنْ مَاءٍ = کسی پانی سے۔</span></li>
+      <li><span class="L-en">At the end of a sentence add "is": الْحَمْدُ لِلّٰهِ = Praise is for Allah.</span><span class="L-ur">جملے کے آخر میں ہو تو "ہے" لگائیں: الْحَمْدُ لِلّٰهِ = تعریف اللہ کے لیے ہے۔</span></li>
+      <li><span class="L-en">فَـ = then, so: فَإِنَّ = then surely · فَلِلّٰهِ = then to Allah alone · فَلَا = then no … at all.</span><span class="L-ur">فَـ = تو، پس: فَإِنَّ = تو بے شک · فَلِلّٰهِ = تو اللہ ہی کے لیے · فَلَا = تو قطعاً کوئی … نہیں۔</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">Lesson details</span><span class="L-ur">اسباق کی تفصیل</span></h3>
+    <ul>
+      <li><span class="L-en"><b>L1 إِنَّ</b> opens a sentence. With لَـ later = double emphasis: إِنَّ هٰذَا لَسِحْرٌ = Surely this is indeed magic.</span><span class="L-ur"><b>سبق 1 إِنَّ</b> جملے کے شروع میں آتا ہے۔ بعد میں لَـ ہو تو دوہری تاکید: إِنَّ هٰذَا لَسِحْرٌ = بے شک یہ یقیناً جادو ہے۔</span></li>
+      <li><span class="L-en"><b>L2 لِـ</b> + اللّٰه = لِلّٰهِ. Placed first = "to Allah alone": وَلِلّٰهِ الْعِزَّةُ.</span><span class="L-ur"><b>سبق 2 لِـ</b> + اللّٰه = لِلّٰهِ۔ شروع میں آئے تو "اللہ ہی کے لیے": وَلِلّٰهِ الْعِزَّةُ = اور عزت اللہ ہی کے لیے ہے۔</span></li>
+      <li><span class="L-en"><b>L3–4</b> with لَـ: لَفِي خُسْرٍ = surely in loss · سَلَامٌ عَلَى نُوحٍ = Peace be upon Nuh.</span><span class="L-ur"><b>سبق 3–4</b> لَـ کے ساتھ: لَفِي خُسْرٍ = یقیناً خسارے میں · سَلَامٌ عَلَى نُوحٍ = نوح پر سلام ہو۔</span></li>
+      <li><span class="L-en"><b>L5 مِنْ</b> after أَفْعَلُ = "than": وَالْفِتْنَةُ أَشَدُّ مِنَ الْقَتْلِ. مِنْ → مِنَ before الـ.</span><span class="L-ur"><b>سبق 5 مِنْ</b> أَفْعَلُ کے بعد "سے زیادہ": وَالْفِتْنَةُ أَشَدُّ مِنَ الْقَتْلِ = فتنہ قتل سے زیادہ سخت ہے۔ الـ سے پہلے مِنْ ← مِنَ۔</span></li>
+      <li><span class="L-en"><b>L6 إِلَى</b>: مِنَ الظُّلُمَاتِ إِلَى النُّورِ = from the darknesses to the light · إِلَى اللَّيْلِ = until night.</span><span class="L-ur"><b>سبق 6 إِلَى</b>: مِنَ الظُّلُمَاتِ إِلَى النُّورِ = اندھیروں سے روشنی کی طرف · إِلَى اللَّيْلِ = رات تک۔</span></li>
+      <li><span class="L-en"><b>L7 بِـ</b> by context: بِالْغَيْبِ = in the unseen · بِالْحِكْمَةِ = with wisdom · النَّفْسَ بِالنَّفْسِ = a life for a life.</span><span class="L-ur"><b>سبق 7 بِـ</b> سیاق کے مطابق: بِالْغَيْبِ = غیب پر · بِالْحِكْمَةِ = حکمت سے · النَّفْسَ بِالنَّفْسِ = جان کے بدلے جان۔</span></li>
+      <li><span class="L-en"><b>L8 لَا</b> removes tanween: عِلْمٌ → لَا عِلْمَ · لَا إِكْرَاهَ فِي الدِّينِ = no compulsion at all in religion.</span><span class="L-ur"><b>سبق 8 لَا</b> تنوین ختم کر دیتا ہے: عِلْمٌ ← لَا عِلْمَ · لَا إِكْرَاهَ فِي الدِّينِ = دین میں قطعاً کوئی زبردستی نہیں۔</span></li>
+      <li><span class="L-en"><b>L9 إِلَّا</b> with لَا / مَا = "nothing but": لَا إِلٰهَ إِلَّا اللّٰهُ · مَا هٰذَا إِلَّا بَشَرٌ.</span><span class="L-ur"><b>سبق 9 إِلَّا</b> لَا / مَا کے ساتھ = "صرف، کچھ نہیں مگر": لَا إِلٰهَ إِلَّا اللّٰهُ = اللہ کے سوا کوئی معبود نہیں · مَا هٰذَا إِلَّا بَشَرٌ = یہ تو صرف ایک انسان ہے۔</span></li>
+      <li><span class="L-en"><b>L10 oath وَ</b>: وَالْعَصْرِ، إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ = By time! Surely man is in loss.</span><span class="L-ur"><b>سبق 10 واوِ قسم</b>: وَالْعَصْرِ، إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ = قسم ہے زمانے کی! بے شک انسان یقیناً خسارے میں ہے۔</span></li>
+      <li><span class="L-en"><b>L11 أَنَّ</b> (hamza above) = "that", mid-sentence; إِنَّ (hamza below) = "surely", at the start.</span><span class="L-ur"><b>سبق 11 أَنَّ</b> (ہمزہ اوپر) = "کہ"، جملے کے درمیان؛ إِنَّ (ہمزہ نیچے) = "بے شک"، شروع میں۔</span></li>
+      <li><span class="L-en"><b>L12 كَانَ</b> turns ـٌ into ـًا: مَرِيضٌ → كَانَ مَرِيضًا. With Allah = "is (always)": وَكَانَ اللّٰهُ عَلِيمًا حَكِيمًا.</span><span class="L-ur"><b>سبق 12 كَانَ</b> ـٌ کو ـًا میں بدل دیتا ہے: مَرِيضٌ ← كَانَ مَرِيضًا۔ اللہ کے ساتھ "ہمیشہ سے ہے": وَكَانَ اللّٰهُ عَلِيمًا حَكِيمًا = اور اللہ جاننے والا، حکمت والا ہے۔</span></li>
+      <li><span class="L-en"><b>L13 يَا</b> before names; before الـ words use يَا أَيُّهَا: يَا أَيُّهَا النَّاسُ = O people.</span><span class="L-ur"><b>سبق 13 يَا</b> ناموں سے پہلے؛ الـ والے لفظ سے پہلے يَا أَيُّهَا: يَا أَيُّهَا النَّاسُ = اے لوگو۔</span></li>
+    </ul>
+  </div>
+  <div class="card traps">
+    <h3><span class="L-en">Exam traps</span><span class="L-ur">امتحانی غلطیاں</span></h3>
+    <ul>
+      <li><span class="L-en">إِنَّ vs أَنَّ: hamza below = surely, above = that.</span><span class="L-ur">إِنَّ اور أَنَّ: ہمزہ نیچے = بے شک، اوپر = کہ۔</span></li>
+      <li><span class="L-en">لَا رَيْبَ = "no doubt at all", not "not a doubt".</span><span class="L-ur">لَا رَيْبَ = "قطعاً کوئی شک نہیں"، صرف "شک نہیں" نہیں۔</span></li>
+      <li><span class="L-en">وَ before a kasra noun at the start of a surah (وَالشَّمْسِ) is an oath, not "and".</span><span class="L-ur">سورت کے شروع میں زیر والے اسم سے پہلے وَ (وَالشَّمْسِ) قسم ہے، "اور" نہیں۔</span></li>
+      <li><span class="L-en">كَانَ اللّٰهُ means Allah always is, not only "was".</span><span class="L-ur">كَانَ اللّٰهُ کا مطلب ہے اللہ ہمیشہ سے ہے، صرف "تھا" نہیں۔</span></li>
+      <li><span class="L-en">Tanween fath needs the extra alif: رَسُولًا, not رَسُولً.</span><span class="L-ur">دو زبر کے ساتھ اضافی الف لکھیں: رَسُولًا، رَسُولً نہیں۔</span></li>
+    </ul>
+  </div>
+  <div class="card practice">
+    <div class="qbar"><h3><span class="L-en">Practice questions</span><span class="L-ur">مشقی سوالات</span></h3><span class="score"></span><button class="sbtn noprint showall">Show all answers · سب جوابات</button></div>
+    <details class="q"><summary><span class="L-en">Add إِنَّ and translate:</span><span class="L-ur">إِنَّ لگا کر ترجمہ کریں:</span> الْإِنْسَانُ</summary><div class="ans">إِنَّ الْإِنْسَانَ — <span class="L-en">surely man (fatha after إِنَّ)</span><span class="L-ur">بے شک انسان (إِنَّ کے بعد زبر)</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> فِي الدُّنْيَا وَالْآخِرَةِ · مِنَ الظُّلُمَاتِ إِلَى النُّورِ</summary><div class="ans"><span class="L-en">in this world and the Hereafter · from the darknesses to the light</span><span class="L-ur blk">دنیا اور آخرت میں · اندھیروں سے روشنی کی طرف</span></div></details>
+    <details class="q"><summary><span class="L-en">Negate completely with لَا:</span><span class="L-ur">لَا سے مکمل نفی کریں:</span> عِلْمٌ، شَرِيكٌ، رَيْبٌ</summary><div class="ans">لَا عِلْمَ · لَا شَرِيكَ · لَا رَيْبَ</div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> لَا إِلٰهَ إِلَّا اللّٰهُ · مَا هٰذَا إِلَّا بَشَرٌ</summary><div class="ans"><span class="L-en">There is no god but Allah · This is nothing but a human being</span><span class="L-ur blk">اللہ کے سوا کوئی معبود نہیں · یہ تو صرف ایک انسان ہے</span></div></details>
+    <details class="q"><summary><span class="L-en">What is the وَ in وَالْعَصْرِ? Translate with the next ayah.</span><span class="L-ur">وَالْعَصْرِ میں وَ کیا ہے؟ اگلی آیت سمیت ترجمہ کریں۔</span></summary><div class="ans"><span class="L-en">Oath waw. By time! Surely man is indeed in loss.</span><span class="L-ur blk">واوِ قسم۔ قسم ہے زمانے کی! بے شک انسان یقیناً خسارے میں ہے۔</span></div></details>
+    <details class="q"><summary><span class="L-en">Add كَانَ:</span><span class="L-ur">كَانَ لگائیں:</span> مَرِيضٌ، مُؤْمِنٌ</summary><div class="ans">كَانَ مَرِيضًا · كَانَ مُؤْمِنًا — <span class="L-en">he was sick · he was a believer</span><span class="L-ur">وہ بیمار تھا · وہ مومن تھا</span></div></details>
+    <details class="q"><summary><span class="L-en">Call these:</span><span class="L-ur">ندا بنائیں:</span> آدَمُ، النَّاسُ، النَّبِيُّ</summary><div class="ans">يَا آدَمُ · يَا أَيُّهَا النَّاسُ · يَا أَيُّهَا النَّبِيُّ</div></details>
+  </div>
+</section>
+
+<!-- ================= UNIT 3 ================= -->
+<section class="tab" id="u3" role="tabpanel" data-title-en="Building phrases" data-title-ur="مرکبات کی تعمیر" data-lessons="10">
+  <div class="card">
+    <p class="L-en lead">Unit 3 joins two nouns in two different ways. Telling them apart is the most tested skill in this unit.</p>
+    <p class="L-ur lead">یونٹ 3 میں دو اسموں کو دو مختلف طریقوں سے جوڑا جاتا ہے۔ ان دونوں میں فرق پہچاننا اس یونٹ کا سب سے اہم امتحانی نکتہ ہے۔</p>
+    <div class="tw"><table>
+      <tr><th></th><th><span class="L-en">Noun + attribute · L1–3</span><span class="L-ur">مرکبِ توصیفی (صفت) · سبق 1–3</span></th><th><span class="L-en">Noun + noun (idafah) · L4–7</span><span class="L-ur">مرکبِ اضافی (اضافت) · سبق 4–7</span></th></tr>
+      <tr><td><span class="L-en">Example</span><span class="L-ur">مثال</span></td><td>عَذَابٌ عَظِيمٌ</td><td>كِتَابُ اللّٰهِ</td></tr>
+      <tr><td><span class="L-en">Meaning</span><span class="L-ur">معنی</span></td><td><span class="L-en">a great punishment</span><span class="L-ur">بڑا عذاب</span></td><td><span class="L-en">the Book of Allah</span><span class="L-ur">اللہ کی کتاب</span></td></tr>
+      <tr><td><span class="L-en">First word</span><span class="L-ur">پہلا لفظ</span></td><td><span class="L-en">keeps tanween or الـ</span><span class="L-ur">تنوین یا الـ برقرار</span></td><td><span class="L-en">loses tanween and الـ (كِتَابٌ → كِتَابُ)</span><span class="L-ur">تنوین اور الـ ختم (كِتَابٌ ← كِتَابُ)</span></td></tr>
+      <tr><td><span class="L-en">Second word</span><span class="L-ur">دوسرا لفظ</span></td><td><span class="L-en">copies the first: tanween ↔ tanween, الـ ↔ الـ, same vowel</span><span class="L-ur">پہلے کی نقل: تنوین ↔ تنوین، الـ ↔ الـ، ایک جیسی حرکت</span></td><td><span class="L-en">usually kasra (اللّٰهِ، الْمَشْرِقِ)</span><span class="L-ur">عموماً زیر (اللّٰهِ، الْمَشْرِقِ)</span></td></tr>
+      <tr><td><span class="L-en">In Urdu</span><span class="L-ur">اردو میں</span></td><td colspan="2"><span class="L-en">attribute: adjective first (بڑا اجر) · idafah: کا / کی / کے (مشرق کا رب)</span><span class="L-ur">صفت: پہلے صفت (بڑا اجر) · اضافت: کا / کی / کے (مشرق کا رب)</span></td></tr>
+    </table></div>
+    <div class="rule"><p class="L-en">Quick test: both words with tanween (أَجْرٌ عَظِيمٌ) or both with الـ (الْكِتَابِ الْمُبِينِ) → noun + attribute. First word has neither الـ nor tanween → idafah.</p><p class="L-ur">فوری پہچان: دونوں الفاظ پر تنوین (أَجْرٌ عَظِيمٌ) یا دونوں پر الـ (الْكِتَابِ الْمُبِينِ) ← مرکبِ توصیفی۔ پہلے لفظ پر نہ الـ ہو نہ تنوین ← مرکبِ اضافی۔</p></div>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L1–3 Noun + attribute</span><span class="L-ur">سبق 1–3: اسم اور صفت</span></h3>
+    <div class="tw"><table>
+      <tr><th>Attribute · صفت</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th>Example · مثال</th></tr>
+      <tr><td>عَظِيم / كَبِير</td><td class="L-en">great / big</td><td class="L-ur">بڑا</td><td>أَجْرٌ عَظِيمٌ · إِثْمٌ كَبِيرٌ</td></tr>
+      <tr><td>شَدِيد / أَلِيم</td><td class="L-en">severe / painful</td><td class="L-ur">سخت / دردناک</td><td>عَذَابٌ شَدِيدٌ · عَذَابٌ أَلِيمٌ</td></tr>
+      <tr><td>مُهِين</td><td class="L-en">humiliating</td><td class="L-ur">رسوا کن</td><td>عَذَابٌ مُهِينٌ</td></tr>
+      <tr><td>مُبِين</td><td class="L-en">clear</td><td class="L-ur">واضح، کھلا</td><td>كِتَابٌ مُبِينٌ · فِي ضَلَالٍ مُبِينٍ</td></tr>
+      <tr><td>كَرِيم / مَجِيد</td><td class="L-en">noble / glorious</td><td class="L-ur">عزت والا / بزرگی والا</td><td>قُرْآنٌ كَرِيمٌ · قُرْآنٌ مَجِيدٌ</td></tr>
+      <tr><td>أَمِين</td><td class="L-en">trustworthy</td><td class="L-ur">امانت دار</td><td>رَسُولٌ أَمِينٌ</td></tr>
+      <tr><td>مُسْتَقِيم</td><td class="L-en">straight</td><td class="L-ur">سیدھا</td><td>صِرَاطٌ مُسْتَقِيمٌ</td></tr>
+      <tr><td>مَعْرُوف</td><td class="L-en">kind, recognised</td><td class="L-ur">بھلی، معروف</td><td>قَوْلٌ مَعْرُوفٌ</td></tr>
+    </table></div>
+    <ul>
+      <li><span class="L-en">Add ة for feminine: فِي جَنَّةٍ عَالِيَةٍ = in a lofty garden.</span><span class="L-ur">مؤنث کے لیے ة لگائیں: فِي جَنَّةٍ عَالِيَةٍ = بلند جنت میں۔</span></li>
+      <li><span class="L-en">With a particle (L3): عَلَى صِرَاطٍ مُسْتَقِيمٍ = on a straight path · مِنَ الْمَسْجِدِ الْحَرَامِ = from the Sacred Mosque · فِي الْحَيَاةِ الدُّنْيَا = in the life of this world.</span><span class="L-ur">حرف کے ساتھ (سبق 3): عَلَى صِرَاطٍ مُسْتَقِيمٍ = سیدھے راستے پر · مِنَ الْمَسْجِدِ الْحَرَامِ = مسجدِ حرام سے · فِي الْحَيَاةِ الدُّنْيَا = دنیا کی زندگی میں۔</span></li>
+      <li><span class="L-en">إِنَّمَا = in reality only: إِنَّمَا اللّٰهُ إِلٰهٌ وَاحِدٌ = Allah is only one God.</span><span class="L-ur">إِنَّمَا = درحقیقت صرف: إِنَّمَا اللّٰهُ إِلٰهٌ وَاحِدٌ = اللہ تو بس ایک ہی معبود ہے۔</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L4–6 Noun + noun (idafah)</span><span class="L-ur">سبق 4–6: مرکبِ اضافی</span></h3>
+    <div class="tw"><table>
+      <tr><th>Arabic · عربی</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <tr><td>رَبُّ الْعَالَمِينَ</td><td class="L-en">Lord of the worlds</td><td class="L-ur">جہانوں کا رب</td></tr>
+      <tr><td>رَبُّ الْمَشْرِقَيْنِ</td><td class="L-en">Lord of the two Easts</td><td class="L-ur">دونوں مشرقوں کا رب</td></tr>
+      <tr><td>يَوْمُ الْقِيَامَةِ · يَوْمُ الْحِسَابِ</td><td class="L-en">Day of Resurrection · Day of Reckoning</td><td class="L-ur">قیامت کا دن · حساب کا دن</td></tr>
+      <tr><td>قَوْمُ لُوطٍ · آلُ مُوسَى</td><td class="L-en">people of Lut · family of Musa</td><td class="L-ur">لوط کی قوم · موسیٰ کا خاندان</td></tr>
+      <tr><td>أَهْلُ الْكِتَابِ</td><td class="L-en">People of the Book</td><td class="L-ur">اہلِ کتاب</td></tr>
+      <tr><td>رَسُولُ اللّٰهِ · وَعْدُ اللّٰهِ · نَصْرُ اللّٰهِ</td><td class="L-en">Messenger / promise / help of Allah</td><td class="L-ur">اللہ کا رسول / وعدہ / مدد</td></tr>
+      <tr><td>فِي سَبِيلِ اللّٰهِ</td><td class="L-en">in the way of Allah</td><td class="L-ur">اللہ کی راہ میں</td></tr>
+      <tr><td>إِنَّ رَحْمَةَ اللّٰهِ</td><td class="L-en">surely the mercy of Allah</td><td class="L-ur">بے شک اللہ کی رحمت</td></tr>
+      <tr><td>يَا أَهْلَ الْكِتَابِ</td><td class="L-en">O People of the Book</td><td class="L-ur">اے اہلِ کتاب</td></tr>
+    </table></div>
+    <ul>
+      <li><span class="L-en">A particle changes only the first word's ending (فِي سَبِيلِ، إِنَّ رَحْمَةَ).</span><span class="L-ur">حرف صرف پہلے لفظ کی حرکت بدلتا ہے (فِي سَبِيلِ، إِنَّ رَحْمَةَ)۔</span></li>
+      <li><span class="L-en">Some names keep fatha instead of kasra (مُوسَى وَهَارُونَ، إِبْرَاهِيمَ، فِرْعَوْنَ); meaning unchanged.</span><span class="L-ur">بعض ناموں پر زیر کے بجائے زبر رہتا ہے (هَارُونَ، إِبْرَاهِيمَ، فِرْعَوْنَ)؛ معنی نہیں بدلتا۔</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L7 كُلٌّ · L8–9 Word patterns · L10 Dual</span><span class="L-ur">سبق 7 كُلٌّ · سبق 8–9 اوزان · سبق 10 تثنیہ</span></h3>
+    <ul>
+      <li><span class="L-en">كُلٌّ + noun without الـ = every (كُلُّ نَفْسٍ = every soul); with الـ = all (كُلُّ الطَّعَامِ = all food). إِنَّ اللّٰهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ = Surely Allah has power over everything.</span><span class="L-ur">كُلٌّ + الـ کے بغیر اسم = ہر (كُلُّ نَفْسٍ = ہر جان)؛ الـ کے ساتھ = تمام (كُلُّ الطَّعَامِ = تمام کھانا)۔ إِنَّ اللّٰهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ = بے شک اللہ ہر چیز پر قادر ہے۔</span></li>
+    </ul>
+    <div class="tw"><table>
+      <tr><th>Pattern · وزن</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th>Examples · مثالیں</th></tr>
+      <tr><td>فَاعِل</td><td class="L-en">one who does</td><td class="L-ur">کرنے والا</td><td>خَالِق، رَازِق، صَابِر، سَاجِد، كَاذِب</td></tr>
+      <tr><td>فَعَّال</td><td class="L-en">one who does a lot</td><td class="L-ur">بہت زیادہ کرنے والا</td><td>غَفَّار، رَزَّاق، تَوَّاب، ظَلَّام، كَذَّاب</td></tr>
+      <tr><td><span class="L-en">مُـ … kasra before last</span><span class="L-ur">مُـ … آخری سے پہلے زیر</span></td><td class="L-en">doer</td><td class="L-ur">کرنے والا</td><td>مُسْلِم، مُؤْمِن، مُحْسِن، مُفْسِد، مُرْسِل</td></tr>
+      <tr><td><span class="L-en">مُـ … fatha before last</span><span class="L-ur">مُـ … آخری سے پہلے زبر</span></td><td class="L-en">one to whom it was done</td><td class="L-ur">جس پر کام کیا گیا</td><td>مُرْسَل، مُحَمَّد، مُقَرَّب</td></tr>
+      <tr><td><span class="L-en">dual ـَانِ / ـَيْنِ</span><span class="L-ur">تثنیہ ـَانِ / ـَيْنِ</span></td><td class="L-en">two</td><td class="L-ur">دو</td><td>مُؤْمِنَانِ · جَنَّتَانِ · الْوَالِدَيْنِ · الْبَحْرَانِ</td></tr>
+    </table></div>
+    <div class="rule"><p class="L-en">Exam pairs: غَافِر forgiver / غَفَّار ever-forgiving · مُرْسِل sender / مُرْسَل sent · مُعَذِّب punisher / مُعَذَّب punished · مُنْذِر warner / مُنْذَر warned.</p><p class="L-ur">امتحانی جوڑے: غَافِر معاف کرنے والا / غَفَّار بہت معاف کرنے والا · مُرْسِل بھیجنے والا / مُرْسَل بھیجا گیا · مُعَذِّب عذاب دینے والا / مُعَذَّب عذاب دیا گیا · مُنْذِر ڈرانے والا / مُنْذَر ڈرایا گیا۔</p></div>
+  </div>
+  <div class="card traps">
+    <h3><span class="L-en">Exam traps</span><span class="L-ur">امتحانی غلطیاں</span></h3>
+    <ul>
+      <li><span class="L-en">The first word of an idafah is definite: كِتَابُ اللّٰهِ = "the Book of Allah", never "a book".</span><span class="L-ur">مضاف ہمیشہ معرفہ ہوتا ہے: كِتَابُ اللّٰهِ = "اللہ کی کتاب"، "کوئی کتاب" نہیں۔</span></li>
+      <li><span class="L-en">Never put الـ on the first word of an idafah.</span><span class="L-ur">مضاف پر الـ کبھی نہ لگائیں۔</span></li>
+      <li><span class="L-en">The attribute copies the noun: عَذَابًا عَظِيمًا · فِي عَذَابٍ عَظِيمٍ.</span><span class="L-ur">صفت موصوف کی پیروی کرتی ہے: عَذَابًا عَظِيمًا · فِي عَذَابٍ عَظِيمٍ۔</span></li>
+      <li><span class="L-en">Dual ـَيْنِ (fatha) vs plural ـِينَ (kasra, Unit 5).</span><span class="L-ur">تثنیہ ـَيْنِ (زبر) اور جمع ـِينَ (زیر، یونٹ 5) میں فرق۔</span></li>
+    </ul>
+  </div>
+  <div class="card practice">
+    <div class="qbar"><h3><span class="L-en">Practice questions</span><span class="L-ur">مشقی سوالات</span></h3><span class="score"></span><button class="sbtn noprint showall">Show all answers · سب جوابات</button></div>
+    <details class="q"><summary><span class="L-en">Attribute or idafah?</span><span class="L-ur">صفت یا اضافت؟</span> عَذَابٌ أَلِيمٌ · عَذَابُ النَّارِ · الْكِتَابِ الْمُبِينِ · رَبُّ الْعَالَمِينَ</summary><div class="ans"><span class="L-en">attribute · idafah · attribute · idafah</span><span class="L-ur blk">صفت · اضافت · صفت · اضافت</span></div></details>
+    <details class="q"><summary><span class="L-en">Join as idafah:</span><span class="L-ur">اضافت بنائیں:</span> كِتَابٌ + اللّٰهُ · رَسُولٌ + اللّٰهُ</summary><div class="ans">كِتَابُ اللّٰهِ · رَسُولُ اللّٰهِ</div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> إِنَّ اللّٰهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</summary><div class="ans"><span class="L-en">Surely Allah has power over everything.</span><span class="L-ur blk">بے شک اللہ ہر چیز پر قادر ہے۔</span></div></details>
+    <details class="q"><summary><span class="L-en">Difference:</span><span class="L-ur">فرق بتائیں:</span> غَافِر / غَفَّار · مُرْسِل / مُرْسَل</summary><div class="ans"><span class="L-en">forgiver / ever-forgiving · sender / one who is sent</span><span class="L-ur blk">معاف کرنے والا / بہت معاف کرنے والا · بھیجنے والا / بھیجا گیا</span></div></details>
+    <details class="q"><summary><span class="L-en">Make dual:</span><span class="L-ur">تثنیہ بنائیں:</span> مُؤْمِنٌ، جَنَّةٌ، بَحْرٌ</summary><div class="ans">مُؤْمِنَانِ · جَنَّتَانِ · بَحْرَانِ</div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> فِي ضَلَالٍ مُبِينٍ · فِي سَبِيلِ اللّٰهِ</summary><div class="ans"><span class="L-en">in clear error · in the way of Allah</span><span class="L-ur blk">کھلی گمراہی میں · اللہ کی راہ میں</span></div></details>
+  </div>
+</section>
+
+<!-- ================= UNIT 4 ================= -->
+<section class="tab" id="u4" role="tabpanel" data-title-en="Singular pronouns" data-title-ur="واحد ضمیریں" data-lessons="17">
+  <div class="card">
+    <p class="L-en lead">Four pronouns, each in three positions: alone, attached to a noun, attached to a particle. Learn this one table and most of the unit is done.</p>
+    <p class="L-ur lead">چار ضمیریں، ہر ایک تین حالتوں میں: الگ، اسم کے ساتھ، اور حرف کے ساتھ۔ یہ ایک جدول یاد کر لیں تو یونٹ کا بڑا حصہ مکمل ہو جاتا ہے۔</p>
+    <div class="tw"><table>
+      <tr><th class="L-en">Person</th><th class="L-ur">ضمیر</th><th>Alone · الگ</th><th>On a noun · اسم پر</th><th>After a preposition · حرفِ جار کے بعد</th><th>On particles · حروف پر</th></tr>
+      <tr><td class="L-en">he / it (L1–4)</td><td class="L-ur">وہ (مذکر) سبق 1–4</td><td>هُوَ</td><td>بَيْتُهُ</td><td>فِي بَيْتِهِ</td><td>لَهُ، مِنْهُ، فِيهِ، عَلَيْهِ، إِلَيْهِ، إِنَّهُ</td></tr>
+      <tr><td class="L-en">you, m. (L5–8)</td><td class="L-ur">تم (مذکر) سبق 5–8</td><td>أَنْتَ</td><td>بَيْتُكَ</td><td>فِي بَيْتِكَ</td><td>لَكَ، مِنْكَ، فِيكَ، عَلَيْكَ، إِلَيْكَ، إِنَّكَ</td></tr>
+      <tr><td class="L-en">she / it (L9–12)</td><td class="L-ur">وہ (مؤنث) سبق 9–12</td><td>هِيَ</td><td>بَيْتُهَا</td><td>فِي بَيْتِهَا</td><td>لَهَا، مِنْهَا، فِيهَا، عَلَيْهَا، إِنَّهَا</td></tr>
+      <tr><td class="L-en">I (L13–16)</td><td class="L-ur">میں سبق 13–16</td><td>أَنَا</td><td>بَيْتِي</td><td>فِي بَيْتِي</td><td>لِي، مِنِّي، عَلَيَّ، إِلَيَّ، إِنِّي</td></tr>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">Spelling rules</span><span class="L-ur">ضمیر لگنے کے قواعد</span></h3>
+    <ul>
+      <li><span class="L-en">Tanween drops: رَبٌّ → رَبُّهُ. ة opens to ت: رَحْمَةٌ → رَحْمَتُهُ.</span><span class="L-ur">تنوین ختم ہو جاتی ہے: رَبٌّ ← رَبُّهُ۔ ة کھلی ت بن جاتی ہے: رَحْمَةٌ ← رَحْمَتُهُ۔</span></li>
+      <li><span class="L-en">ـهُ becomes ـهِ after kasra or ي (sound only): فِي بَيْتِهِ · فِيهِ · عَلَيْهِ.</span><span class="L-ur">زیر یا ي کے بعد ـهُ ← ـهِ (صرف آواز کی تبدیلی): فِي بَيْتِهِ · فِيهِ · عَلَيْهِ۔</span></li>
+      <li><span class="L-en">لِـ becomes لَـ before a pronoun (لَهُ، لَكَ، لَهَا) but stays لِي. إِلَى / عَلَى become إِلَيْـ / عَلَيْـ.</span><span class="L-ur">ضمیر سے پہلے لِـ ← لَـ (لَهُ، لَكَ، لَهَا) مگر لِي۔ إِلَى / عَلَى ← إِلَيْـ / عَلَيْـ۔</span></li>
+      <li><span class="L-en">After مِنْ the noun takes kasra (مِنْ رَبِّكَ); after إِنَّ fatha (إِنَّ رَبَّكَ).</span><span class="L-ur">مِنْ کے بعد زیر (مِنْ رَبِّكَ)؛ إِنَّ کے بعد زبر (إِنَّ رَبَّكَ)۔</span></li>
+      <li><span class="L-en">"My" ي is often dropped, leaving kasra: رَبِّ = my Lord · يَا قَوْمِ = O my people · فَكَيْفَ كَانَ عِقَابِ = how was My punishment!</span><span class="L-ur">"میرا" کی ي اکثر گر جاتی ہے اور صرف زیر رہتا ہے: رَبِّ = میرا رب · يَا قَوْمِ = اے میری قوم · فَكَيْفَ كَانَ عِقَابِ = تو میری سزا کیسی تھی!</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">The emphasis ladder</span><span class="L-ur">تاکید کے درجے</span></h3>
+    <div class="tw"><table>
+      <tr><th class="L-en">Level</th><th class="L-ur">درجہ</th><th>Example · مثال</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <tr><td class="L-en">plain: pronoun + tanween</td><td class="L-ur">سادہ: ضمیر + تنوین</td><td>هُوَ حَقٌّ</td><td class="L-en">He / it is truth</td><td class="L-ur">وہ حق ہے</td></tr>
+      <tr><td class="L-en">emphasis: pronoun + الـ</td><td class="L-ur">تاکید: ضمیر + الـ</td><td>هُوَ الْحَقُّ</td><td class="L-en">He alone is the Truth</td><td class="L-ur">وہی حق ہے</td></tr>
+      <tr><td class="L-en">double: ذٰلِكَ + هُوَ + الـ</td><td class="L-ur">دوہری: ذٰلِكَ + هُوَ + الـ</td><td>ذٰلِكَ هُوَ الْفَوْزُ الْعَظِيمُ</td><td class="L-en">That is indeed the great success</td><td class="L-ur">یہی تو بڑی کامیابی ہے</td></tr>
+      <tr><td class="L-en">third: إِنَّهُ + هُوَ + الـ</td><td class="L-ur">تیسرا: إِنَّهُ + هُوَ + الـ</td><td>إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ</td><td class="L-en">Indeed He alone is the Forgiving, the Merciful</td><td class="L-ur">بے شک وہی بخشنے والا، رحم کرنے والا ہے</td></tr>
+      <tr><td class="L-en">fourth: إِنَّ + name + لَهُوَ + الـ</td><td class="L-ur">چوتھا: إِنَّ + نام + لَهُوَ + الـ</td><td>إِنَّ اللّٰهَ لَهُوَ الْعَزِيزُ الْحَكِيمُ</td><td class="L-en">Indeed Allah, He alone is the Mighty, the Wise</td><td class="L-ur">بے شک اللہ ہی یقیناً غالب، حکمت والا ہے</td></tr>
+    </table></div>
+    <p class="L-en">Same with you / I: أَنْتَ السَّمِيعُ الْعَلِيمُ · إِنَّكَ أَنْتَ الْوَهَّابُ · إِنِّي أَنَا اللّٰهُ رَبُّ الْعَالَمِينَ. With لَـ: إِنَّهُ لَحَقٌّ · إِنَّكَ لَرَسُولُ اللّٰهِ · وَإِنِّي لَغَفَّارٌ.</p>
+    <p class="L-ur">تم / میں کے ساتھ بھی یہی: أَنْتَ السَّمِيعُ الْعَلِيمُ (تو ہی سننے والا، جاننے والا ہے) · إِنَّكَ أَنْتَ الْوَهَّابُ · إِنِّي أَنَا اللّٰهُ رَبُّ الْعَالَمِينَ۔ لَـ کے ساتھ: إِنَّهُ لَحَقٌّ · إِنَّكَ لَرَسُولُ اللّٰهِ · وَإِنِّي لَغَفَّارٌ۔</p>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">Other points · L17 style</span><span class="L-ur">دیگر نکات · سبق 17 کا اسلوب</span></h3>
+    <ul>
+      <li><span class="L-en">وَهُوَ = and he, or "while he": وَهُوَ كَافِرٌ = while he is a disbeliever. فَهُوَ = so he.</span><span class="L-ur">وَهُوَ = اور وہ، یا "حالانکہ وہ": وَهُوَ كَافِرٌ = حالانکہ وہ کافر ہے۔ فَهُوَ = تو وہ۔</span></li>
+      <li><span class="L-en">هِيَ is for feminine things <b>and non-human plurals</b>: الْأَبْصَارُ … هِيَ شَاخِصَةٌ (they are staring).</span><span class="L-ur">هِيَ مؤنث چیزوں <b>اور غیر انسانی جمع</b> کے لیے ہے: الْأَبْصَارُ … هِيَ شَاخِصَةٌ (وہ پتھرائی ہوئی ہیں)۔</span></li>
+      <li><span class="L-en">New small words: كَـ like · عَنْ about, from · الَّذِي who · بَعْدَ / قَبْلَ after / before · عِنْدَ with · مِنْ تَحْتِهَا beneath it.</span><span class="L-ur">نئے چھوٹے الفاظ: كَـ جیسا · عَنْ کے بارے میں، سے · الَّذِي جو · بَعْدَ / قَبْلَ بعد / پہلے · عِنْدَ پاس · مِنْ تَحْتِهَا اس کے نیچے سے۔</span></li>
+      <li><span class="L-en">ـًا = "as / being" (state): مُجْرِمًا as a criminal · خَائِفًا in fear · خَالِدًا فِيهَا abiding in it forever · شَاهِدًا وَمُبَشِّرًا وَنَذِيرًا.</span><span class="L-ur">ـًا = "بطور، اس حال میں" (حال): مُجْرِمًا مجرم ہو کر · خَائِفًا ڈرتے ہوئے · خَالِدًا فِيهَا اس میں ہمیشہ رہنے والا · شَاهِدًا وَمُبَشِّرًا وَنَذِيرًا گواہ، خوشخبری دینے والا اور ڈرانے والا بنا کر۔</span></li>
+      <li><span class="L-en">مَفْعُول pattern = the one it was done to: مَذْكُور mentioned · مَغْلُوب defeated · مَنْصُور helped · مَظْلُوم wronged.</span><span class="L-ur">مَفْعُول کا وزن = جس پر کام کیا گیا: مَذْكُور ذکر کیا گیا · مَغْلُوب مغلوب · مَنْصُور مدد کیا گیا · مَظْلُوم ظلم کیا گیا۔</span></li>
+      <li><span class="L-en">Ready sentences: فَأَجْرُهُ عَلَى اللّٰهِ · لَهُ مُلْكُ السَّمٰوَاتِ وَالْأَرْضِ · حَسْبُكَ اللّٰهُ · إِنَّ رَبِّي قَرِيبٌ مُجِيبٌ · لَا رَيْبَ فِيهَا.</span><span class="L-ur">تیار جملے: فَأَجْرُهُ عَلَى اللّٰهِ (تو اس کا اجر اللہ پر ہے) · لَهُ مُلْكُ السَّمٰوَاتِ وَالْأَرْضِ · حَسْبُكَ اللّٰهُ (تیرے لیے اللہ کافی ہے) · إِنَّ رَبِّي قَرِيبٌ مُجِيبٌ · لَا رَيْبَ فِيهَا۔</span></li>
+    </ul>
+  </div>
+  <div class="card traps">
+    <h3><span class="L-en">Exam traps</span><span class="L-ur">امتحانی غلطیاں</span></h3>
+    <ul>
+      <li><span class="L-en">Non-human plurals take هِيَ / ـهَا, not هُمْ.</span><span class="L-ur">غیر انسانی جمع کے لیے هِيَ / ـهَا آتا ہے، هُمْ نہیں۔</span></li>
+      <li><span class="L-en">فِيهِ (masc.) vs فِيهَا (fem.): check what it refers to.</span><span class="L-ur">فِيهِ (مذکر) اور فِيهَا (مؤنث): دیکھیں ضمیر کس کی طرف لوٹ رہی ہے۔</span></li>
+      <li><span class="L-en">رَبِّ without ي still means "my Lord".</span><span class="L-ur">ي کے بغیر رَبِّ کا مطلب بھی "میرا رب" ہے۔</span></li>
+      <li><span class="L-en">With pronouns write لَهُ / لَكَ, not لِهُ / لِكَ (only لِي keeps kasra).</span><span class="L-ur">ضمیر کے ساتھ لَهُ / لَكَ لکھیں، لِهُ / لِكَ نہیں (صرف لِي میں زیر رہتا ہے)۔</span></li>
+    </ul>
+  </div>
+  <div class="card practice">
+    <div class="qbar"><h3><span class="L-en">Practice questions</span><span class="L-ur">مشقی سوالات</span></h3><span class="score"></span><button class="sbtn noprint showall">Show all answers · سب جوابات</button></div>
+    <details class="q"><summary><span class="L-en">Add his / your / her / my to</span><span class="L-ur">اس کا / تیرا / اس کی / میرا لگائیں:</span> رَبٌّ، رَحْمَةٌ</summary><div class="ans">رَبُّهُ، رَبُّكَ، رَبُّهَا، رَبِّي · رَحْمَتُهُ، رَحْمَتُكَ، رَحْمَتُهَا، رَحْمَتِي</div></details>
+    <details class="q"><summary><span class="L-en">Put فِي before بَيْتُهُ and explain.</span><span class="L-ur">بَيْتُهُ سے پہلے فِي لگا کر وضاحت کریں۔</span></summary><div class="ans">فِي بَيْتِهِ — <span class="L-en">noun takes kasra and ـهُ becomes ـهِ</span><span class="L-ur">اسم پر زیر آیا اور ـهُ ← ـهِ ہو گیا</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> هُوَ حَقٌّ · هُوَ الْحَقُّ · إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ</summary><div class="ans"><span class="L-en">He is truth · He alone is the Truth · Indeed He alone is the Forgiving, the Merciful</span><span class="L-ur blk">وہ حق ہے · وہی حق ہے · بے شک وہی بخشنے والا، رحم کرنے والا ہے</span></div></details>
+    <details class="q"><summary><span class="L-en">Attach the pronoun:</span><span class="L-ur">ضمیر جوڑیں:</span> لِـ + هُ، لِـ + كَ، لِـ + ي، عَلَى + كَ، إِلَى + ي</summary><div class="ans">لَهُ · لَكَ · لِي · عَلَيْكَ · إِلَيَّ</div></details>
+    <details class="q"><summary><span class="L-en">Why هِيَ in</span><span class="L-ur">یہاں هِيَ کیوں:</span> الْأَبْصَارُ … هِيَ شَاخِصَةٌ</summary><div class="ans"><span class="L-en">Non-human plurals are treated as feminine singular.</span><span class="L-ur blk">غیر انسانی جمع کو مؤنث واحد سمجھا جاتا ہے۔</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> خَالِدًا فِيهَا · رَبِّ · يَا قَوْمِ</summary><div class="ans"><span class="L-en">abiding in it forever · my Lord · O my people</span><span class="L-ur blk">اس میں ہمیشہ رہنے والا · اے میرے رب · اے میری قوم</span></div></details>
+  </div>
+</section>
+
+<!-- ================= UNIT 5 ================= -->
+<section class="tab" id="u5" role="tabpanel" data-title-en="Plurals, plural pronouns and Quranic styles" data-title-ur="جمع، جمع کی ضمیریں اور قرآنی اسالیب" data-lessons="23">
+  <div class="card">
+    <p class="L-en lead">Three parts: the masculine plural and its two endings (L1–4), the plural pronouns they / you / we (L5–16), then pointing words for people and the famous Quranic styles and idioms (L17–23).</p>
+    <p class="L-ur lead">تین حصے: جمع مذکر اور اس کی دو شکلیں (سبق 1–4)، جمع کی ضمیریں وہ / تم / ہم (سبق 5–16)، پھر لوگوں کے لیے اسمائے اشارہ اور مشہور قرآنی اسالیب و محاورے (سبق 17–23)۔</p>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L1–3 Sound masculine plural</span><span class="L-ur">سبق 1–3: جمع مذکر سالم</span></h3>
+    <div class="tw"><table>
+      <tr><th>Form · شکل</th><th class="L-en">When</th><th class="L-ur">کب</th><th>Example · مثال</th></tr>
+      <tr><td>ـُونَ</td><td class="L-en">basic form; after هُمْ / أَنْتُمْ / نَحْنُ</td><td class="L-ur">اصل شکل؛ هُمْ / أَنْتُمْ / نَحْنُ کے بعد</td><td>الْمُسْلِمُونَ · هُمْ كَافِرُونَ</td></tr>
+      <tr><td>ـِينَ</td><td class="L-en">after إِنَّ, a preposition, or as 2nd word of idafah</td><td class="L-ur">إِنَّ، حرفِ جار کے بعد یا مضاف الیہ ہو</td><td>إِنَّ الْكَافِرِينَ · مِنَ الظَّالِمِينَ · أَجْرُ الْمُحْسِنِينَ</td></tr>
+      <tr><td>ـَاتٌ</td><td class="L-en">women and things</td><td class="L-ur">عورتوں اور چیزوں کے لیے</td><td>الْمُسْلِمَاتُ · الْمُؤْمِنَاتُ</td></tr>
+    </table></div>
+    <ul>
+      <li><span class="L-en">ـُونَ and ـِينَ mean exactly the same; only the position changes.</span><span class="L-ur">ـُونَ اور ـِينَ کا معنی بالکل ایک ہے؛ صرف جملے میں مقام بدلتا ہے۔</span></li>
+      <li><span class="L-en">With الـ = "the …"; without الـ, at sentence end = "are …": ظَالِمُونَ = they are wrongdoers.</span><span class="L-ur">الـ کے ساتھ = خاص لوگ؛ الـ کے بغیر جملے کے آخر میں = "… ہیں": ظَالِمُونَ = ظالم ہیں۔</span></li>
+      <li><span class="L-en">أَفْعَلُ + plural: خَيْرُ الرَّازِقِينَ best of providers · أَحْسَنُ الْخَالِقِينَ best of creators · أَوَّلُ الْمُسْلِمِينَ first of those who submit.</span><span class="L-ur">أَفْعَلُ + جمع: خَيْرُ الرَّازِقِينَ سب سے بہتر رزق دینے والا · أَحْسَنُ الْخَالِقِينَ سب سے اچھا پیدا کرنے والا · أَوَّلُ الْمُسْلِمِينَ سب سے پہلا فرمانبردار۔</span></li>
+      <li><span class="L-en">Ready sentences: وَاللّٰهُ وَلِيُّ الْمُؤْمِنِينَ · وَذٰلِكَ جَزَاءُ الظَّالِمِينَ · لَمِنَ الصَّادِقِينَ (surely among the truthful).</span><span class="L-ur">تیار جملے: وَاللّٰهُ وَلِيُّ الْمُؤْمِنِينَ (اللہ مومنوں کا دوست ہے) · وَذٰلِكَ جَزَاءُ الظَّالِمِينَ · لَمِنَ الصَّادِقِينَ (یقیناً سچوں میں سے)۔</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L4 Broken plurals</span><span class="L-ur">سبق 4: جمعِ مکسر</span></h3>
+    <div class="tw"><table>
+      <tr><th>Singular · واحد</th><th>Plural · جمع</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <tr><td>عَالِم</td><td>عُلَمَاء</td><td class="L-en">scholar</td><td class="L-ur">عالم</td></tr>
+      <tr><td>نَبِيّ</td><td>أَنْبِيَاء</td><td class="L-en">prophet</td><td class="L-ur">نبی</td></tr>
+      <tr><td>وَلِيّ</td><td>أَوْلِيَاء</td><td class="L-en">friend, protector</td><td class="L-ur">دوست، سرپرست</td></tr>
+      <tr><td>كَافِر / فَاجِر</td><td>كُفَّار / فُجَّار</td><td class="L-en">disbeliever / wicked</td><td class="L-ur">کافر / بدکار</td></tr>
+      <tr><td>شَهِيد</td><td>شُهَدَاء</td><td class="L-en">witness, martyr</td><td class="L-ur">گواہ، شہید</td></tr>
+      <tr><td>ضَعِيف / فَقِير</td><td>ضُعَفَاء / فُقَرَاء</td><td class="L-en">weak / poor</td><td class="L-ur">کمزور / محتاج</td></tr>
+      <tr><td>شَرِيك / شَفِيع</td><td>شُرَكَاء / شُفَعَاء</td><td class="L-en">partner / intercessor</td><td class="L-ur">شریک / سفارشی</td></tr>
+      <tr><td>رَسُول / صَاحِب</td><td>رُسُل / أَصْحَاب</td><td class="L-en">messenger / companion</td><td class="L-ur">رسول / ساتھی</td></tr>
+    </table></div>
+    <p class="L-en">إِنَّ الْأَبْرَارَ لَفِي نَعِيمٍ = Surely the righteous will be in bliss · إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ = The believers are only brothers.</p>
+    <p class="L-ur">إِنَّ الْأَبْرَارَ لَفِي نَعِيمٍ = بے شک نیک لوگ نعمتوں میں ہوں گے · إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ = مومن تو آپس میں بھائی ہی ہیں۔</p>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L5–16 Plural pronouns</span><span class="L-ur">سبق 5–16: جمع کی ضمیریں</span></h3>
+    <div class="tw"><table>
+      <tr><th class="L-en">Person</th><th class="L-ur">ضمیر</th><th>Alone · الگ</th><th>On a noun · اسم پر</th><th>After a preposition · حرفِ جار کے بعد</th><th>On particles · حروف پر</th></tr>
+      <tr><td class="L-en">they (L5–8)</td><td class="L-ur">وہ سب (سبق 5–8)</td><td>هُمْ</td><td>كِتَابُهُمْ</td><td>فِي كِتَابِهِمْ</td><td>لَهُمْ، مِنْهُمْ، عَلَيْهِمْ، إِنَّهُمْ</td></tr>
+      <tr><td class="L-en">you, pl. (L9–12)</td><td class="L-ur">تم سب (سبق 9–12)</td><td>أَنْتُمْ</td><td>كِتَابُكُمْ</td><td>فِي كِتَابِكُمْ</td><td>لَكُمْ، مِنْكُمْ، عَلَيْكُمْ، إِلَيْكُمْ، إِنَّكُمْ</td></tr>
+      <tr><td class="L-en">we (L13–16)</td><td class="L-ur">ہم (سبق 13–16)</td><td>نَحْنُ</td><td>كِتَابُنَا</td><td>فِي كِتَابِنَا</td><td>لَنَا، مِنَّا، عَلَيْنَا، إِنَّا</td></tr>
+    </table></div>
+    <ul>
+      <li><span class="L-en">Pronoun + الـ plural = emphasis: هُمُ الْمُؤْمِنُونَ they are the (true) believers · أَنْتُمُ الْفُقَرَاءُ you are the needy · نَحْنُ الْوَارِثُونَ it is We who inherit.</span><span class="L-ur">ضمیر + الـ والی جمع = تاکید: هُمُ الْمُؤْمِنُونَ وہی (سچے) مومن ہیں · أَنْتُمُ الْفُقَرَاءُ تم ہی محتاج ہو · نَحْنُ الْوَارِثُونَ ہم ہی وارث ہیں۔</span></li>
+      <li><span class="L-en">وَهُمْ / وَأَنْتُمْ = "and they" or "while they": وَهُمْ رَاكِعُونَ = while they bow.</span><span class="L-ur">وَهُمْ / وَأَنْتُمْ = "اور وہ" یا "اس حال میں کہ وہ": وَهُمْ رَاكِعُونَ = اس حال میں کہ وہ رکوع کر رہے ہوں۔</span></li>
+      <li><span class="L-en">هَلْ = question: فَهَلْ أَنْتُمْ مُسْلِمُونَ = So will you submit? · بَلْ أَنْتُمْ قَوْمٌ مُسْرِفُونَ = Rather, you are a transgressing people.</span><span class="L-ur">هَلْ = سوال: فَهَلْ أَنْتُمْ مُسْلِمُونَ = تو کیا تم فرمانبردار بنتے ہو؟ · بَلْ أَنْتُمْ قَوْمٌ مُسْرِفُونَ = بلکہ تم حد سے بڑھنے والے لوگ ہو۔</span></li>
+      <li><span class="L-en">ذٰلِكُمْ = ذٰلِكَ with a call for attention: ذٰلِكُمُ اللّٰهُ رَبُّكُمْ = That is Allah, your Lord. الَّذِينَ = those who.</span><span class="L-ur">ذٰلِكُمْ = توجہ دلانے والا ذٰلِكَ: ذٰلِكُمُ اللّٰهُ رَبُّكُمْ = یہی اللہ تمہارا رب ہے۔ الَّذِينَ = وہ لوگ جو۔</span></li>
+      <li><span class="L-en">"We / Our" for Allah is the royal We: وَإِنَّا لَهُ لَحَافِظُونَ = And indeed We will surely guard it.</span><span class="L-ur">اللہ کے لیے "ہم / ہمارا" شاہانہ جمع ہے: وَإِنَّا لَهُ لَحَافِظُونَ = اور بے شک ہم ہی اس کی حفاظت کرنے والے ہیں۔</span></li>
+      <li><span class="L-en">Ready sentences: لَهُمْ أَجْرٌ · مَأْوَاهُمْ جَهَنَّمُ · وَإِلٰهُكُمْ إِلٰهٌ وَاحِدٌ · إِنِّي لَكُمْ رَسُولٌ أَمِينٌ · اللّٰهُ رَبُّنَا وَرَبُّكُمْ.</span><span class="L-ur">تیار جملے: لَهُمْ أَجْرٌ (ان کے لیے اجر ہے) · مَأْوَاهُمْ جَهَنَّمُ (ان کا ٹھکانا جہنم ہے) · وَإِلٰهُكُمْ إِلٰهٌ وَاحِدٌ · إِنِّي لَكُمْ رَسُولٌ أَمِينٌ · اللّٰهُ رَبُّنَا وَرَبُّكُمْ۔</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L17–19 Pointing at people · Styles 1–3</span><span class="L-ur">سبق 17–19: لوگوں کے لیے اشارہ · اسالیب 1–3</span></h3>
+    <ul>
+      <li><span class="L-en">أُولٰئِكَ = those / these people: أُولٰئِكَ أَصْحَابُ الْجَنَّةِ. أُولٰئِكَ هُمُ الْمُتَّقُونَ = in fact such people are the God-fearing.</span><span class="L-ur">أُولٰئِكَ = وہ / یہ لوگ: أُولٰئِكَ أَصْحَابُ الْجَنَّةِ = یہ لوگ جنت والے ہیں۔ أُولٰئِكَ هُمُ الْمُتَّقُونَ = درحقیقت یہی لوگ متقی ہیں۔</span></li>
+      <li><span class="L-en">هٰؤُلَاءِ = these people: إِنَّ هٰؤُلَاءِ لَضَالُّونَ = Surely these people are astray.</span><span class="L-ur">هٰؤُلَاءِ = یہ لوگ: إِنَّ هٰؤُلَاءِ لَضَالُّونَ = بے شک یہ لوگ ضرور گمراہ ہیں۔</span></li>
+    </ul>
+    <div class="tw"><table>
+      <tr><th>Style · اسلوب</th><th>Example · مثال</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <tr><td>مَا … إِلَّا</td><td>وَمَا مُحَمَّدٌ إِلَّا رَسُولٌ</td><td class="L-en">Muhammad is nothing but a messenger</td><td class="L-ur">محمد تو بس ایک رسول ہیں</td></tr>
+      <tr><td><span class="L-en">إِنْ … إِلَّا (إِنْ = not)</span><span class="L-ur">إِنْ … إِلَّا (إِنْ = نہیں)</span></td><td>إِنْ هٰذَا إِلَّا سِحْرٌ</td><td class="L-en">This is nothing but magic</td><td class="L-ur">یہ تو صرف جادو ہے</td></tr>
+      <tr><td>لَا … إِلَّا</td><td>لَا إِلٰهَ إِلَّا هُوَ</td><td class="L-en">There is no god at all but Him</td><td class="L-ur">اس کے سوا کوئی معبود نہیں</td></tr>
+      <tr><td>إِنَّمَا</td><td>إِنَّمَا أَنَا رَسُولُ رَبِّكِ</td><td class="L-en">I am only a messenger of your Lord</td><td class="L-ur">میں تو صرف تیرے رب کا بھیجا ہوا ہوں</td></tr>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L20–21 Sentence openers and idioms</span><span class="L-ur">سبق 20–21: جملے کے شروع کے الفاظ اور محاورے</span></h3>
+    <div class="tw"><table>
+      <tr><th>Word · لفظ</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th>Example · مثال</th></tr>
+      <tr><td>لَيْسَ</td><td class="L-en">is not</td><td class="L-ur">نہیں ہے</td><td>لَيْسَ عَلَيْكُمْ جُنَاحٌ</td></tr>
+      <tr><td>مَا … بِـ</td><td class="L-en">is certainly not</td><td class="L-ur">قطعاً نہیں</td><td>وَمَا هُوَ بِقَوْلِ شَاعِرٍ</td></tr>
+      <tr><td>أَ / هَلْ</td><td class="L-en">is …? (question)</td><td class="L-ur">کیا …؟</td><td>أَذٰلِكَ خَيْرٌ</td></tr>
+      <tr><td>أَ … أَمْ</td><td class="L-en">… or …?</td><td class="L-ur">… یا …؟</td><td>أَأَنْتُمْ أَعْلَمُ أَمِ اللّٰهُ</td></tr>
+      <tr><td>أَنَّى</td><td class="L-en">how ever? from where?</td><td class="L-ur">کہاں سے؟ کیسے؟</td><td>يَا مَرْيَمُ أَنَّى لَكِ هٰذَا</td></tr>
+      <tr><td>بَلْ</td><td class="L-en">rather, in fact</td><td class="L-ur">بلکہ</td><td>بَلْ أَنْتُمْ قَوْمٌ مُسْرِفُونَ</td></tr>
+      <tr><td>أَلَا</td><td class="L-en">Beware! Take heed!</td><td class="L-ur">خبردار! سن لو!</td><td>أَلَا إِنَّ نَصْرَ اللّٰهِ قَرِيبٌ</td></tr>
+      <tr><td>أَلَيْسَ … بِـ</td><td class="L-en">Is it not really …?</td><td class="L-ur">کیا واقعی … نہیں؟</td><td>أَلَيْسَ هٰذَا بِالْحَقِّ</td></tr>
+      <tr><td>الْيَوْمَ · يَوْمَئِذٍ</td><td class="L-en">on this Day · on that Day</td><td class="L-ur">آج کے دن · اس دن</td><td>الْمُلْكُ يَوْمَئِذٍ لِلّٰهِ</td></tr>
+      <tr><td>سُبْحَانَ</td><td class="L-en">glory be to</td><td class="L-ur">پاک ہے</td><td>سُبْحَانَ رَبِّي</td></tr>
+      <tr><td>قُلْ</td><td class="L-en">Say (to the Prophet ﷺ)</td><td class="L-ur">کہہ دیجیے</td><td>—</td></tr>
+      <tr><td>إِذًا</td><td class="L-en">then indeed (consequence)</td><td class="L-ur">تب تو</td><td>إِذًا لَمِنَ الظَّالِمِينَ</td></tr>
+      <tr><td>بِئْسَ / نِعْمَ</td><td class="L-en">how bad! / how excellent!</td><td class="L-ur">کیا ہی برا! / کیا ہی اچھا!</td><td>بِئْسَ الْمَصِيرُ · نِعْمَ الْمَوْلَى</td></tr>
+      <tr><td>كَلَّا</td><td class="L-en">No indeed!</td><td class="L-ur">ہرگز نہیں!</td><td>—</td></tr>
+      <tr><td>مَا أَدْرَاكَ مَا</td><td class="L-en">what will make you know what … is?</td><td class="L-ur">تمہیں کیا معلوم کہ … کیا ہے؟</td><td>وَمَا أَدْرَاكَ مَا يَوْمُ الدِّينِ</td></tr>
+      <tr><td>حَسْبُ</td><td class="L-en">is sufficient</td><td class="L-ur">کافی ہے</td><td>حَسْبُنَا اللّٰهُ</td></tr>
+      <tr><td>أَعْلَمُ بِـ</td><td class="L-en">knows best about</td><td class="L-ur">خوب جانتا ہے</td><td>وَاللّٰهُ أَعْلَمُ بِأَعْدَائِكُمْ</td></tr>
+      <tr><td>الْمَصِيرُ</td><td class="L-en">the final return</td><td class="L-ur">لوٹ کر جانا</td><td>وَإِلَيْهِ الْمَصِيرُ</td></tr>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">L22–23 Styles 4–5</span><span class="L-ur">سبق 22–23: اسالیب 4–5</span></h3>
+    <ul>
+      <li><span class="L-en">Style 4, ـًا = "in terms of / as": أَحْسَنُ دِينًا better in religion · وَمَنْ أَحْسَنُ قَوْلًا who is better in speech? · جَزَاءً as a recompense.</span><span class="L-ur">اسلوب 4، ـًا = "کے اعتبار سے / بطور": أَحْسَنُ دِينًا دین کے اعتبار سے بہتر · وَمَنْ أَحْسَنُ قَوْلًا بات کے اعتبار سے کون بہتر ہے؟ · جَزَاءً بدلے کے طور پر۔</span></li>
+      <li><span class="L-en">كَفَى بِاللّٰهِ + ـًا = Allah is sufficient as …: وَكَفَى بِاللّٰهِ وَلِيًّا · نَصِيرًا · وَكِيلًا. The بِـ is emphasis, not translated.</span><span class="L-ur">كَفَى بِاللّٰهِ + ـًا = اللہ کافی ہے بطور …: وَكَفَى بِاللّٰهِ وَلِيًّا (اور اللہ دوست کے طور پر کافی ہے) · نَصِيرًا · وَكِيلًا۔ بِـ تاکید کے لیے ہے، اس کا الگ ترجمہ نہیں۔</span></li>
+      <li><span class="L-en">Style 5, مِنْ + indefinite in negation = "any … at all": فَمَا لَهُ مِنْ نُورٍ = he has no light at all · هَلْ مِنْ خَالِقٍ غَيْرُ اللّٰهِ = is there any creator at all besides Allah?</span><span class="L-ur">اسلوب 5، نفی میں مِنْ + نکرہ = "کوئی بھی …": فَمَا لَهُ مِنْ نُورٍ = اس کے لیے کوئی بھی روشنی نہیں · هَلْ مِنْ خَالِقٍ غَيْرُ اللّٰهِ = کیا اللہ کے سوا کوئی بھی خالق ہے؟</span></li>
+    </ul>
+  </div>
+  <div class="card traps">
+    <h3><span class="L-en">Exam traps</span><span class="L-ur">امتحانی غلطیاں</span></h3>
+    <ul>
+      <li><span class="L-en">مُسْلِمُونَ and مُسْلِمِينَ are the same plural.</span><span class="L-ur">مُسْلِمُونَ اور مُسْلِمِينَ ایک ہی جمع ہیں۔</span></li>
+      <li><span class="L-en">Plural ـِينَ (kasra) vs dual ـَيْنِ (fatha): الْمُسْلِمِينَ Muslims, الْمُسْلِمَيْنِ two Muslims.</span><span class="L-ur">جمع ـِينَ (زیر) اور تثنیہ ـَيْنِ (زبر): الْمُسْلِمِينَ مسلمان (جمع)، الْمُسْلِمَيْنِ دو مسلمان۔</span></li>
+      <li><span class="L-en">إِنْ … إِلَّا is not "if": with إِلَّا, إِنْ means "not".</span><span class="L-ur">إِنْ … إِلَّا میں إِنْ "اگر" نہیں بلکہ "نہیں" ہے۔</span></li>
+      <li><span class="L-en">مِنْ in negative sentences means "any at all", not "from".</span><span class="L-ur">نفی والے جملے میں مِنْ کا مطلب "کوئی بھی" ہے، "سے" نہیں۔</span></li>
+      <li><span class="L-en">هُمْ is for people; things take هِيَ.</span><span class="L-ur">هُمْ انسانوں کے لیے ہے؛ چیزوں کے لیے هِيَ۔</span></li>
+    </ul>
+  </div>
+  <div class="card practice">
+    <div class="qbar"><h3><span class="L-en">Practice questions</span><span class="L-ur">مشقی سوالات</span></h3><span class="score"></span><button class="sbtn noprint showall">Show all answers · سب جوابات</button></div>
+    <details class="q"><summary><span class="L-en">Change the ending:</span><span class="L-ur">آخر بدلیں:</span> إِنَّ + الْكَافِرُونَ · مِنَ + الظَّالِمُونَ · أَجْرُ + الْمُحْسِنُونَ</summary><div class="ans">إِنَّ الْكَافِرِينَ · مِنَ الظَّالِمِينَ · أَجْرُ الْمُحْسِنِينَ</div></details>
+    <details class="q"><summary><span class="L-en">Give the plural:</span><span class="L-ur">جمع بتائیں:</span> عَالِم، نَبِيّ، كَافِر، شَهِيد، وَلِيّ</summary><div class="ans">عُلَمَاء · أَنْبِيَاء · كُفَّار · شُهَدَاء · أَوْلِيَاء</div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> هُمْ مُؤْمِنُونَ · هُمُ الْمُؤْمِنُونَ · أُولٰئِكَ هُمُ الْمُتَّقُونَ</summary><div class="ans"><span class="L-en">They are believers · They are the (true) believers · In fact such people are the God-fearing</span><span class="L-ur blk">وہ مومن ہیں · وہی (سچے) مومن ہیں · درحقیقت یہی لوگ متقی ہیں</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> وَإِلٰهُكُمْ إِلٰهٌ وَاحِدٌ · إِنِّي لَكُمْ رَسُولٌ أَمِينٌ</summary><div class="ans"><span class="L-en">And your God is one God · Surely I am a trustworthy messenger to you</span><span class="L-ur blk">اور تمہارا معبود ایک ہی معبود ہے · بے شک میں تمہارے لیے امانت دار رسول ہوں</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> إِنْ هٰذَا إِلَّا سِحْرٌ · إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ</summary><div class="ans"><span class="L-en">This is nothing but magic · The believers are only brothers</span><span class="L-ur blk">یہ تو صرف جادو ہے · مومن تو آپس میں بھائی ہی ہیں</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> وَكَفَى بِاللّٰهِ وَلِيًّا · فَمَا لَهُ مِنْ نُورٍ</summary><div class="ans"><span class="L-en">And Allah is sufficient as a protector · Then he has no light at all</span><span class="L-ur blk">اور اللہ دوست کے طور پر کافی ہے · تو اس کے لیے کوئی بھی روشنی نہیں</span></div></details>
+    <details class="q"><summary><span class="L-en">Meaning of:</span><span class="L-ur">معنی بتائیں:</span> أَلَا، يَوْمَئِذٍ، كَلَّا، بِئْسَ، حَسْبُنَا اللّٰهُ</summary><div class="ans"><span class="L-en">Beware! · on that Day · No indeed! · how evil · Allah is sufficient for us</span><span class="L-ur blk">خبردار! · اس دن · ہرگز نہیں! · کیا ہی برا · ہمارے لیے اللہ کافی ہے</span></div></details>
+  </div>
+</section>
+
+<!-- ================= REVISION ================= -->
+<section class="tab" id="rev" role="tabpanel">
+  <div class="card">
+    <h3><span class="L-en">Quick revision · the night before the exam</span><span class="L-ur">فوری دہرائی · امتحان سے پہلی رات</span></h3>
+    <h3 style="font-size:16px;margin-top:6px"><span class="L-en">1. All pronouns (Units 4–5)</span><span class="L-ur">1۔ تمام ضمیریں (یونٹ 4–5)</span></h3>
+    <div class="tw"><table>
+      <tr><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th>Alone · الگ</th><th>Noun · اسم</th><th>لِـ</th><th>مِنْ</th><th>عَلَى</th><th>إِنَّ</th></tr>
+      <tr><td class="L-en">he / it</td><td class="L-ur">وہ (مذکر)</td><td>هُوَ</td><td>كِتَابُهُ</td><td>لَهُ</td><td>مِنْهُ</td><td>عَلَيْهِ</td><td>إِنَّهُ</td></tr>
+      <tr><td class="L-en">she / it / things</td><td class="L-ur">وہ (مؤنث) / چیزیں</td><td>هِيَ</td><td>كِتَابُهَا</td><td>لَهَا</td><td>مِنْهَا</td><td>عَلَيْهَا</td><td>إِنَّهَا</td></tr>
+      <tr><td class="L-en">you (one man)</td><td class="L-ur">تم (ایک مرد)</td><td>أَنْتَ</td><td>كِتَابُكَ</td><td>لَكَ</td><td>مِنْكَ</td><td>عَلَيْكَ</td><td>إِنَّكَ</td></tr>
+      <tr><td class="L-en">I</td><td class="L-ur">میں</td><td>أَنَا</td><td>كِتَابِي</td><td>لِي</td><td>مِنِّي</td><td>عَلَيَّ</td><td>إِنِّي</td></tr>
+      <tr><td class="L-en">they (men)</td><td class="L-ur">وہ سب</td><td>هُمْ</td><td>كِتَابُهُمْ</td><td>لَهُمْ</td><td>مِنْهُمْ</td><td>عَلَيْهِمْ</td><td>إِنَّهُمْ</td></tr>
+      <tr><td class="L-en">you (men)</td><td class="L-ur">تم سب</td><td>أَنْتُمْ</td><td>كِتَابُكُمْ</td><td>لَكُمْ</td><td>مِنْكُمْ</td><td>عَلَيْكُمْ</td><td>إِنَّكُمْ</td></tr>
+      <tr><td class="L-en">we</td><td class="L-ur">ہم</td><td>نَحْنُ</td><td>كِتَابُنَا</td><td>لَنَا</td><td>مِنَّا</td><td>عَلَيْنَا</td><td>إِنَّا</td></tr>
+    </table></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3><span class="L-en">2. Pointing words</span><span class="L-ur">2۔ اسمائے اشارہ</span></h3>
+      <div class="tw"><table>
+        <tr><th>Word · لفظ</th><th class="L-en">Use</th><th class="L-ur">استعمال</th></tr>
+        <tr><td>هٰذَا</td><td class="L-en">this (masc.)</td><td class="L-ur">یہ (مذکر)</td></tr>
+        <tr><td>هٰذِهِ</td><td class="L-en">this (fem. / things)</td><td class="L-ur">یہ (مؤنث / چیزیں)</td></tr>
+        <tr><td>ذٰلِكَ</td><td class="L-en">that (Qur'an: often this)</td><td class="L-ur">وہ (قرآن میں اکثر یہ)</td></tr>
+        <tr><td>تِلْكَ</td><td class="L-en">that, fem.</td><td class="L-ur">وہ (مؤنث)</td></tr>
+        <tr><td>هٰؤُلَاءِ</td><td class="L-en">these people</td><td class="L-ur">یہ لوگ</td></tr>
+        <tr><td>أُولٰئِكَ</td><td class="L-en">those / these people</td><td class="L-ur">وہ / یہ لوگ</td></tr>
+        <tr><td>ذٰلِكُمْ</td><td class="L-en">that, O people</td><td class="L-ur">اے لوگو! یہ</td></tr>
+      </table></div>
+    </div>
+    <div class="card">
+      <h3><span class="L-en">3. Number</span><span class="L-ur">3۔ عدد</span></h3>
+      <div class="tw"><table>
+        <tr><th class="L-en">Number</th><th class="L-ur">عدد</th><th>Ending · علامت</th><th>Example · مثال</th></tr>
+        <tr><td class="L-en">one</td><td class="L-ur">واحد</td><td>ـٌ / الـ</td><td>مُؤْمِنٌ</td></tr>
+        <tr><td class="L-en">two</td><td class="L-ur">تثنیہ</td><td>ـَانِ / ـَيْنِ</td><td>مُؤْمِنَانِ</td></tr>
+        <tr><td class="L-en">men, 3+</td><td class="L-ur">جمع مذکر</td><td>ـُونَ / ـِينَ</td><td>مُؤْمِنُونَ</td></tr>
+        <tr><td class="L-en">women / things</td><td class="L-ur">جمع مؤنث / چیزیں</td><td>ـَاتٌ</td><td>مُؤْمِنَاتٌ</td></tr>
+        <tr><td class="L-en">broken</td><td class="L-ur">جمعِ مکسر</td><td>—</td><td>كُتُب، عُلَمَاء</td></tr>
+      </table></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3><span class="L-en">4. What changes the last vowel</span><span class="L-ur">4۔ آخری حرکت کیوں بدلتی ہے</span></h3>
+    <div class="tw"><table>
+      <tr><th class="L-en">Cause</th><th class="L-ur">وجہ</th><th class="L-en">Effect</th><th class="L-ur">اثر</th><th>Example · مثال</th></tr>
+      <tr><td class="L-en">إِنَّ / أَنَّ</td><td class="L-ur">إِنَّ / أَنَّ</td><td class="L-en">fatha</td><td class="L-ur">زبر</td><td>إِنَّ اللّٰهَ</td></tr>
+      <tr><td class="L-en">preposition or oath وَ</td><td class="L-ur">حرفِ جار یا واوِ قسم</td><td class="L-en">kasra; ـُونَ → ـِينَ; هُ → هِ</td><td class="L-ur">زیر؛ ـُونَ ← ـِينَ؛ هُ ← هِ</td><td>مِنَ الظَّالِمِينَ · فِي بَيْتِهِمْ</td></tr>
+      <tr><td class="L-en">2nd word of idafah</td><td class="L-ur">مضاف الیہ</td><td class="L-en">kasra; ـُونَ → ـِينَ</td><td class="L-ur">زیر؛ ـُونَ ← ـِينَ</td><td>أَجْرُ الْمُحْسِنِينَ</td></tr>
+      <tr><td class="L-en">1st word of idafah / + pronoun</td><td class="L-ur">مضاف / ضمیر لگنا</td><td class="L-en">no tanween, no الـ; ة → ت</td><td class="L-ur">تنوین اور الـ ختم؛ ة ← ت</td><td>رَحْمَتُهُ</td></tr>
+      <tr><td class="L-en">كَانَ</td><td class="L-ur">كَانَ</td><td class="L-en">ـٌ → ـًا</td><td class="L-ur">ـٌ ← ـًا</td><td>كَانَ رَسُولًا</td></tr>
+      <tr><td class="L-en">لَا (complete negation)</td><td class="L-ur">لَا (نفیِ کامل)</td><td class="L-en">one fatha</td><td class="L-ur">ایک زبر</td><td>لَا رَيْبَ</td></tr>
+      <tr><td class="L-en">يَا</td><td class="L-ur">يَا</td><td class="L-en">one damma</td><td class="L-ur">ایک پیش</td><td>يَا آدَمُ</td></tr>
+      <tr><td class="L-en">"as / in terms of"</td><td class="L-ur">"بطور / کے اعتبار سے"</td><td class="L-en">ـًا</td><td class="L-ur">ـًا</td><td>مُجْرِمًا · دِينًا</td></tr>
+    </table></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3><span class="L-en">5. Emphasis, weakest → strongest</span><span class="L-ur">5۔ تاکید، کم سے زیادہ</span></h3>
+      <p>لَـ → إِنَّ → إِنَّ + لَـ → هُوَ الْـ… → إِنَّهُ هُوَ الْـ… → إِنَّ اللّٰهَ لَهُوَ الْـ… → مَا / إِنْ … إِلَّا → إِنَّمَا</p>
+    </div>
+    <div class="card">
+      <h3><span class="L-en">6. Negation words</span><span class="L-ur">6۔ نفی کے الفاظ</span></h3>
+      <p class="L-en">لَا + noun = no … at all · مَا = not · لَيْسَ = is not · مَا … بِـ = certainly not · مَا / إِنْ … إِلَّا = nothing but · مَا لَهُ مِنْ … = he has no … at all.</p>
+      <p class="L-ur">لَا + اسم = قطعاً کوئی … نہیں · مَا = نہیں · لَيْسَ = نہیں ہے · مَا … بِـ = ہرگز نہیں · مَا / إِنْ … إِلَّا = صرف · مَا لَهُ مِنْ … = اس کے لیے کوئی بھی … نہیں۔</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer><span class="L-en">Based on Muallim-ul-Quran Units 1–5. These notes summarise the book's rules; check doubtful meanings with your teacher.</span><span class="L-ur">معلم القرآن یونٹ 1–5 پر مبنی۔ یہ نوٹس کتاب کے قواعد کا خلاصہ ہیں؛ کسی معنی میں شک ہو تو استاد سے تصدیق کریں۔</span></footer>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const store = { get(k, d) { try { const v = localStorage.getItem('mqx.' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+                  set(k, v) { try { localStorage.setItem('mqx.' + k, JSON.stringify(v)); } catch {} } };
+  const A = '؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿', H = 'ً-ْٰ';
+  // English context: wrap each Arabic-script run; vowelled = Arabic font, unvowelled = Urdu font
+  const RUN = new RegExp(`[${A}][${A}\\s،؟.\\/()]*[${A}]|[${A}]`, 'g');
+  // Urdu context: the block is already Nastaleeq, so only vowelled Arabic words get the Arabic font
+  const VW = new RegExp(`[${A}]*[${H}][${A}]*(?:\\s+[${A}]*[${H}][${A}]*)*`, 'g');
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('.ar,.ur,script,style,.seg,nav') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+  for (const n of nodes) {
+    const t = n.nodeValue, inUr = !!n.parentElement.closest('.L-ur'), re = inUr ? VW : RUN;
+    re.lastIndex = 0; if (!re.test(t)) continue;
+    const frag = document.createDocumentFragment(); let last = 0, m; re.lastIndex = 0;
+    const hasH = new RegExp(`[${H}]`), tokRe = new RegExp(`[${A}]+`, 'g');
+    while ((m = re.exec(t))) {
+      if (!m[0]) { re.lastIndex++; continue; }
+      // split the run where it switches between vowelled Arabic and plain Urdu, so each keeps its own order
+      const groups = []; let g = null, tk; tokRe.lastIndex = 0;
+      while ((tk = tokRe.exec(m[0]))) {
+        const cls = hasH.test(tk[0]) ? 'ar' : 'ur', end = tk.index + tk[0].length;
+        if (g && g.cls === cls) g.end = end; else { g = { cls, start: tk.index, end }; groups.push(g); }
+      }
+      for (const gr of groups) {
+        const a = m.index + gr.start;
+        if (a > last) frag.appendChild(document.createTextNode(t.slice(last, a)));
+        const s = document.createElement('span'); s.className = gr.cls; s.textContent = m[0].slice(gr.start, gr.end);
+        frag.appendChild(s); last = m.index + gr.end;
+      }
+    }
+    if (last < t.length) frag.appendChild(document.createTextNode(t.slice(last)));
+    n.parentNode.replaceChild(frag, n);
+  }
+
+  // language
+  const setLang = l => { document.body.className = document.body.className.replace(/lang-\w+/, 'lang-' + l); $$('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l)); store.set('lang', l); };
+  $$('.seg button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  setLang(store.get('lang', 'both'));
+
+  // unit headers + done buttons + practice scores
+  const revised = store.get('revised', {}), got = store.get('got', {});
+  const units = $$('section.tab[data-title-en]');
+  units.forEach(sec => {
+    const n = sec.id.slice(1);
+    sec.insertAdjacentHTML('afterbegin', `<div class="uhead"><div class="num">Unit ${n}<small>یونٹ ${'۰۱۲۳۴۵۶۷۸۹'[n]}</small></div>
+      <div class="ttl"><h2 class="L-en">${sec.dataset.titleEn}</h2><h2 class="L-ur">${sec.dataset.titleUr}</h2><div class="meta">${sec.dataset.lessons} lessons · ${sec.dataset.lessons} اسباق</div></div>
+      <button class="donebtn" data-unit="${sec.id}"></button></div>`);
+    sec.querySelectorAll('details.q').forEach((d, i) => {
+      const key = sec.id + ':' + i;
+      d.insertAdjacentHTML('beforeend', `<label class="got"><input type="checkbox" data-got="${key}" ${got[key] ? 'checked' : ''}> I got it right · میرا جواب درست تھا</label>`);
+    });
+  });
+  const paintUnits = () => {
+    units.forEach(sec => {
+      const qs = sec.querySelectorAll('[data-got]'), ok = [...qs].filter(c => c.checked).length;
+      const sc = sec.querySelector('.score'); if (sc) sc.innerHTML = `<b>${ok}</b> / ${qs.length} correct · درست`;
+      const btn = sec.querySelector('.donebtn'), done = !!revised[sec.id];
+      btn.setAttribute('aria-pressed', done); btn.textContent = done ? '✓ Revised · دہرائی مکمل' : 'Mark as revised · دہرائی مکمل کریں';
+      const tab = $(`nav.tabs [data-tab="${sec.id}"]`); tab.querySelector('.tick')?.remove();
+      if (done) tab.insertAdjacentHTML('beforeend', '<span class="tick">✓</span>');
+    });
+    $('#ucards').innerHTML = units.map(sec => {
+      const qs = sec.querySelectorAll('[data-got]'), ok = [...qs].filter(c => c.checked).length;
+      return `<button class="ucard" data-go="${sec.id}"><b>Unit ${sec.id.slice(1)} ${revised[sec.id] ? '✓' : ''}</b><span class="ur">${sec.dataset.titleUr}</span><span class="st">${sec.dataset.titleEn}<br>${ok}/${qs.length} practice correct</span></button>`;
+    }).join('');
+  };
+  document.addEventListener('change', e => {
+    const g = e.target.dataset.got; if (g) { if (e.target.checked) got[g] = 1; else delete got[g]; store.set('got', got); paintUnits(); }
+  });
+  document.addEventListener('click', e => {
+    const d = e.target.closest('.donebtn'); if (d) { const u = d.dataset.unit; if (revised[u]) delete revised[u]; else revised[u] = 1; store.set('revised', revised); paintUnits(); return; }
+    const go = e.target.closest('[data-go]'); if (go) { show(go.dataset.go); return; }
+    const sa = e.target.closest('.showall'); if (sa) { const qs = [...sa.closest('.practice').querySelectorAll('details.q')]; const open = !qs.every(q => q.open); qs.forEach(q => q.open = open); }
+  });
+  paintUnits();
+
+  // tabs
+  const tabs = $$('nav.tabs button');
+  const show = id => {
+    if (!document.getElementById(id)) id = 'plan';
+    $$('section.tab').forEach(s => s.classList.toggle('on', s.id === id));
+    tabs.forEach(b => b.setAttribute('aria-selected', b.dataset.tab === id));
+    $(`nav.tabs [data-tab="${id}"]`).scrollIntoView({ block: 'nearest', inline: 'center' });
+    history.replaceState(null, '', '#' + id); store.set('tab', id); scrollTo(0, 0);
+  };
+  tabs.forEach(b => b.addEventListener('click', () => show(b.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (!e.target.closest('nav.tabs') || !['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    const i = tabs.findIndex(b => b.getAttribute('aria-selected') === 'true');
+    const j = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length; show(tabs[j].dataset.tab); tabs[j].focus();
+  });
+  show(location.hash.slice(1) || store.get('tab', 'plan'));
+
+  // plan ticks
+  const days = store.get('days', {}), boxes = $$('.plan input');
+  const paint = () => {
+    let c = 0; boxes.forEach(b => { b.checked = !!days[b.dataset.day]; b.closest('tr').classList.toggle('done', b.checked); if (b.checked) c++; });
+    $('#pbar').style.width = c * 10 + '%'; $('#ptext').textContent = `${c} of 10 days done · 10 میں سے ${c} دن مکمل`;
+  };
+  boxes.forEach(b => b.addEventListener('change', () => { if (b.checked) days[b.dataset.day] = 1; else delete days[b.dataset.day]; store.set('days', days); paint(); }));
+  paint();
+
+  // theme + print
+  const root = document.documentElement; const th = store.get('theme', null); if (th) root.dataset.theme = th;
+  $('#theme').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark'; store.set('theme', root.dataset.theme);
+  });
+  addEventListener('beforeprint', () => $$('details.q').forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>
