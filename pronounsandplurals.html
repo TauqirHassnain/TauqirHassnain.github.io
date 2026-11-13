@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pronouns and Plurals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ec; --surface: #fffdf8; --surface-2: #f0ebe0; --ink: #1f2a2a; --muted: #5d6b6b; --line: #ddd5c4;
+  --teal: #2f7f78; --teal-d: #1f5c57; --red: #b3261e; --gold: #a8741a; --ok: #2e7d32; --head: #1f5c57;
+  --ar: "Scheherazade New", "Traditional Arabic", serif;
+  --ur: "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #141a1a; --surface: #1c2424; --surface-2: #243030; --ink: #e8eeee; --muted: #9fb0b0; --line: #334242; --teal: #5fb8ae; --teal-d: #8fd3ca; --red: #f08a80; --gold: #e0b45c; --ok: #7bc47f; --head: #0f2422; }
+}
+:root[data-theme="dark"] { --bg: #141a1a; --surface: #1c2424; --surface-2: #243030; --ink: #e8eeee; --muted: #9fb0b0; --line: #334242; --teal: #5fb8ae; --teal-d: #8fd3ca; --red: #f08a80; --gold: #e0b45c; --ok: #7bc47f; --head: #0f2422; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, "Segoe UI", sans-serif; }
+.ar { font-family: var(--ar); font-size: 1.32em; line-height: 1.7; direction: rtl; unicode-bidi: isolate; }
+.ur { font-family: var(--ur); line-height: 2; direction: rtl; unicode-bidi: isolate; }
+.L-ur { font-family: var(--ur); direction: rtl; text-align: right; line-height: 2.15; }
+p.L-ur, li .L-ur, .L-ur.blk { display: block; }
+li > .L-en, li > .L-ur { display: block; margin: 0; }
+li > .L-ur { color: color-mix(in srgb, var(--ink) 85%, var(--teal)); }
+body.lang-en .L-ur, body.lang-ur .L-en { display: none !important; }
+body.lang-ur li { list-style: none; }
+body.lang-ur ul { padding-right: 4px; }
+
+header.top { position: sticky; top: 0; z-index: 20; background: var(--head); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.bar { max-width: 1150px; margin: 0 auto; padding: 8px 16px 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.brand { font-weight: 700; margin-right: auto; white-space: nowrap; }
+.brand .ar { font-size: 22px; margin-left: 6px; }
+.seg { display: inline-flex; background: rgba(255,255,255,.14); border-radius: 999px; padding: 2px; }
+.seg button { border: 0; background: transparent; color: #fff; font: inherit; font-size: 13px; padding: 4px 11px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: #fff; color: #1f5c57; font-weight: 700; }
+.seg .u { font-family: var(--ur); font-size: 14px; line-height: 1.4; }
+.tbtn { border: 0; background: rgba(255,255,255,.15); color: #fff; border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+nav.tabs { max-width: 1150px; margin: 0 auto; display: flex; gap: 4px; padding: 8px 16px 0; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { flex: none; border: 0; background: rgba(255,255,255,.1); color: #fff; font: inherit; font-size: 14px; padding: 7px 14px 8px; border-radius: 12px 12px 0 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
+nav.tabs button .tu { font-family: var(--ur); font-size: 12px; opacity: .85; line-height: 1.6; }
+nav.tabs button .tick { font-size: 11px; color: #a5e3a8; }
+nav.tabs button[aria-selected="true"] { background: var(--bg); color: var(--teal-d); font-weight: 700; }
+main { max-width: 1150px; margin: 0 auto; padding: 18px 16px 60px; }
+section.tab { display: none; animation: fade .2s ease; }
+section.tab.on { display: block; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; margin: 14px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.uhead { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; }
+.uhead .num { background: var(--teal-d); color: #fff; border-radius: 14px; padding: 8px 14px; text-align: center; font-weight: 800; font-size: 20px; line-height: 1.2; }
+:root[data-theme="dark"] .uhead .num { color: #10201f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .uhead .num { color: #10201f; } }
+.uhead .num small { display: block; font-family: var(--ur); font-weight: 400; font-size: 13px; line-height: 1.6; }
+.uhead .ttl { flex: 1; min-width: 220px; }
+.uhead h2 { margin: 0; color: var(--teal-d); font-size: 22px; }
+.uhead h2.L-ur { font-size: 24px; color: var(--red); font-weight: 400; }
+.uhead .meta { color: var(--muted); font-size: 13px; }
+.donebtn { border: 2px solid var(--ok); background: transparent; color: var(--ok); border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; }
+.donebtn[aria-pressed="true"] { background: var(--ok); color: #fff; }
+h3 { color: var(--red); margin: 0 0 8px; font-size: 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+h3 .L-ur { font-weight: 400; font-size: 20px; }
+body.lang-ur h3 { flex-direction: row-reverse; }
+.lead { font-size: 16.5px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 15px; }
+th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: middle; }
+th { background: var(--surface-2); color: var(--teal-d); font-size: 13px; letter-spacing: .2px; }
+th .L-ur, td.L-ur, th.L-ur { font-family: var(--ur); text-align: right; }
+td.L-ur { direction: rtl; }
+tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
+.tw { overflow-x: auto; }
+ul { padding-left: 22px; margin: 6px 0; } li { margin: 6px 0; }
+.rule { background: color-mix(in srgb, var(--teal) 10%, var(--surface)); border-left: 4px solid var(--teal); padding: 10px 14px; border-radius: 8px; margin: 10px 0; }
+.traps { background: color-mix(in srgb, var(--red) 8%, var(--surface)); border-color: color-mix(in srgb, var(--red) 35%, var(--line)); }
+.qbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.score { font-size: 14px; color: var(--muted); }
+.score b { color: var(--ok); }
+details.q { border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin: 8px 0; background: var(--surface); }
+details.q summary { cursor: pointer; font-weight: 600; }
+details.q summary::marker { color: var(--teal); }
+details.q summary .L-ur { font-weight: 400; }
+details.q .ans { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line); color: var(--ok); }
+.got { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 14px; color: var(--muted); cursor: pointer; }
+.got input { width: 18px; height: 18px; accent-color: var(--ok); }
+.sbtn { border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); border-radius: 999px; padding: 5px 14px; font: inherit; font-size: 14px; cursor: pointer; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+footer { text-align: center; color: var(--muted); font-size: 13px; padding: 20px; }
+
+/* new: badges, pronoun explorer, sorting map, drill */
+.badge { display: inline-block; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 1px 8px; vertical-align: middle; white-space: nowrap; }
+.b-book { background: color-mix(in srgb, var(--ok) 16%, transparent); color: var(--ok); }
+.b-extra { background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--gold); }
+td.extra { color: var(--muted); }
+.pgrid td.cell { cursor: pointer; text-align: center; border-radius: 8px; transition: background .12s; }
+.pgrid td.cell:hover, .pgrid td.cell.sel { background: color-mix(in srgb, var(--teal) 18%, var(--surface)) !important; }
+.pgrid td.cell.extra .ar { opacity: .6; }
+.pgrid th { text-align: center; }
+.pgrid td.rowh { font-weight: 700; color: var(--teal-d); white-space: nowrap; }
+.pgrid td.rowh .L-ur { font-weight: 400; display: block; }
+.ppanel { margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; background: color-mix(in srgb, var(--teal) 6%, var(--surface)); min-height: 96px; }
+.ppanel .big { font-family: var(--ar); font-size: 44px; line-height: 1.3; color: var(--teal-d); direction: rtl; }
+.ppanel .row { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+.ppanel dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 6px 0 0; }
+.ppanel dt { color: var(--muted); font-size: 13px; }
+.ppanel dd { margin: 0; }
+.flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 8px 0; }
+.flow .box { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 6px 12px; text-align: center; }
+.flow .box b { display: block; color: var(--teal-d); font-size: 13px; }
+.flow .arr { color: var(--teal); font-size: 20px; }
+.map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.map .col { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; background: var(--surface); }
+.map .col h4 { margin: 0 0 4px; color: var(--teal-d); font-size: 15px; }
+.map .col .eg { font-family: var(--ar); font-size: 22px; direction: rtl; text-align: right; color: var(--red); }
+.drill { text-align: center; }
+.drill .prompt { font-family: var(--ar); font-size: 46px; line-height: 1.4; color: var(--teal-d); direction: rtl; margin: 6px 0; }
+.drill .ask { color: var(--muted); font-size: 14px; }
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px auto; max-width: 640px; }
+.opts button { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 12px; padding: 10px; font: inherit; cursor: pointer; text-align: center; transition: transform .1s; }
+.opts button:hover:not(:disabled) { transform: translateY(-1px); border-color: var(--teal); }
+.opts button.right { background: color-mix(in srgb, var(--ok) 18%, var(--surface)); border-color: var(--ok); }
+.opts button.wrong { background: color-mix(in srgb, var(--red) 14%, var(--surface)); border-color: var(--red); }
+.opts .ur { display: block; font-size: 15px; line-height: 1.8; }
+.dmeta { display: flex; justify-content: center; gap: 14px; align-items: center; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
+.dmeta b { color: var(--ok); }
+.why { min-height: 30px; font-size: 14.5px; }
+.chips { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 6px; }
+.chips button { border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); border-radius: 999px; padding: 3px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--teal-d); color: #fff; border-color: var(--teal-d); }
+@media (max-width: 760px) {
+  .grid2, .map { grid-template-columns: 1fr; }
+  .card { padding: 12px 14px; }
+  .brand { font-size: 15px; }
+  th, td { padding: 5px 6px; font-size: 14px; }
+  .opts { grid-template-columns: 1fr; }
+  .drill .prompt { font-size: 38px; }
+}
+@media print {
+  header.top, .noprint, .got, .drillcard { display: none !important; }
+  section.tab { display: block !important; break-before: page; }
+  body { background: #fff; color: #000; font-size: 11.5pt; }
+  .card { box-shadow: none; break-inside: avoid; }
+  details.q > * { display: block; }
+}
+</style>
+</head>
+<body class="lang-both">
+<header class="top">
+  <div class="bar">
+    <span class="brand">Pronouns &amp; Plurals <span class="ar">الضَّمَائِرُ وَالْجَمْعُ</span></span>
+    <div class="seg" role="group" aria-label="Language">
+      <button data-lang="en">English</button><button data-lang="both">Both</button><button data-lang="ur" class="u">اردو</button>
+    </div>
+    <button class="tbtn" id="theme" title="Dark / light">◐</button>
+    <button class="tbtn" onclick="print()" title="Print all tabs or save as PDF">Print</button>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="ov">Overview<span class="tu">خلاصہ</span></button>
+    <button role="tab" data-tab="pr">Pronouns<span class="tu">ضمائر</span></button>
+    <button role="tab" data-tab="pl">Plurals<span class="tu">جمع</span></button>
+    <button role="tab" data-tab="dr">Drill<span class="tu">مشق</span></button>
+    <button role="tab" data-tab="pq">Practice<span class="tu">سوالات</span></button>
+  </nav>
+</header>
+
+<main>
+<!-- ================= OVERVIEW ================= -->
+<section class="tab" id="ov" role="tabpanel">
+  <div class="card">
+    <p class="L-en lead">Muallim-ul-Quran teaches 7 pronouns, each in two shapes: a <b>separate word</b> (هُوَ he) and an <b>ending</b> (بَيْتُهُ his house). It teaches plurals in three kinds: ـُونَ / ـِينَ for men, ـَاتٌ for women and things, and <b>broken plurals</b> learned as pairs (عَالِم → عُلَمَاء).</p>
+    <p class="L-ur lead">معلم القرآن میں 7 ضمیریں سکھائی گئی ہیں، ہر ایک کی دو شکلیں ہیں: <b>الگ لفظ</b> (هُوَ وہ) اور <b>لفظ کے آخر میں لگنے والی</b> (بَيْتُهُ اس کا گھر)۔ جمع کی تین قسمیں ہیں: مردوں کے لیے ـُونَ / ـِينَ، عورتوں اور چیزوں کے لیے ـَاتٌ، اور <b>جمعِ مکسر</b> جو واحد کے ساتھ جوڑوں میں یاد کی جاتی ہے (عَالِم ← عُلَمَاء)۔</p>
+    <p class="L-en" style="font-size:14px;color:var(--muted)"><span class="badge b-book">In book</span> = taught in Units 1–5 · <span class="badge b-extra">Additional</span> = the rest of the Arabic system, for completeness; not in Units 1–5.</p>
+    <p class="L-ur" style="font-size:14px;color:var(--muted)"><span class="badge b-book">کتاب میں</span> = یونٹ 1–5 میں پڑھایا گیا · <span class="badge b-extra">اضافی</span> = عربی کے باقی صیغے، مکمل تصویر کے لیے؛ یونٹ 1–5 میں نہیں۔</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">Where each topic is in the book</span><span class="L-ur">کتاب میں کون سا موضوع کہاں ہے</span></h3>
+    <div class="tw"><table>
+      <tr><th>Unit · Lessons</th><th class="L-en">Topic</th><th class="L-ur">موضوع</th><th>Key form · اہم شکل</th></tr>
+      <tr><td>U1 · L10–11</td><td class="L-en">First plurals (ـَات and broken)</td><td class="L-ur">ابتدائی جمع (ـَات اور مکسر)</td><td class="ar">آيَات · أَقْلَام · كُتُب</td></tr>
+      <tr><td>U3 · L10</td><td class="L-en">The dual (two)</td><td class="L-ur">تثنیہ (دو)</td><td class="ar">جَنَّتَانِ · الْوَالِدَيْنِ</td></tr>
+      <tr><td>U4 · L1–8</td><td class="L-en">he / you (m.) and his / your</td><td class="L-ur">وہ / تم (مذکر) اور اس کا / تمہارا</td><td class="ar">هُوَ · ـهُ · أَنْتَ · ـكَ</td></tr>
+      <tr><td>U4 · L9–16</td><td class="L-en">she / I and her / my</td><td class="L-ur">وہ (مؤنث) / میں اور اس کی / میرا</td><td class="ar">هِيَ · ـهَا · أَنَا · ـي</td></tr>
+      <tr><td>U5 · L1–4</td><td class="L-en">Sound masculine and broken plurals</td><td class="L-ur">جمع مذکر سالم اور جمعِ مکسر</td><td class="ar">ـُونَ · ـِينَ · عُلَمَاء</td></tr>
+      <tr><td>U5 · L5–16</td><td class="L-en">they / you (pl.) / we and their / your / our</td><td class="L-ur">وہ سب / تم سب / ہم اور ان کا / تمہارا / ہمارا</td><td class="ar">هُمْ · أَنْتُمْ · نَحْنُ</td></tr>
+      <tr><td>U5 · L17–18</td><td class="L-en">Pointing at many people</td><td class="L-ur">لوگوں کی طرف اشارہ</td><td class="ar">أُولٰئِكَ · هٰؤُلَاءِ</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">How an ending is added</span><span class="L-ur">ضمیر کیسے جڑتی ہے</span></h3>
+    <div class="flow">
+      <div class="box"><b>noun · اسم</b><span class="ar">رَحْمَةٌ</span></div><span class="arr">→</span>
+      <div class="box"><b>drop tanween, ة → ت</b><span class="ar">رَحْمَتُ</span></div><span class="arr">→</span>
+      <div class="box"><b>+ ending · ضمیر</b><span class="ar">رَحْمَتُهُ</span></div><span class="arr">→</span>
+      <div class="box"><b>after فِي / مِنْ</b><span class="ar">فِي رَحْمَتِهِ</span></div>
+    </div>
+    <p class="L-en">Tanween drops when an ending is attached. After فِي، مِنْ، إِلَى، عَلَى، بِـ the word takes kasra, and ـهُ becomes ـهِ, هُمْ becomes هِمْ. That is a change of sound only; the meaning is the same.</p>
+    <p class="L-ur">ضمیر جڑنے پر تنوین ختم ہو جاتی ہے۔ فِي، مِنْ، إِلَى، عَلَى، بِـ کے بعد لفظ پر زیر آتا ہے، اور ـهُ ← ـهِ، هُمْ ← هِمْ ہو جاتا ہے۔ یہ صرف آواز کی تبدیلی ہے؛ معنی وہی رہتا ہے۔</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">Quick revision</span><span class="L-ur">فوری دہرائی</span></h3>
+    <ul>
+      <li><span class="L-en"><b>Main rule:</b> pronoun + word without الـ = plain sentence (هُوَ حَقٌّ); + word with الـ = emphasis, "he alone / they are the" (هُوَ الْحَقُّ).</span><span class="L-ur"><b>بنیادی قاعدہ:</b> ضمیر + بغیر الـ لفظ = سادہ جملہ (هُوَ حَقٌّ وہ حق ہے)؛ + الـ والا لفظ = تاکید، "وہی" (هُوَ الْحَقُّ وہی حق ہے)۔</span></li>
+      <li><span class="L-en"><b>Endings:</b> ـهُ his · ـهَا her · ـهُمْ their · ـكَ your · ـكُمْ your (pl.) · ـي my · ـنَا our.</span><span class="L-ur"><b>ضمیریں:</b> ـهُ اس کا · ـهَا اس (مؤنث) کا · ـهُمْ ان کا · ـكَ تیرا · ـكُمْ تم لوگوں کا · ـي میرا · ـنَا ہمارا۔</span></li>
+      <li><span class="L-en"><b>Plural endings:</b> ـُونَ and ـِينَ are the same plural; ـِينَ comes after إِنَّ, a preposition, or as the 2nd word of an idafah.</span><span class="L-ur"><b>جمع کی علامات:</b> ـُونَ اور ـِينَ ایک ہی جمع ہیں؛ ـِينَ إِنَّ، حرفِ جار کے بعد یا مضاف الیہ ہونے پر آتا ہے۔</span></li>
+      <li><span class="L-en"><b>Key distinction:</b> plurals of things take هِيَ / ـهَا (feminine singular), not هُمْ.</span><span class="L-ur"><b>اہم فرق:</b> چیزوں کی جمع کے لیے هِيَ / ـهَا (مؤنث واحد) آتا ہے، هُمْ نہیں۔</span></li>
+      <li><span class="L-en"><b>Likely exam focus</b> (from the book's exercises): add a pronoun to a noun, change ـُونَ to ـِينَ, give the broken plural, translate pronoun sentences.</span><span class="L-ur"><b>امتحان میں متوقع</b> (کتاب کی مشقوں کی بنیاد پر): اسم پر ضمیر لگانا، ـُونَ کو ـِينَ بنانا، جمعِ مکسر بتانا، ضمیر والے جملوں کا ترجمہ۔</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PRONOUNS ================= -->
+<section class="tab" id="pr" role="tabpanel">
+  <div class="card">
+    <h3><span class="L-en">Pronoun explorer: tap a pronoun</span><span class="L-ur">ضمیر پر کلک کریں</span></h3>
+    <p class="L-en" style="margin-top:0">Rows are persons, columns are number. Bright cells are taught in the book; faded cells are additional.</p>
+    <p class="L-ur" style="margin-top:0">قطاریں غائب، حاضر اور متکلم ہیں؛ کالم واحد، تثنیہ اور جمع ہیں۔ نمایاں خانے کتاب میں ہیں؛ ہلکے خانے اضافی ہیں۔</p>
+    <div class="tw"><table class="pgrid">
+      <tr><th></th><th>Singular · واحد</th><th>Dual · تثنیہ</th><th>Plural · جمع</th></tr>
+      <tr><td class="rowh">3rd m. <span class="L-ur">غائب مذکر</span></td><td class="cell" data-p="huwa"><span class="ar">هُوَ</span></td><td class="cell extra" data-p="huma"><span class="ar">هُمَا</span></td><td class="cell" data-p="hum"><span class="ar">هُمْ</span></td></tr>
+      <tr><td class="rowh">3rd f. <span class="L-ur">غائب مؤنث</span></td><td class="cell" data-p="hiya"><span class="ar">هِيَ</span></td><td class="cell extra" data-p="huma"><span class="ar">هُمَا</span></td><td class="cell extra" data-p="hunna"><span class="ar">هُنَّ</span></td></tr>
+      <tr><td class="rowh">2nd m. <span class="L-ur">حاضر مذکر</span></td><td class="cell" data-p="anta"><span class="ar">أَنْتَ</span></td><td class="cell extra" data-p="antuma"><span class="ar">أَنْتُمَا</span></td><td class="cell" data-p="antum"><span class="ar">أَنْتُمْ</span></td></tr>
+      <tr><td class="rowh">2nd f. <span class="L-ur">حاضر مؤنث</span></td><td class="cell extra" data-p="anti"><span class="ar">أَنْتِ</span></td><td class="cell extra" data-p="antuma"><span class="ar">أَنْتُمَا</span></td><td class="cell extra" data-p="antunna"><span class="ar">أَنْتُنَّ</span></td></tr>
+      <tr><td class="rowh">1st <span class="L-ur">متکلم</span></td><td class="cell" data-p="ana"><span class="ar">أَنَا</span></td><td class="cell" data-p="nahnu" colspan="2"><span class="ar">نَحْنُ</span></td></tr>
+    </table></div>
+    <div class="ppanel" id="ppanel" aria-live="polite"></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">The 7 book pronouns: alone, on a noun, on a particle</span><span class="L-ur">کتاب کی 7 ضمیریں: الگ، اسم پر، حرف پر</span></h3>
+    <div class="tw"><table>
+      <tr><th>Alone · الگ</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th>Ending · متصل</th><th>On a noun · اسم پر</th><th>On particles · حروف پر</th><th>Lessons</th></tr>
+      <tr><td class="ar">هُوَ</td><td class="L-en">he, it</td><td class="L-ur">وہ (مذکر)</td><td class="ar">ـهُ</td><td class="ar">بَيْتُهُ</td><td class="ar">لَهُ · إِنَّهُ · فِيهِ · عَلَيْهِ</td><td>U4 L1–4</td></tr>
+      <tr><td class="ar">أَنْتَ</td><td class="L-en">you (one man)</td><td class="L-ur">تم، تو (مذکر)</td><td class="ar">ـكَ</td><td class="ar">رَبُّكَ</td><td class="ar">لَكَ · إِنَّكَ · إِلَيْكَ · عَلَيْكَ</td><td>U4 L5–8</td></tr>
+      <tr><td class="ar">هِيَ</td><td class="L-en">she, it; things (pl.)</td><td class="L-ur">وہ (مؤنث)؛ چیزوں کی جمع</td><td class="ar">ـهَا</td><td class="ar">زَوْجُهَا</td><td class="ar">لَهَا · فِيهَا · مِنْهَا · إِلَيْهَا</td><td>U4 L9–12</td></tr>
+      <tr><td class="ar">أَنَا</td><td class="L-en">I</td><td class="L-ur">میں</td><td class="ar">ـي</td><td class="ar">رَبِّي</td><td class="ar">لِي · إِنِّي · عَلَيَّ · إِلَيَّ</td><td>U4 L13–16</td></tr>
+      <tr><td class="ar">هُمْ</td><td class="L-en">they (men, 3+)</td><td class="L-ur">وہ سب، وہ لوگ</td><td class="ar">ـهُمْ</td><td class="ar">كِتَابُهُمْ</td><td class="ar">لَهُمْ · فِيهِمْ · مِنْهُمْ · عَلَيْهِمْ</td><td>U5 L5–8</td></tr>
+      <tr><td class="ar">أَنْتُمْ</td><td class="L-en">you (many men)</td><td class="L-ur">تم سب، تم لوگ</td><td class="ar">ـكُمْ</td><td class="ar">رَبُّكُمْ</td><td class="ar">لَكُمْ · إِنَّكُمْ · مِنْكُمْ · عَلَيْكُمْ</td><td>U5 L9–12</td></tr>
+      <tr><td class="ar">نَحْنُ</td><td class="L-en">we</td><td class="L-ur">ہم</td><td class="ar">ـنَا</td><td class="ar">رَبُّنَا</td><td class="ar">لَنَا · إِنَّا · مِنَّا · عَلَيْنَا</td><td>U5 L13–16</td></tr>
+    </table></div>
+    <div class="rule"><p class="L-en">Spelling with particles: لِـ + هُ = لَهُ (fatha, but لِي keeps kasra) · إِلَى + كَ = إِلَيْكَ · عَلَى + كَ = عَلَيْكَ · إِنَّ + ي = إِنِّي · إِنَّ + نَا = إِنَّا · مِنْ + نَا = مِنَّا.</p>
+    <p class="L-ur">حروف کے ساتھ املا: لِـ + هُ = لَهُ (زبر، مگر لِي میں زیر رہتا ہے) · إِلَى + كَ = إِلَيْكَ · عَلَى + كَ = عَلَيْكَ · إِنَّ + ي = إِنِّي · إِنَّ + نَا = إِنَّا · مِنْ + نَا = مِنَّا۔</p></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">Rules from the book</span><span class="L-ur">کتاب کے قواعد</span></h3>
+    <ul>
+      <li><span class="L-en"><b>Plain vs emphatic</b> (U4 L1): هُوَ حَقٌّ = He is truth · هُوَ الْحَقُّ = He alone is the Truth. Common in Allah's attributes: إِنَّهُ هُوَ السَّمِيعُ الْعَلِيمُ.</span><span class="L-ur"><b>سادہ اور تاکیدی</b> (یونٹ 4، سبق 1): هُوَ حَقٌّ = وہ حق ہے · هُوَ الْحَقُّ = وہی حق ہے۔ اللہ کی صفات میں عام: إِنَّهُ هُوَ السَّمِيعُ الْعَلِيمُ۔</span></li>
+      <li><span class="L-en"><b>وَهُوَ / فَهُوَ</b>: "and he" / "so he"; وَهُوَ can also mean "while he": وَهُوَ كَافِرٌ = while he is a disbeliever.</span><span class="L-ur"><b>وَهُوَ / فَهُوَ</b>: "اور وہ" / "تو وہ"؛ وَهُوَ کا مطلب "جبکہ وہ" بھی ہے: وَهُوَ كَافِرٌ = جبکہ وہ کافر ہے۔</span></li>
+      <li><span class="L-en"><b>هِيَ for things</b> (U4 L9): used for any feminine word and for plurals of things: الْأَبْصَارُ … هِيَ شَاخِصَةٌ = the eyes … they are staring.</span><span class="L-ur"><b>چیزوں کے لیے هِيَ</b> (یونٹ 4، سبق 9): ہر مؤنث لفظ اور چیزوں کی جمع کے لیے: الْأَبْصَارُ … هِيَ شَاخِصَةٌ = آنکھیں … وہ پتھرائی ہوئی ہیں۔</span></li>
+      <li><span class="L-en"><b>Dropped ي</b> (U4 L14): "my" often shows only as kasra: رَبِّ = my Lord · يَا قَوْمِ = O my people.</span><span class="L-ur"><b>ي کا حذف</b> (یونٹ 4، سبق 14): "میرا" اکثر صرف زیر سے ظاہر ہوتا ہے: رَبِّ = میرے رب · يَا قَوْمِ = اے میری قوم۔</span></li>
+      <li><span class="L-en"><b>Double emphasis</b> (U4 L16): إِنَّ … لَـ, or إِنِّي أَنَا: إِنِّي أَنَا رَبُّكَ = Indeed I, I am your Lord.</span><span class="L-ur"><b>دوہری تاکید</b> (یونٹ 4، سبق 16): إِنَّ … لَـ، یا إِنِّي أَنَا: إِنِّي أَنَا رَبُّكَ = بے شک میں ہی تیرا رب ہوں۔</span></li>
+      <li><span class="L-en"><b>هُمْ + الـ plural</b> (U5 L5): هُمُ الْمُؤْمِنُونَ = they are the (true) believers; أُولٰئِكَ هُمُ الْمُتَّقُونَ = such people indeed are the God-fearing.</span><span class="L-ur"><b>هُمْ + الـ والی جمع</b> (یونٹ 5، سبق 5): هُمُ الْمُؤْمِنُونَ = وہی (سچے) مومن ہیں؛ أُولٰئِكَ هُمُ الْمُتَّقُونَ = درحقیقت یہی لوگ متقی ہیں۔</span></li>
+      <li><span class="L-en"><b>الَّذِينَ هُمْ</b> (U5 L7) = "those who are": الَّذِينَ هُمْ فِي صَلَاتِهِمْ خَاشِعُونَ.</span><span class="L-ur"><b>الَّذِينَ هُمْ</b> (یونٹ 5، سبق 7) = "وہ لوگ جو": الَّذِينَ هُمْ فِي صَلَاتِهِمْ خَاشِعُونَ = جو اپنی نماز میں عاجزی کرنے والے ہیں۔</span></li>
+      <li><span class="L-en"><b>نَحْنُ / ـنَا for Allah</b> is the royal "We": إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ.</span><span class="L-ur"><b>اللہ کے لیے نَحْنُ / ـنَا</b> شاہانہ جمع ہے: إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ = بے شک ہم ہی نے یہ ذکر اتارا۔</span></li>
+      <li><span class="L-en"><b>ذٰلِكُمْ</b> (U5 L12) = ذٰلِكَ plus a call for the listeners' attention: ذٰلِكُمُ اللّٰهُ رَبُّكُمْ.</span><span class="L-ur"><b>ذٰلِكُمْ</b> (یونٹ 5، سبق 12) = ذٰلِكَ جس میں سننے والوں کو متوجہ کیا جاتا ہے: ذٰلِكُمُ اللّٰهُ رَبُّكُمْ = یہی اللہ تمہارا رب ہے۔</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">The full Arabic system</span><span class="L-ur">عربی کا مکمل نظام</span> <span class="badge b-extra">Additional · اضافی</span></h3>
+    <div class="grid2">
+      <div>
+        <p class="L-en"><b>1. Detached (منفصل)</b>: a separate word. Subject set: هُوَ، أَنْتَ … Object set built on إِيَّا: إِيَّاكَ نَعْبُدُ = You alone we worship.</p>
+        <p class="L-ur"><b>1. ضمیرِ منفصل</b>: الگ لفظ۔ مرفوع: هُوَ، أَنْتَ … منصوب، إِيَّا پر: إِيَّاكَ نَعْبُدُ = ہم صرف تیری ہی عبادت کرتے ہیں۔</p>
+        <p class="L-en"><b>2. Attached (متصل)</b>: an ending. On a noun = possessive (مجرور); on a verb or إِنَّ = object (منصوب); some are the verb's subject: كَتَبْتُ I wrote.</p>
+        <p class="L-ur"><b>2. ضمیرِ متصل</b>: آخر میں لگنے والی۔ اسم پر = ملکیت (مجرور)؛ فعل یا إِنَّ پر = مفعول (منصوب)؛ بعض فعل کا فاعل: كَتَبْتُ میں نے لکھا۔</p>
+        <p class="L-en"><b>3. Hidden (مستتر)</b>: understood, not written: in نَعْبُدُ the subject نَحْنُ is hidden.</p>
+        <p class="L-ur"><b>3. ضمیرِ مستتر</b>: پوشیدہ، لکھی نہیں جاتی: نَعْبُدُ میں فاعل نَحْنُ پوشیدہ ہے۔</p>
+      </div>
+      <div class="tw"><table>
+        <tr><th>Detached</th><th>Attached</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+        <tr><td class="ar">هُمَا</td><td class="ar">ـهُمَا</td><td class="L-en">they two</td><td class="L-ur">وہ دونوں</td></tr>
+        <tr><td class="ar">هُنَّ</td><td class="ar">ـهُنَّ</td><td class="L-en">they (women)</td><td class="L-ur">وہ سب (عورتیں)</td></tr>
+        <tr><td class="ar">أَنْتِ</td><td class="ar">ـكِ</td><td class="L-en">you (one woman)</td><td class="L-ur">تم (عورت)</td></tr>
+        <tr><td class="ar">أَنْتُمَا</td><td class="ar">ـكُمَا</td><td class="L-en">you two</td><td class="L-ur">تم دونوں</td></tr>
+        <tr><td class="ar">أَنْتُنَّ</td><td class="ar">ـكُنَّ</td><td class="L-en">you (women)</td><td class="L-ur">تم سب (عورتیں)</td></tr>
+      </table></div>
+    </div>
+    <p class="L-en" style="font-size:14px;color:var(--muted)">ـكِ does appear in the book's sentences without being taught as a lesson: يَا مَرْيَمُ أَنَّى لَكِ هٰذَا · إِنَّمَا أَنَا رَسُولُ رَبِّكِ.</p>
+    <p class="L-ur" style="font-size:14px;color:var(--muted)">ـكِ کتاب کے جملوں میں آیا ہے، اگرچہ الگ سبق نہیں: يَا مَرْيَمُ أَنَّى لَكِ هٰذَا · إِنَّمَا أَنَا رَسُولُ رَبِّكِ۔</p>
+  </div>
+
+  <div class="card traps">
+    <h3><span class="L-en">Exam traps</span><span class="L-ur">امتحانی غلطیاں</span></h3>
+    <ul>
+      <li><span class="L-en">فِيهِ (masc.) vs فِيهَا (fem.): check what the pronoun refers back to.</span><span class="L-ur">فِيهِ (مذکر) اور فِيهَا (مؤنث): دیکھیں ضمیر کس کی طرف لوٹ رہی ہے۔</span></li>
+      <li><span class="L-en">بَيْتِهِ and قُلُوبِهِمْ are not new words: ـهِ / ـهِمْ is ـهُ / ـهُمْ after kasra.</span><span class="L-ur">بَيْتِهِ اور قُلُوبِهِمْ نئے الفاظ نہیں: زیر کے بعد ـهُ / ـهُمْ ہی ـهِ / ـهِمْ بن جاتے ہیں۔</span></li>
+      <li><span class="L-en">Never keep tanween with an ending: رَبُّهُ, not رَبٌّهُ.</span><span class="L-ur">ضمیر کے ساتھ تنوین نہ رکھیں: رَبُّهُ، رَبٌّهُ نہیں۔</span></li>
+      <li><span class="L-en">إِنَّا = إِنَّ + نَا "indeed we", and إِنِّي = إِنَّ + ي "indeed I"; don't read them as new words.</span><span class="L-ur">إِنَّا = إِنَّ + نَا "بے شک ہم"، اور إِنِّي = إِنَّ + ي "بے شک میں"؛ انہیں نئے الفاظ نہ سمجھیں۔</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PLURALS ================= -->
+<section class="tab" id="pl" role="tabpanel">
+  <div class="card">
+    <h3><span class="L-en">Three numbers, three plurals</span><span class="L-ur">تین عدد، جمع کی تین قسمیں</span></h3>
+    <p class="L-en">Arabic counts one (واحد), two (تثنیہ) and three or more (جمع).</p>
+    <p class="L-ur">عربی میں ایک (واحد)، دو (تثنیہ) اور تین یا زیادہ (جمع) الگ ہیں۔</p>
+    <div class="map">
+      <div class="col"><h4><span class="L-en">Sound masculine</span><span class="L-ur">جمع مذکر سالم</span></h4><div class="eg">مُسْلِمُونَ / مُسْلِمِينَ</div><p class="L-en">Add ـُونَ / ـِينَ. For men; the singular stays whole.</p><p class="L-ur">ـُونَ / ـِينَ لگائیں۔ مردوں کے لیے؛ واحد سلامت رہتا ہے۔</p></div>
+      <div class="col"><h4><span class="L-en">Sound feminine</span><span class="L-ur">جمع مؤنث سالم</span></h4><div class="eg">مُسْلِمَاتٌ · آيَاتٌ</div><p class="L-en">Replace ة with ـَاتٌ. For women and things.</p><p class="L-ur">ة کی جگہ ـَاتٌ۔ عورتوں اور چیزوں کے لیے۔</p></div>
+      <div class="col"><h4><span class="L-en">Broken</span><span class="L-ur">جمعِ مکسر</span></h4><div class="eg">عَالِم ← عُلَمَاء</div><p class="L-en">The inside of the word changes. Learn each as a pair.</p><p class="L-ur">لفظ کے اندر تبدیلی۔ ہر ایک جوڑے کی صورت میں یاد کریں۔</p></div>
+    </div>
+    <div class="rule"><p class="L-en"><b>Dual (U3 L10):</b> ـَانِ / ـَيْنِ = two: مُؤْمِنَانِ · جَنَّتَانِ · الْوَالِدَيْنِ. Don't confuse dual ـَيْنِ (fatha) with plural ـِينَ (kasra): الْمُسْلِمَيْنِ two Muslims, الْمُسْلِمِينَ Muslims.</p>
+    <p class="L-ur"><b>تثنیہ (یونٹ 3، سبق 10):</b> ـَانِ / ـَيْنِ = دو: مُؤْمِنَانِ · جَنَّتَانِ · الْوَالِدَيْنِ۔ تثنیہ ـَيْنِ (زبر) اور جمع ـِينَ (زیر) میں فرق رکھیں: الْمُسْلِمَيْنِ دو مسلمان، الْمُسْلِمِينَ مسلمان (جمع)۔</p></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">Sound masculine plural (U5 L1–3)</span><span class="L-ur">جمع مذکر سالم (یونٹ 5، سبق 1–3)</span></h3>
+    <div class="tw"><table>
+      <tr><th>Form · شکل</th><th class="L-en">When</th><th class="L-ur">کب</th><th>Example · مثال</th></tr>
+      <tr><td class="ar">ـُونَ</td><td class="L-en">basic form; after هُمْ / أَنْتُمْ / نَحْنُ</td><td class="L-ur">اصل شکل؛ هُمْ / أَنْتُمْ / نَحْنُ کے بعد</td><td class="ar">الْمُسْلِمُونَ · هُمْ شَاكِرُونَ</td></tr>
+      <tr><td class="ar">ـِينَ</td><td class="L-en">after إِنَّ, a preposition, or as 2nd word of an idafah</td><td class="L-ur">إِنَّ یا حرفِ جار کے بعد، یا مضاف الیہ ہو</td><td class="ar">إِنَّ الْكَافِرِينَ · مِنَ الظَّالِمِينَ · أَحْسَنُ الْخَالِقِينَ</td></tr>
+    </table></div>
+    <p class="L-en">Which words take it (U5 L1 notes):</p>
+    <p class="L-ur">کون سے الفاظ یہ جمع بناتے ہیں (یونٹ 5، سبق 1 کے نکات):</p>
+    <ul>
+      <li><span class="L-en">فَاعِل doers: صَابِر → صَابِرُونَ · ظَالِم → ظَالِمُونَ · كَاذِب → كَاذِبُونَ</span><span class="L-ur">فَاعِل (کرنے والا): صَابِر ← صَابِرُونَ · ظَالِم ← ظَالِمُونَ · كَاذِب ← كَاذِبُونَ</span></li>
+      <li><span class="L-en">مُـ … kasra before last = doer: مُشْرِك → مُشْرِكُونَ · مُنَافِق → مُنَافِقُونَ</span><span class="L-ur">مُـ … آخری سے پہلے زیر = کرنے والا: مُشْرِك ← مُشْرِكُونَ · مُنَافِق ← مُنَافِقُونَ</span></li>
+      <li><span class="L-en">مُـ … fatha before last = the one done to: مُرْسَل → مُرْسَلُونَ</span><span class="L-ur">مُـ … آخری سے پہلے زبر = جس پر کام کیا گیا: مُرْسَل ← مُرْسَلُونَ</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">How to translate a plural (U5 L1, L4)</span><span class="L-ur">جمع کا ترجمہ کیسے کریں (یونٹ 5، سبق 1، 4)</span></h3>
+    <div class="tw"><table>
+      <tr><th>Case · صورت</th><th>Example · مثال</th><th class="L-en">Translation</th><th class="L-ur">ترجمہ</th></tr>
+      <tr><td><span class="L-en">with الـ</span><span class="L-ur">الـ کے ساتھ</span></td><td class="ar">الظَّالِمُونَ · الْعِبَاد</td><td class="L-en">the wrongdoers · the servants</td><td class="L-ur">ظالم لوگ · بندے</td></tr>
+      <tr><td><span class="L-en">without الـ</span><span class="L-ur">الـ کے بغیر</span></td><td class="ar">ظَالِمُونَ · عِبَاد</td><td class="L-en">some wrongdoers / (they) are wrongdoers</td><td class="L-ur">کچھ ظالم / ظالم ہیں</td></tr>
+      <tr><td><span class="L-en">after a particle</span><span class="L-ur">حرف کے بعد</span></td><td class="ar">فِي الْقُلُوبِ</td><td class="L-en">last letter takes kasra</td><td class="L-ur">آخری حرف پر زیر</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">Sound feminine plural ـَاتٌ (U1 L10–11)</span><span class="L-ur">جمع مؤنث سالم ـَاتٌ (یونٹ 1، سبق 10–11)</span></h3>
+    <div class="tw"><table>
+      <tr><th>Singular · واحد</th><th>Plural · جمع</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <tr><td class="ar">آيَة</td><td class="ar">آيَات</td><td class="L-en">verse, sign</td><td class="L-ur">آیت، نشانی</td></tr>
+      <tr><td class="ar">صَلَاة</td><td class="ar">صَلَوَات</td><td class="L-en">prayer</td><td class="L-ur">نماز</td></tr>
+      <tr><td class="ar">سَمَاء</td><td class="ar">سَمٰوَات</td><td class="L-en">sky, heaven</td><td class="L-ur">آسمان</td></tr>
+      <tr><td class="ar">حَسَنَة / سَيِّئَة</td><td class="ar">حَسَنَات / سَيِّئَات</td><td class="L-en">good / evil deed</td><td class="L-ur">نیکی / برائی</td></tr>
+      <tr><td class="ar">ظُلْمَة</td><td class="ar">ظُلُمَات</td><td class="L-en">darkness</td><td class="L-ur">اندھیرا</td></tr>
+      <tr><td class="ar">مُسْلِمَة</td><td class="ar">مُسْلِمَات</td><td class="L-en">Muslim woman</td><td class="L-ur">مسلمان عورت</td></tr>
+    </table></div>
+    <p class="L-en">Without الـ they take double damma: الْآيَاتُ → آيَاتٌ.</p>
+    <p class="L-ur">الـ کے بغیر دو پیش آتے ہیں: الْآيَاتُ ← آيَاتٌ۔</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">Broken plurals (U1 L10–11, U5 L4), grouped by shape</span><span class="L-ur">جمعِ مکسر (یونٹ 1 اور 5)، وزن کے لحاظ سے</span></h3>
+    <p class="L-en" style="margin-top:0">The book teaches these as pairs. The pattern column is <span class="badge b-extra">Additional</span>: it groups words of the same shape so they are easier to remember.</p>
+    <p class="L-ur" style="margin-top:0">کتاب انہیں جوڑوں کی صورت میں سکھاتی ہے۔ وزن والا کالم <span class="badge b-extra">اضافی</span> ہے: ایک جیسی شکل والے الفاظ اکٹھے کرنے سے یاد کرنا آسان ہوتا ہے۔</p>
+    <div class="tw"><table>
+      <tr><th>Pattern · وزن</th><th>Pairs · جوڑے (واحد ← جمع)</th></tr>
+      <tr><td class="ar">فُعَلَاء</td><td class="ar">عَالِم ← عُلَمَاء · شَهِيد ← شُهَدَاء · فَقِير ← فُقَرَاء · ضَعِيف ← ضُعَفَاء · شَرِيك ← شُرَكَاء · شَفِيع ← شُفَعَاء · خَلِيفَة ← خُلَفَاء · شَاعِر ← شُعَرَاء · سَفِيه ← سُفَهَاء</td></tr>
+      <tr><td class="ar">أَفْعِلَاء</td><td class="ar">نَبِيّ ← أَنْبِيَاء · وَلِيّ ← أَوْلِيَاء · غَنِيّ ← أَغْنِيَاء · حَبِيب ← أَحِبَّاء · شَدِيد ← أَشِدَّاء</td></tr>
+      <tr><td class="ar">أَفْعَال</td><td class="ar">قَلَم ← أَقْلَام · عَمَل ← أَعْمَال · يَوْم ← أَيَّام · رَبّ ← أَرْبَاب · مَيِّت ← أَمْوَات · نَاصِر ← أَنْصَار · صَاحِب ← أَصْحَاب · وَلَد ← أَوْلَاد · زَوْج ← أَزْوَاج · ابْن ← أَبْنَاء · عَدُوّ ← أَعْدَاء · بَرّ ← أَبْرَار · أَب ← آبَاء</td></tr>
+      <tr><td class="ar">فُعَّال</td><td class="ar">كَافِر ← كُفَّار · حَاكِم ← حُكَّام · فَاجِر ← فُجَّار</td></tr>
+      <tr><td class="ar">فَعَلَة</td><td class="ar">سَاحِر ← سَحَرَة · كَافِر ← كَفَرَة · فَاجِر ← فَجَرَة · بَارّ ← بَرَرَة · وَارِث ← وَرَثَة</td></tr>
+      <tr><td class="ar">فُعُل · فُعُول</td><td class="ar">كِتَاب ← كُتُب · رَسُول ← رُسُل · قَلْب ← قُلُوب · قَبْر ← قُبُور · نَفْس ← نُفُوس</td></tr>
+      <tr><td class="ar">فِعَال</td><td class="ar">رَجُل ← رِجَال · عَبْد ← عِبَاد</td></tr>
+      <tr><td class="ar">مَفَاعِل · مَفَاعِيل</td><td class="ar">مَسْجِد ← مَسَاجِد · شَيْطَان ← شَيَاطِين</td></tr>
+      <tr><td><span class="L-en">others</span><span class="L-ur">دیگر</span></td><td class="ar">إِلٰه ← آلِهَة · أَخ ← إِخْوَة / إِخْوَان · يَتِيم ← يَتَامَى · اِسْم ← أَسْمَاء · شَيْء ← أَشْيَاء · ذُو ← أُولُو</td></tr>
+    </table></div>
+    <p class="L-en">Some words have two plurals: كُفَّار / كَفَرَة · أَبْرَار / بَرَرَة · إِخْوَة / إِخْوَان.</p>
+    <p class="L-ur">بعض الفاظ کی دو جمعیں ہیں: كُفَّار / كَفَرَة · أَبْرَار / بَرَرَة · إِخْوَة / إِخْوَان۔</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="L-en">Agreement: who takes which pronoun</span><span class="L-ur">مطابقت: کس جمع کے لیے کون سی ضمیر</span></h3>
+    <div class="tw"><table>
+      <tr><th class="L-en">Plural of</th><th class="L-ur">کس کی جمع</th><th>Pronoun · ضمیر</th><th>Example · مثال</th></tr>
+      <tr><td class="L-en">men (or mixed)</td><td class="L-ur">مرد (یا ملے جلے لوگ)</td><td class="ar">هُمْ · ـهُمْ</td><td class="ar">الْمُؤْمِنُونَ … هُمْ</td></tr>
+      <tr><td class="L-en">things</td><td class="L-ur">چیزیں</td><td class="ar">هِيَ · ـهَا</td><td class="ar">الْأَبْصَارُ … هِيَ شَاخِصَةٌ</td></tr>
+      <tr><td class="L-en">women <span class="badge b-extra">Additional</span></td><td class="L-ur">عورتیں <span class="badge b-extra">اضافی</span></td><td class="ar">هُنَّ · ـهُنَّ</td><td class="ar">الْمُؤْمِنَاتُ … هُنَّ</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card traps">
+    <h3><span class="L-en">Exam traps</span><span class="L-ur">امتحانی غلطیاں</span></h3>
+    <ul>
+      <li><span class="L-en">مُسْلِمُونَ and مُسْلِمِينَ are the same plural; only the position changes.</span><span class="L-ur">مُسْلِمُونَ اور مُسْلِمِينَ ایک ہی جمع ہیں؛ صرف جملے میں مقام بدلتا ہے۔</span></li>
+      <li><span class="L-en">Don't build plurals the Urdu way (عالموں); learn the Arabic pair (عُلَمَاء).</span><span class="L-ur">جمع اردو طریقے سے نہ بنائیں (عالموں)؛ عربی جوڑا یاد کریں (عُلَمَاء)۔</span></li>
+      <li><span class="L-en">قَوْم and نَاس mean many people but are not plural forms: they have no singular from the same root.</span><span class="L-ur">قَوْم اور نَاس کا معنی کئی لوگ ہے مگر یہ جمع کے صیغے نہیں؛ ان کا اسی مادے سے واحد نہیں۔</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= DRILL ================= -->
+<section class="tab" id="dr" role="tabpanel">
+  <div class="card drill drillcard">
+    <div class="chips" id="dset">
+      <button data-set="all" aria-pressed="true">All · سب</button>
+      <button data-set="pron">Pronouns · ضمائر</button>
+      <button data-set="plur">Plurals · جمع</button>
+    </div>
+    <div class="ask" id="dask"></div>
+    <div class="prompt" id="dprompt"></div>
+    <div class="opts" id="dopts"></div>
+    <div class="why" id="dwhy" aria-live="polite"></div>
+    <div class="dmeta"><span id="dscore"></span><button class="sbtn" id="dnext">Next · اگلا →</button><button class="sbtn" id="dreset">Reset · دوبارہ</button></div>
+  </div>
+  <div class="card">
+    <p class="L-en" style="margin:0">Each question is picked at random from the tables in these notes. Your best streak is saved in this browser.</p>
+    <p class="L-ur" style="margin:0">ہر سوال انہی نوٹس کے جدولوں سے بلا ترتیب چنا جاتا ہے۔ آپ کا بہترین سلسلہ اسی براؤزر میں محفوظ رہتا ہے۔</p>
+  </div>
+</section>
+
+<!-- ================= PRACTICE ================= -->
+<section class="tab" id="pq" role="tabpanel">
+  <div class="card practice">
+    <div class="qbar"><h3><span class="L-en">Pronouns</span><span class="L-ur">ضمائر</span></h3><span class="score"></span><button class="sbtn noprint showall">Show all answers · سب جوابات</button></div>
+    <details class="q"><summary><span class="L-en">Add his / your / her / my / their / our to</span><span class="L-ur">اس کا / تیرا / اس کی / میرا / ان کا / ہمارا لگائیں:</span> <span class="ar">رَبٌّ</span></summary><div class="ans ar">رَبُّهُ · رَبُّكَ · رَبُّهَا · رَبِّي · رَبُّهُمْ · رَبُّنَا</div></details>
+    <details class="q"><summary><span class="L-en">Same with</span><span class="L-ur">یہی عمل کریں:</span> <span class="ar">رَحْمَةٌ</span></summary><div class="ans"><span class="ar">رَحْمَتُهُ · رَحْمَتُكَ · رَحْمَتُهَا · رَحْمَتِي · رَحْمَتُهُمْ · رَحْمَتُنَا</span> <span class="L-en">(ة becomes ت)</span><span class="L-ur blk">(ة ← ت)</span></div></details>
+    <details class="q"><summary><span class="L-en">Put فِي before</span><span class="L-ur">فِي لگائیں:</span> <span class="ar">بَيْتُهُ · قُلُوبُهُمْ</span></summary><div class="ans"><span class="ar">فِي بَيْتِهِ · فِي قُلُوبِهِمْ</span> <span class="L-en">: kasra on the noun, ـهُ → ـهِ, هُمْ → هِمْ; meaning unchanged.</span><span class="L-ur blk">اسم پر زیر، ـهُ ← ـهِ، هُمْ ← هِمْ؛ معنی وہی۔</span></div></details>
+    <details class="q"><summary><span class="L-en">Join:</span><span class="L-ur">جوڑیں:</span> <span class="ar">لِـ + كَ · عَلَى + هِ · إِنَّ + ي · إِلَى + كُمْ · إِنَّ + نَا</span></summary><div class="ans ar">لَكَ · عَلَيْهِ · إِنِّي · إِلَيْكُمْ · إِنَّا</div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> <span class="ar">هُوَ حَقٌّ · هُوَ الْحَقُّ</span></summary><div class="ans"><span class="L-en">He is truth · He alone is the Truth</span><span class="L-ur blk">وہ حق ہے · وہی حق ہے</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> <span class="ar">هُمْ مُؤْمِنُونَ · أُولٰئِكَ هُمُ الْمُتَّقُونَ</span></summary><div class="ans"><span class="L-en">They are believers · Such people indeed are the God-fearing</span><span class="L-ur blk">وہ مومن ہیں · درحقیقت یہی لوگ متقی ہیں</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> <span class="ar">نَحْنُ مُسْلِمُونَ · أَنْتُمْ شَاكِرُونَ · أَنَا نَذِيرٌ</span></summary><div class="ans"><span class="L-en">We are Muslims · You (all) are grateful · I am a warner</span><span class="L-ur blk">ہم مسلمان ہیں · تم لوگ شکرگزار ہو · میں ڈرانے والا ہوں</span></div></details>
+    <details class="q"><summary><span class="L-en">Why هِيَ and not هُمْ in</span><span class="L-ur">یہاں هُمْ کے بجائے هِيَ کیوں:</span> <span class="ar">الْأَبْصَارُ … هِيَ شَاخِصَةٌ</span></summary><div class="ans"><span class="L-en">أَبْصَار is a plural of things; plurals of things are treated as feminine singular.</span><span class="L-ur blk">أَبْصَار چیزوں کی جمع ہے؛ چیزوں کی جمع مؤنث واحد شمار ہوتی ہے۔</span></div></details>
+    <details class="q"><summary><span class="L-en">Meaning of</span><span class="L-ur">معنی بتائیں:</span> <span class="ar">رَبِّ · يَا قَوْمِ · وَهُوَ كَافِرٌ</span></summary><div class="ans"><span class="L-en">my Lord · O my people · while he is a disbeliever</span><span class="L-ur blk">میرے رب · اے میری قوم · جبکہ وہ کافر ہے</span></div></details>
+  </div>
+
+  <div class="card practice">
+    <div class="qbar"><h3><span class="L-en">Plurals</span><span class="L-ur">جمع</span></h3><span class="score"></span><button class="sbtn noprint showall">Show all answers · سب جوابات</button></div>
+    <details class="q"><summary><span class="L-en">Give the plural:</span><span class="L-ur">جمع بتائیں:</span> <span class="ar">عَالِم، نَبِيّ، كَافِر، رَسُول، عَبْد، قَلْب</span></summary><div class="ans ar">عُلَمَاء · أَنْبِيَاء · كُفَّار · رُسُل · عِبَاد · قُلُوب</div></details>
+    <details class="q"><summary><span class="L-en">Give the singular:</span><span class="L-ur">واحد بتائیں:</span> <span class="ar">أَوْلِيَاء، شُهَدَاء، أَصْحَاب، رِجَال، آلِهَة</span></summary><div class="ans ar">وَلِيّ · شَهِيد · صَاحِب · رَجُل · إِلٰه</div></details>
+    <details class="q"><summary><span class="L-en">Change the ending:</span><span class="L-ur">آخر بدلیں:</span> <span class="ar">إِنَّ + الْكَافِرُونَ · مِنَ + الظَّالِمُونَ · أَحْسَنُ + الْخَالِقُونَ</span></summary><div class="ans ar">إِنَّ الْكَافِرِينَ · مِنَ الظَّالِمِينَ · أَحْسَنُ الْخَالِقِينَ</div></details>
+    <details class="q"><summary><span class="L-en">Dual or plural?</span><span class="L-ur">تثنیہ یا جمع؟</span> <span class="ar">الْمُسْلِمَيْنِ · الْمُسْلِمِينَ · جَنَّتَانِ</span></summary><div class="ans"><span class="L-en">dual (two Muslims) · plural (Muslims) · dual (two gardens)</span><span class="L-ur blk">تثنیہ (دو مسلمان) · جمع (مسلمان) · تثنیہ (دو باغ)</span></div></details>
+    <details class="q"><summary><span class="L-en">Name the kind of plural:</span><span class="L-ur">جمع کی قسم بتائیں:</span> <span class="ar">آيَات · صَابِرُونَ · أَنْبِيَاء</span></summary><div class="ans"><span class="L-en">sound feminine · sound masculine · broken</span><span class="L-ur blk">جمع مؤنث سالم · جمع مذکر سالم · جمعِ مکسر</span></div></details>
+    <details class="q"><summary><span class="L-en">Translate:</span><span class="L-ur">ترجمہ کریں:</span> <span class="ar">الظَّالِمُونَ · ظَالِمُونَ</span></summary><div class="ans"><span class="L-en">the wrongdoers · some wrongdoers / (they) are wrongdoers</span><span class="L-ur blk">ظالم لوگ · کچھ ظالم / ظالم ہیں</span></div></details>
+  </div>
+</section>
+</main>
+<footer><span class="L-en">Based on Muallim-ul-Quran Units 1–5. Items marked Additional go beyond the book; check doubtful points with your teacher.</span><span class="L-ur">معلم القرآن یونٹ 1–5 پر مبنی۔ "اضافی" والے نکات کتاب سے باہر ہیں؛ شک ہو تو استاد سے تصدیق کریں۔</span></footer>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const store = { get(k, d) { try { const v = localStorage.getItem('mqp.' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+                  set(k, v) { try { localStorage.setItem('mqp.' + k, JSON.stringify(v)); } catch {} } };
+  const A = '؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿', H = 'ً-ْٰ';
+  const RUN = new RegExp(`[${A}][${A}\\s،؟.\\/()←]*[${A}]|[${A}]`, 'g');
+  const VW = new RegExp(`[${A}]*[${H}][${A}]*(?:\\s+[${A}]*[${H}][${A}]*)*`, 'g');
+  const wrapArabic = root => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('.ar,.ur,script,style,.seg,nav,.prompt,.big') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const n of nodes) {
+      const t = n.nodeValue, inUr = !!n.parentElement.closest('.L-ur'), re = inUr ? VW : RUN;
+      re.lastIndex = 0; if (!re.test(t)) continue;
+      const frag = document.createDocumentFragment(); let last = 0, m; re.lastIndex = 0;
+      while ((m = re.exec(t))) {
+        if (!m[0]) { re.lastIndex++; continue; }
+        if (m.index > last) frag.appendChild(document.createTextNode(t.slice(last, m.index)));
+        const s = document.createElement('span'); s.className = new RegExp(`[${H}]`).test(m[0]) ? 'ar' : 'ur'; s.textContent = m[0];
+        frag.appendChild(s); last = m.index + m[0].length;
+      }
+      if (last < t.length) frag.appendChild(document.createTextNode(t.slice(last)));
+      n.parentNode.replaceChild(frag, n);
+    }
+  };
+  wrapArabic(document.body);
+
+  // language
+  const setLang = l => { document.body.className = document.body.className.replace(/lang-\w+/, 'lang-' + l); $$('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l)); store.set('lang', l); };
+  $$('.seg button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  setLang(store.get('lang', 'both'));
+
+  // pronoun explorer
+  const P = {
+    huwa:   { d: 'هُوَ', a: 'ـهُ', en: 'he / it (one male or masculine thing)', ur: 'وہ (ایک مرد یا مذکر چیز)', n: 'بَيْتُهُ', nen: 'his house', nur: 'اس کا گھر', p: 'لَهُ · إِنَّهُ · فِيهِ · عَلَيْهِ · مِنْهُ', s: 'هُوَ الْحَقُّ', sen: 'He alone is the Truth', sur: 'وہی حق ہے', book: 'U4 L1–4' },
+    hiya:   { d: 'هِيَ', a: 'ـهَا', en: 'she / it (feminine word, or plural of things)', ur: 'وہ (مؤنث، یا چیزوں کی جمع)', n: 'زَوْجُهَا', nen: 'her husband', nur: 'اس کا شوہر', p: 'لَهَا · فِيهَا · مِنْهَا · إِلَيْهَا', s: 'هِيَ فِتْنَةٌ', sen: 'It is a trial', sur: 'وہ آزمائش ہے', book: 'U4 L9–12' },
+    hum:    { d: 'هُمْ', a: 'ـهُمْ', en: 'they (three or more men)', ur: 'وہ سب، وہ لوگ', n: 'كِتَابُهُمْ', nen: 'their book', nur: 'ان کی کتاب', p: 'لَهُمْ · فِيهِمْ · مِنْهُمْ · عَلَيْهِمْ', s: 'هُمُ الْمُؤْمِنُونَ', sen: 'They are the (true) believers', sur: 'وہی (سچے) مومن ہیں', book: 'U5 L5–8' },
+    anta:   { d: 'أَنْتَ', a: 'ـكَ', en: 'you (one man)', ur: 'تم، تو (ایک مرد)', n: 'رَبُّكَ', nen: 'your Lord', nur: 'تیرا رب', p: 'لَكَ · إِنَّكَ · إِلَيْكَ · عَلَيْكَ', s: 'أَنْتَ نَذِيرٌ', sen: 'You are a warner', sur: 'تم ڈرانے والے ہو', book: 'U4 L5–8' },
+    antum:  { d: 'أَنْتُمْ', a: 'ـكُمْ', en: 'you (many men)', ur: 'تم سب، تم لوگ', n: 'رَبُّكُمْ', nen: 'your Lord', nur: 'تم لوگوں کا رب', p: 'لَكُمْ · إِنَّكُمْ · مِنْكُمْ · عَلَيْكُمْ', s: 'أَنْتُمْ مُسْلِمُونَ', sen: 'You (all) are Muslims', sur: 'تم لوگ مسلمان ہو', book: 'U5 L9–12' },
+    ana:    { d: 'أَنَا', a: 'ـي', en: 'I (man or woman)', ur: 'میں (مرد یا عورت)', n: 'رَبِّي', nen: 'my Lord', nur: 'میرا رب', p: 'لِي · إِنِّي · عَلَيَّ · إِلَيَّ', s: 'أَنَا بَشَرٌ', sen: 'I am a human being', sur: 'میں انسان ہوں', book: 'U4 L13–16' },
+    nahnu:  { d: 'نَحْنُ', a: 'ـنَا', en: 'we (two or more; also the royal We)', ur: 'ہم (دو یا زیادہ؛ شاہانہ جمع بھی)', n: 'رَبُّنَا', nen: 'our Lord', nur: 'ہمارا رب', p: 'لَنَا · إِنَّا · مِنَّا · عَلَيْنَا', s: 'نَحْنُ مُسْلِمُونَ', sen: 'We are Muslims', sur: 'ہم مسلمان ہیں', book: 'U5 L13–16' },
+    huma:   { d: 'هُمَا', a: 'ـهُمَا', en: 'they two (m. or f.)', ur: 'وہ دونوں', n: 'رَبُّهُمَا', nen: 'their (two) Lord', nur: 'ان دونوں کا رب', p: 'لَهُمَا · بَيْنَهُمَا', s: 'وَمَا بَيْنَهُمَا', sen: 'and whatever is between the two', sur: 'اور جو ان دونوں کے درمیان ہے', extra: 1 },
+    hunna:  { d: 'هُنَّ', a: 'ـهُنَّ', en: 'they (women)', ur: 'وہ سب (عورتیں)', n: 'رَبُّهُنَّ', nen: 'their Lord', nur: 'ان عورتوں کا رب', p: 'لَهُنَّ · عَلَيْهِنَّ', s: 'هُنَّ لِبَاسٌ لَكُمْ', sen: 'They are a garment for you', sur: 'وہ تمہارے لیے لباس ہیں', extra: 1 },
+    anti:   { d: 'أَنْتِ', a: 'ـكِ', en: 'you (one woman)', ur: 'تم (ایک عورت)', n: 'رَبُّكِ', nen: 'your Lord', nur: 'تمہارا رب', p: 'لَكِ · إِلَيْكِ', s: 'أَنَّى لَكِ هٰذَا', sen: 'From where is this for you?', sur: 'یہ تمہارے پاس کہاں سے آیا؟', extra: 1 },
+    antuma: { d: 'أَنْتُمَا', a: 'ـكُمَا', en: 'you two', ur: 'تم دونوں', n: 'رَبُّكُمَا', nen: 'the Lord of you two', nur: 'تم دونوں کا رب', p: 'لَكُمَا', s: 'فَبِأَيِّ آلَاءِ رَبِّكُمَا', sen: 'So which of the favours of your Lord…', sur: 'تو تم دونوں اپنے رب کی کون کون سی نعمتوں…', extra: 1 },
+    antunna:{ d: 'أَنْتُنَّ', a: 'ـكُنَّ', en: 'you (women)', ur: 'تم سب (عورتیں)', n: 'بُيُوتُكُنَّ', nen: 'your houses', nur: 'تمہارے گھر', p: 'لَكُنَّ · عَلَيْكُنَّ', s: 'فِي بُيُوتِكُنَّ', sen: 'in your houses', sur: 'تمہارے گھروں میں', extra: 1 }
+  };
+  const panel = $('#ppanel');
+  const showP = k => {
+    const p = P[k]; $$('.pgrid td.cell').forEach(c => c.classList.toggle('sel', c.dataset.p === k));
+    const tag = p.extra ? '<span class="badge b-extra">Additional · اضافی</span>' : `<span class="badge b-book">In book · ${p.book}</span>`;
+    panel.innerHTML = `<div class="row"><div class="big">${p.d}</div><div class="big" style="font-size:34px;color:var(--red)">${p.a}</div><div>${tag}<div class="L-en"><b>${p.en}</b></div><div class="L-ur">${p.ur}</div></div></div>
+      <dl><dt>On a noun · اسم پر</dt><dd><span class="ar">${p.n}</span> <span class="L-en">${p.nen}</span> <span class="L-ur" style="display:inline">${p.nur}</span></dd>
+      <dt>On particles · حروف پر</dt><dd><span class="ar">${p.p}</span></dd>
+      <dt>Sentence · جملہ</dt><dd><span class="ar">${p.s}</span> <span class="L-en">${p.sen}</span> <span class="L-ur" style="display:inline">${p.sur}</span></dd></dl>`;
+    store.set('pron', k);
+  };
+  $$('.pgrid td.cell').forEach(c => c.addEventListener('click', () => showP(c.dataset.p)));
+  showP(store.get('pron', 'huwa'));
+
+  // drill
+  const Q = [];
+  Object.entries(P).filter(([, p]) => !p.extra).forEach(([, p]) => {
+    Q.push({ set: 'pron', q: p.d, ask: ['Meaning?', 'معنی؟'], a: [p.en.split(' (')[0], p.ur.split(' (')[0].split('،')[0]], why: p.book });
+    Q.push({ set: 'pron', q: p.n, ask: ['Meaning?', 'معنی؟'], a: [p.nen, p.nur], why: `${p.a} = ${p.en.split(' (')[0]}` });
+  });
+  [['قُلُوبِهِمْ', 'their hearts', 'ان کے دل'], ['رَبِّ', 'my Lord', 'میرے رب'], ['إِلَيْكَ', 'to you', 'تیری طرف'], ['عَلَيْنَا', 'upon us', 'ہم پر'], ['إِنَّهُ', 'indeed he', 'بے شک وہ'], ['فِيهَا', 'in it (f.)', 'اس (مؤنث) میں']]
+    .forEach(([q, en, ur]) => Q.push({ set: 'pron', q, ask: ['Meaning?', 'معنی؟'], a: [en, ur] }));
+  [['عَالِم', 'عُلَمَاء'], ['نَبِيّ', 'أَنْبِيَاء'], ['كَافِر', 'كُفَّار'], ['رَسُول', 'رُسُل'], ['عَبْد', 'عِبَاد'], ['قَلْب', 'قُلُوب'], ['رَجُل', 'رِجَال'], ['شَهِيد', 'شُهَدَاء'], ['وَلِيّ', 'أَوْلِيَاء'], ['صَاحِب', 'أَصْحَاب'], ['إِلٰه', 'آلِهَة'], ['مَسْجِد', 'مَسَاجِد'], ['كِتَاب', 'كُتُب'], ['يَوْم', 'أَيَّام'], ['آيَة', 'آيَات'], ['سَاحِر', 'سَحَرَة'], ['شَيْطَان', 'شَيَاطِين'], ['نَفْس', 'نُفُوس']]
+    .forEach(([s, p]) => Q.push({ set: 'plur', q: s, ask: ['Plural?', 'جمع؟'], a: [p], arOpt: 1 }));
+  [['الْمُسْلِمِينَ', 'plural · جمع'], ['الْمُسْلِمَيْنِ', 'dual · تثنیہ'], ['جَنَّتَانِ', 'dual · تثنیہ'], ['صَابِرُونَ', 'plural · جمع'], ['مُؤْمِنَاتٌ', 'plural · جمع'], ['رَسُولٌ', 'singular · واحد']]
+    .forEach(([q, a]) => Q.push({ set: 'plur', q, ask: ['Singular, dual or plural?', 'واحد، تثنیہ یا جمع؟'], a: [a], fixed: ['singular · واحد', 'dual · تثنیہ', 'plural · جمع'] }));
+
+  let set = 'all', cur = null, stats = { right: 0, total: 0, streak: 0 }, best = store.get('best', 0);
+  const pool = () => Q.filter(q => set === 'all' || q.set === set);
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const label = q => q.arOpt ? `<span class="ar">${q.a[0]}</span>` : (q.fixed ? q.a[0] : `${q.a[0]}${q.a[1] ? `<span class="ur">${q.a[1]}</span>` : ''}`);
+  const paintScore = () => { $('#dscore').innerHTML = `<b>${stats.right}</b> / ${stats.total} correct · درست · streak ${stats.streak} · best ${best}`; };
+  const next = () => {
+    const ps = pool(); let q; do { q = ps[Math.floor(Math.random() * ps.length)]; } while (ps.length > 1 && q === cur); cur = q;
+    $('#dask').innerHTML = `${q.ask[0]} · <span class="ur">${q.ask[1]}</span>`;
+    $('#dprompt').textContent = q.q; $('#dwhy').textContent = '';
+    let opts;
+    if (q.fixed) opts = q.fixed.map(f => ({ ...q, a: [f], ok: f === q.a[0] }));
+    else {
+      const others = shuffle(pool().filter(o => o !== q && !!o.arOpt === !!q.arOpt && !o.fixed && o.a[0] !== q.a[0])).slice(0, 3);
+      opts = shuffle([{ ...q, ok: true }, ...others.map(o => ({ ...o, ok: false }))]);
+    }
+    $('#dopts').innerHTML = opts.map((o, i) => `<button data-i="${i}" data-ok="${o.ok ? 1 : 0}">${label(o)}</button>`).join('');
+  };
+  $('#dopts').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.disabled) return;
+    const ok = b.dataset.ok === '1'; stats.total++;
+    if (ok) { stats.right++; stats.streak++; if (stats.streak > best) { best = stats.streak; store.set('best', best); } } else stats.streak = 0;
+    $$('#dopts button').forEach(x => { x.disabled = true; if (x.dataset.ok === '1') x.classList.add('right'); });
+    if (!ok) b.classList.add('wrong');
+    $('#dwhy').innerHTML = (ok ? '<b style="color:var(--ok)">✓ Correct · درست</b>' : '<b style="color:var(--red)">✗ Not quite · غلط</b>') + (cur.why ? ` · <span class="ar" style="font-size:1.1em">${cur.why}</span>` : '');
+    paintScore();
+  });
+  $('#dnext').addEventListener('click', next);
+  $('#dreset').addEventListener('click', () => { stats = { right: 0, total: 0, streak: 0 }; paintScore(); next(); });
+  $$('#dset button').forEach(b => b.addEventListener('click', () => { set = b.dataset.set; $$('#dset button').forEach(x => x.setAttribute('aria-pressed', x === b)); next(); }));
+  paintScore(); next();
+
+  // practice scores
+  const got = store.get('got', {});
+  $$('.practice').forEach((card, ci) => card.querySelectorAll('details.q').forEach((d, i) => {
+    const key = ci + ':' + i;
+    d.insertAdjacentHTML('beforeend', `<label class="got"><input type="checkbox" data-got="${key}" ${got[key] ? 'checked' : ''}> I got it right · میرا جواب درست تھا</label>`);
+  }));
+  const paintPractice = () => $$('.practice').forEach(card => {
+    const qs = card.querySelectorAll('[data-got]'), ok = [...qs].filter(c => c.checked).length;
+    card.querySelector('.score').innerHTML = `<b>${ok}</b> / ${qs.length} correct · درست`;
+  });
+  document.addEventListener('change', e => { const g = e.target.dataset.got; if (g) { if (e.target.checked) got[g] = 1; else delete got[g]; store.set('got', got); paintPractice(); } });
+  document.addEventListener('click', e => { const sa = e.target.closest('.showall'); if (sa) { const qs = [...sa.closest('.practice').querySelectorAll('details.q')]; const open = !qs.every(q => q.open); qs.forEach(q => q.open = open); } });
+  paintPractice();
+
+  // tabs
+  const tabs = $$('nav.tabs button');
+  const show = id => {
+    if (!document.getElementById(id)) id = 'ov';
+    $$('section.tab').forEach(s => s.classList.toggle('on', s.id === id));
+    tabs.forEach(b => b.setAttribute('aria-selected', b.dataset.tab === id));
+    try { history.replaceState(null, '', '#' + id); } catch {} store.set('tab', id); scrollTo(0, 0);
+  };
+  tabs.forEach(b => b.addEventListener('click', () => show(b.dataset.tab)));
+  document.addEventListener('keydown', e => {
+    if (!e.target.closest('nav.tabs') || !['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    const i = tabs.findIndex(b => b.getAttribute('aria-selected') === 'true');
+    const j = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length; show(tabs[j].dataset.tab); tabs[j].focus();
+  });
+  show(location.hash.slice(1) || store.get('tab', 'ov'));
+
+  // theme + print
+  const root = document.documentElement; const th = store.get('theme', null); if (th) root.dataset.theme = th;
+  $('#theme').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark'; store.set('theme', root.dataset.theme);
+  });
+  addEventListener('beforeprint', () => $$('details.q').forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>
