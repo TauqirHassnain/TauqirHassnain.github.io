@@ -136,11 +136,21 @@ td.extra { color: var(--muted); }
   .opts { grid-template-columns: 1fr; }
   .drill .prompt { font-size: 38px; }
 }
+.ptitle { display: none; }
 @media print {
-  header.top, .noprint, .got, .drillcard { display: none !important; }
-  section.tab { display: block !important; break-before: page; }
-  body { background: #fff; color: #000; font-size: 11.5pt; }
-  .card { box-shadow: none; break-inside: avoid; }
+  @page { size: A4; margin: 12mm; }
+  header.top, .noprint, .got, #dr, .ppanel { display: none !important; }
+  .ptitle { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--teal-d); margin-bottom: 6px; }
+  .ptitle h1 { margin: 0; font-size: 20pt; color: var(--teal-d); }
+  .ptitle .ar { font-size: 22pt; color: var(--red); }
+  main { padding: 0; max-width: none; }
+  section.tab { display: block !important; animation: none; }
+  section.tab + section.tab { break-before: page; }
+  body { background: #fff; color: #000; font-size: 10.5pt; }
+  .card { box-shadow: none; break-inside: auto; margin: 8px 0; padding: 10px 14px; }
+  h3 { break-after: avoid; }
+  tr, li, .flow, .map .col, details.q, .rule { break-inside: avoid; }
+  .pgrid td.cell.extra .ar { opacity: 1; color: #888; }
   details.q > * { display: block; }
 }
 </style>
@@ -165,6 +175,7 @@ td.extra { color: var(--muted); }
 </header>
 
 <main>
+<div class="ptitle"><h1>Arabic Pronouns &amp; Plurals · Muallim-ul-Quran Units 1–5</h1><span class="ar">الضَّمَائِرُ وَالْجَمْعُ</span></div>
 <!-- ================= OVERVIEW ================= -->
 <section class="tab" id="ov" role="tabpanel">
   <div class="card">
