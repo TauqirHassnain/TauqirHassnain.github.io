@@ -111,7 +111,8 @@ td.extra { color: var(--muted); }
 .flow .arr { color: var(--teal); font-size: 20px; }
 .map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .map .col { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; background: var(--surface); }
-.map .col h4 { margin: 0 0 4px; color: var(--teal-d); font-size: 15px; }
+.map .col h4 { margin: 0 0 4px; color: var(--teal-d); font-size: 15px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.map .col h4 .L-ur { font-weight: 400; }
 .map .col .eg { font-family: var(--ar); font-size: 22px; direction: rtl; text-align: right; color: var(--red); }
 .drill { text-align: center; }
 .drill .prompt { font-family: var(--ar); font-size: 46px; line-height: 1.4; color: var(--teal-d); direction: rtl; margin: 6px 0; }
@@ -128,7 +129,7 @@ td.extra { color: var(--muted); }
 .chips { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 6px; }
 .chips button { border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); border-radius: 999px; padding: 3px 12px; font: inherit; font-size: 13px; cursor: pointer; }
 .chips button[aria-pressed="true"] { background: var(--teal-d); color: #fff; border-color: var(--teal-d); }
-@media (max-width: 760px) {
+@media screen and (max-width: 760px) {
   .grid2, .map { grid-template-columns: 1fr; }
   .card { padding: 12px 14px; }
   .brand { font-size: 15px; }
@@ -137,6 +138,8 @@ td.extra { color: var(--muted); }
   .drill .prompt { font-size: 38px; }
 }
 .ptitle { display: none; }
+body.lang-both span.L-en + span.L-ur { margin-left: .7em; }
+thead { display: table-header-group; }
 @media print {
   @page { size: A4; margin: 12mm; }
   header.top, .noprint, .got, #dr, .ppanel { display: none !important; }
@@ -146,12 +149,32 @@ td.extra { color: var(--muted); }
   main { padding: 0; max-width: none; }
   section.tab { display: block !important; animation: none; }
   section.tab + section.tab { break-before: page; }
-  body { background: #fff; color: #000; font-size: 10.5pt; }
-  .card { box-shadow: none; break-inside: auto; margin: 8px 0; padding: 10px 14px; }
-  h3 { break-after: avoid; }
-  tr, li, .flow, .map .col, details.q, .rule { break-inside: avoid; }
+  html, body { background: #fff !important; }
+  body { color: #000; font-size: 10.5pt; line-height: 1.5; }
+  /* flat sections instead of boxed cards, so a section that flows onto the next page never shows a cut box */
+  .card, .traps { border: 0; border-radius: 0; box-shadow: none; background: none; padding: 0; margin: 0 0 14px; break-inside: auto; }
+  .score { display: none; }
+  h3 { break-after: avoid; break-inside: avoid; border-bottom: 1.5px solid var(--line); padding: 10px 0 3px; margin: 2px 0 6px; font-size: 14pt; }
+  li { margin: 3px 0; }
+  p { margin: 6px 0; }
+  .traps h3 { color: var(--red); }
+  .traps ul { border-left: 3px solid var(--red); padding-left: 26px; }
+  .tw { overflow: visible; }
+  table { font-size: 10pt; break-inside: auto; }
+  th, td { padding: 4px 6px; }
+  tr, li, .flow, .map, details.q, .rule, .grid2 > div { break-inside: avoid; }
+  p.lead { font-size: 11pt; }
+  .ar { font-size: 1.25em; line-height: 1.6; }
+  .L-ur { line-height: 1.95; }
+  .map .col { padding: 8px 10px; }
+  .map .col .eg { font-size: 18pt; }
+  details.q { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; margin: 6px 0; }
+  details.q summary { list-style: none; }
+  details.q summary::-webkit-details-marker { display: none; }
   .pgrid td.cell.extra .ar { opacity: 1; color: #888; }
+  .pgrid td.cell.sel { background: none !important; }
   details.q > * { display: block; }
+  footer { padding: 10px 0 0; border-top: 1px solid var(--line); }
 }
 </style>
 </head>
@@ -188,7 +211,7 @@ td.extra { color: var(--muted); }
   <div class="card">
     <h3><span class="L-en">Where each topic is in the book</span><span class="L-ur">کتاب میں کون سا موضوع کہاں ہے</span></h3>
     <div class="tw"><table>
-      <tr><th>Unit · Lessons</th><th class="L-en">Topic</th><th class="L-ur">موضوع</th><th>Key form · اہم شکل</th></tr>
+      <thead><tr><th>Unit · Lessons</th><th class="L-en">Topic</th><th class="L-ur">موضوع</th><th>Key form · اہم شکل</th></tr></thead>
       <tr><td>U1 · L10–11</td><td class="L-en">First plurals (ـَات and broken)</td><td class="L-ur">ابتدائی جمع (ـَات اور مکسر)</td><td class="ar">آيَات · أَقْلَام · كُتُب</td></tr>
       <tr><td>U3 · L10</td><td class="L-en">The dual (two)</td><td class="L-ur">تثنیہ (دو)</td><td class="ar">جَنَّتَانِ · الْوَالِدَيْنِ</td></tr>
       <tr><td>U4 · L1–8</td><td class="L-en">he / you (m.) and his / your</td><td class="L-ur">وہ / تم (مذکر) اور اس کا / تمہارا</td><td class="ar">هُوَ · ـهُ · أَنْتَ · ـكَ</td></tr>
@@ -226,11 +249,11 @@ td.extra { color: var(--muted); }
 <!-- ================= PRONOUNS ================= -->
 <section class="tab" id="pr" role="tabpanel">
   <div class="card">
-    <h3><span class="L-en">Pronoun explorer: tap a pronoun</span><span class="L-ur">ضمیر پر کلک کریں</span></h3>
+    <h3><span class="L-en">Pronoun chart<span class="noprint">: tap a pronoun</span></span><span class="L-ur">ضمیروں کا جدول<span class="noprint">: ضمیر پر کلک کریں</span></span></h3>
     <p class="L-en" style="margin-top:0">Rows are persons, columns are number. Bright cells are taught in the book; faded cells are additional.</p>
     <p class="L-ur" style="margin-top:0">قطاریں غائب، حاضر اور متکلم ہیں؛ کالم واحد، تثنیہ اور جمع ہیں۔ نمایاں خانے کتاب میں ہیں؛ ہلکے خانے اضافی ہیں۔</p>
     <div class="tw"><table class="pgrid">
-      <tr><th></th><th>Singular · واحد</th><th>Dual · تثنیہ</th><th>Plural · جمع</th></tr>
+      <thead><tr><th></th><th>Singular · واحد</th><th>Dual · تثنیہ</th><th>Plural · جمع</th></tr></thead>
       <tr><td class="rowh">3rd m. <span class="L-ur">غائب مذکر</span></td><td class="cell" data-p="huwa"><span class="ar">هُوَ</span></td><td class="cell extra" data-p="huma"><span class="ar">هُمَا</span></td><td class="cell" data-p="hum"><span class="ar">هُمْ</span></td></tr>
       <tr><td class="rowh">3rd f. <span class="L-ur">غائب مؤنث</span></td><td class="cell" data-p="hiya"><span class="ar">هِيَ</span></td><td class="cell extra" data-p="huma"><span class="ar">هُمَا</span></td><td class="cell extra" data-p="hunna"><span class="ar">هُنَّ</span></td></tr>
       <tr><td class="rowh">2nd m. <span class="L-ur">حاضر مذکر</span></td><td class="cell" data-p="anta"><span class="ar">أَنْتَ</span></td><td class="cell extra" data-p="antuma"><span class="ar">أَنْتُمَا</span></td><td class="cell" data-p="antum"><span class="ar">أَنْتُمْ</span></td></tr>
@@ -243,7 +266,7 @@ td.extra { color: var(--muted); }
   <div class="card">
     <h3><span class="L-en">The 7 book pronouns: alone, on a noun, on a particle</span><span class="L-ur">کتاب کی 7 ضمیریں: الگ، اسم پر، حرف پر</span></h3>
     <div class="tw"><table>
-      <tr><th>Alone · الگ</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th>Ending · متصل</th><th>On a noun · اسم پر</th><th>On particles · حروف پر</th><th>Lessons</th></tr>
+      <thead><tr><th>Alone · الگ</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th><th>Ending · متصل</th><th>On a noun · اسم پر</th><th>On particles · حروف پر</th><th>Lessons</th></tr></thead>
       <tr><td class="ar">هُوَ</td><td class="L-en">he, it</td><td class="L-ur">وہ (مذکر)</td><td class="ar">ـهُ</td><td class="ar">بَيْتُهُ</td><td class="ar">لَهُ · إِنَّهُ · فِيهِ · عَلَيْهِ</td><td>U4 L1–4</td></tr>
       <tr><td class="ar">أَنْتَ</td><td class="L-en">you (one man)</td><td class="L-ur">تم، تو (مذکر)</td><td class="ar">ـكَ</td><td class="ar">رَبُّكَ</td><td class="ar">لَكَ · إِنَّكَ · إِلَيْكَ · عَلَيْكَ</td><td>U4 L5–8</td></tr>
       <tr><td class="ar">هِيَ</td><td class="L-en">she, it; things (pl.)</td><td class="L-ur">وہ (مؤنث)؛ چیزوں کی جمع</td><td class="ar">ـهَا</td><td class="ar">زَوْجُهَا</td><td class="ar">لَهَا · فِيهَا · مِنْهَا · إِلَيْهَا</td><td>U4 L9–12</td></tr>
@@ -283,7 +306,7 @@ td.extra { color: var(--muted); }
         <p class="L-ur"><b>3. ضمیرِ مستتر</b>: پوشیدہ، لکھی نہیں جاتی: نَعْبُدُ میں فاعل نَحْنُ پوشیدہ ہے۔</p>
       </div>
       <div class="tw"><table>
-        <tr><th>Detached</th><th>Attached</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+        <thead><tr><th>Detached</th><th>Attached</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr></thead>
         <tr><td class="ar">هُمَا</td><td class="ar">ـهُمَا</td><td class="L-en">they two</td><td class="L-ur">وہ دونوں</td></tr>
         <tr><td class="ar">هُنَّ</td><td class="ar">ـهُنَّ</td><td class="L-en">they (women)</td><td class="L-ur">وہ سب (عورتیں)</td></tr>
         <tr><td class="ar">أَنْتِ</td><td class="ar">ـكِ</td><td class="L-en">you (one woman)</td><td class="L-ur">تم (عورت)</td></tr>
@@ -324,7 +347,7 @@ td.extra { color: var(--muted); }
   <div class="card">
     <h3><span class="L-en">Sound masculine plural (U5 L1–3)</span><span class="L-ur">جمع مذکر سالم (یونٹ 5، سبق 1–3)</span></h3>
     <div class="tw"><table>
-      <tr><th>Form · شکل</th><th class="L-en">When</th><th class="L-ur">کب</th><th>Example · مثال</th></tr>
+      <thead><tr><th>Form · شکل</th><th class="L-en">When</th><th class="L-ur">کب</th><th>Example · مثال</th></tr></thead>
       <tr><td class="ar">ـُونَ</td><td class="L-en">basic form; after هُمْ / أَنْتُمْ / نَحْنُ</td><td class="L-ur">اصل شکل؛ هُمْ / أَنْتُمْ / نَحْنُ کے بعد</td><td class="ar">الْمُسْلِمُونَ · هُمْ شَاكِرُونَ</td></tr>
       <tr><td class="ar">ـِينَ</td><td class="L-en">after إِنَّ, a preposition, or as 2nd word of an idafah</td><td class="L-ur">إِنَّ یا حرفِ جار کے بعد، یا مضاف الیہ ہو</td><td class="ar">إِنَّ الْكَافِرِينَ · مِنَ الظَّالِمِينَ · أَحْسَنُ الْخَالِقِينَ</td></tr>
     </table></div>
@@ -340,7 +363,7 @@ td.extra { color: var(--muted); }
   <div class="card">
     <h3><span class="L-en">How to translate a plural (U5 L1, L4)</span><span class="L-ur">جمع کا ترجمہ کیسے کریں (یونٹ 5، سبق 1، 4)</span></h3>
     <div class="tw"><table>
-      <tr><th>Case · صورت</th><th>Example · مثال</th><th class="L-en">Translation</th><th class="L-ur">ترجمہ</th></tr>
+      <thead><tr><th>Case · صورت</th><th>Example · مثال</th><th class="L-en">Translation</th><th class="L-ur">ترجمہ</th></tr></thead>
       <tr><td><span class="L-en">with الـ</span><span class="L-ur">الـ کے ساتھ</span></td><td class="ar">الظَّالِمُونَ · الْعِبَاد</td><td class="L-en">the wrongdoers · the servants</td><td class="L-ur">ظالم لوگ · بندے</td></tr>
       <tr><td><span class="L-en">without الـ</span><span class="L-ur">الـ کے بغیر</span></td><td class="ar">ظَالِمُونَ · عِبَاد</td><td class="L-en">some wrongdoers / (they) are wrongdoers</td><td class="L-ur">کچھ ظالم / ظالم ہیں</td></tr>
       <tr><td><span class="L-en">after a particle</span><span class="L-ur">حرف کے بعد</span></td><td class="ar">فِي الْقُلُوبِ</td><td class="L-en">last letter takes kasra</td><td class="L-ur">آخری حرف پر زیر</td></tr>
@@ -350,7 +373,7 @@ td.extra { color: var(--muted); }
   <div class="card">
     <h3><span class="L-en">Sound feminine plural ـَاتٌ (U1 L10–11)</span><span class="L-ur">جمع مؤنث سالم ـَاتٌ (یونٹ 1، سبق 10–11)</span></h3>
     <div class="tw"><table>
-      <tr><th>Singular · واحد</th><th>Plural · جمع</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr>
+      <thead><tr><th>Singular · واحد</th><th>Plural · جمع</th><th class="L-en">Meaning</th><th class="L-ur">معنی</th></tr></thead>
       <tr><td class="ar">آيَة</td><td class="ar">آيَات</td><td class="L-en">verse, sign</td><td class="L-ur">آیت، نشانی</td></tr>
       <tr><td class="ar">صَلَاة</td><td class="ar">صَلَوَات</td><td class="L-en">prayer</td><td class="L-ur">نماز</td></tr>
       <tr><td class="ar">سَمَاء</td><td class="ar">سَمٰوَات</td><td class="L-en">sky, heaven</td><td class="L-ur">آسمان</td></tr>
@@ -367,7 +390,7 @@ td.extra { color: var(--muted); }
     <p class="L-en" style="margin-top:0">The book teaches these as pairs. The pattern column is <span class="badge b-extra">Additional</span>: it groups words of the same shape so they are easier to remember.</p>
     <p class="L-ur" style="margin-top:0">کتاب انہیں جوڑوں کی صورت میں سکھاتی ہے۔ وزن والا کالم <span class="badge b-extra">اضافی</span> ہے: ایک جیسی شکل والے الفاظ اکٹھے کرنے سے یاد کرنا آسان ہوتا ہے۔</p>
     <div class="tw"><table>
-      <tr><th>Pattern · وزن</th><th>Pairs · جوڑے (واحد ← جمع)</th></tr>
+      <thead><tr><th>Pattern · وزن</th><th>Pairs · جوڑے (واحد ← جمع)</th></tr></thead>
       <tr><td class="ar">فُعَلَاء</td><td class="ar">عَالِم ← عُلَمَاء · شَهِيد ← شُهَدَاء · فَقِير ← فُقَرَاء · ضَعِيف ← ضُعَفَاء · شَرِيك ← شُرَكَاء · شَفِيع ← شُفَعَاء · خَلِيفَة ← خُلَفَاء · شَاعِر ← شُعَرَاء · سَفِيه ← سُفَهَاء</td></tr>
       <tr><td class="ar">أَفْعِلَاء</td><td class="ar">نَبِيّ ← أَنْبِيَاء · وَلِيّ ← أَوْلِيَاء · غَنِيّ ← أَغْنِيَاء · حَبِيب ← أَحِبَّاء · شَدِيد ← أَشِدَّاء</td></tr>
       <tr><td class="ar">أَفْعَال</td><td class="ar">قَلَم ← أَقْلَام · عَمَل ← أَعْمَال · يَوْم ← أَيَّام · رَبّ ← أَرْبَاب · مَيِّت ← أَمْوَات · نَاصِر ← أَنْصَار · صَاحِب ← أَصْحَاب · وَلَد ← أَوْلَاد · زَوْج ← أَزْوَاج · ابْن ← أَبْنَاء · عَدُوّ ← أَعْدَاء · بَرّ ← أَبْرَار · أَب ← آبَاء</td></tr>
@@ -385,7 +408,7 @@ td.extra { color: var(--muted); }
   <div class="card">
     <h3><span class="L-en">Agreement: who takes which pronoun</span><span class="L-ur">مطابقت: کس جمع کے لیے کون سی ضمیر</span></h3>
     <div class="tw"><table>
-      <tr><th class="L-en">Plural of</th><th class="L-ur">کس کی جمع</th><th>Pronoun · ضمیر</th><th>Example · مثال</th></tr>
+      <thead><tr><th class="L-en">Plural of</th><th class="L-ur">کس کی جمع</th><th>Pronoun · ضمیر</th><th>Example · مثال</th></tr></thead>
       <tr><td class="L-en">men (or mixed)</td><td class="L-ur">مرد (یا ملے جلے لوگ)</td><td class="ar">هُمْ · ـهُمْ</td><td class="ar">الْمُؤْمِنُونَ … هُمْ</td></tr>
       <tr><td class="L-en">things</td><td class="L-ur">چیزیں</td><td class="ar">هِيَ · ـهَا</td><td class="ar">الْأَبْصَارُ … هِيَ شَاخِصَةٌ</td></tr>
       <tr><td class="L-en">women <span class="badge b-extra">Additional</span></td><td class="L-ur">عورتیں <span class="badge b-extra">اضافی</span></td><td class="ar">هُنَّ · ـهُنَّ</td><td class="ar">الْمُؤْمِنَاتُ … هُنَّ</td></tr>
